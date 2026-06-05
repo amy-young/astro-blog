@@ -1,38 +1,86 @@
 [
-	{
-		"name": "TempMail.Best",
-		"description": "Best Temporary Email.",
-		"image": "/assets/images/projects/tempmail.best.png",
-		"url": "https://tempmail.best"
-	},
-	{
-		"name": "DNS.Surf",
-		"description": "Querying DNS Resolution Results in Different Regions Worldwide.",
-		"image": "/assets/images/projects/dns.surf.png",
-		"url": "https://dns.surf"
-	},
-	{
-		"name": "HTML.ZONE",
-		"description": "Web Toolbox.",
-		"image": "/assets/images/projects/html.zone.png",
-		"url": "https://html.zone"
-	},
-	{
-		"name": "Sink",
-		"description": "A Simple / Speedy / Secure Link Shortener with Analytics.",
-		"image": "/assets/images/projects/sink.cool.png",
-		"url": "https://sink.cool"
-	},
-	{
-		"name": "BroadcastChannel",
-		"description": "Turn your Telegram Channel into a MicroBlog.",
-		"image": "/assets/images/projects/broadcast-channel.png",
-		"url": "https://github.com/ccbikai/BroadcastChannel"
-	},
-	{
-		"name": "L(O*62).ONG",
-		"description": "Make your URL looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooonger",
-		"image": "/assets/images/projects/long.png",
-		"url": "https://loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo.ong"
-	}
+  {
+    "name": "ADRD Researcher Community",
+    "description": "Comprehensive database and collaboration platform for Alzheimer's disease research scientists across the ADRC network.",
+    "image": "",
+    "url": "#",
+    "category": "work"
+  },
+  {
+    "name": "Researcher Profile App",
+    "description": "Web application for ADRD researchers to manage profiles, data permissions, and discover collaborators by expertise.",
+    "image": "",
+    "url": "#",
+    "category": "work"
+  },
+  {
+    "name": "NACC Website",
+    "description": "New NACC website built on a WordPress block theme, integrated with NACC's data and community platforms.",
+    "image": "",
+    "url": "#",
+    "category": "work"
+  },
+  {
+    "name": "ADRD Research Hub",
+    "description": "Platform for neuroscience researchers to find funding opportunities, jobs, and stay current on ADRD and AI research trends.",
+    "image": "",
+    "url": "#",
+    "category": "personal"
+  },
+  {
+    "name": "Travel Companion App",
+    "description": "Trip organizer with itinerary management, fellow traveler insights, and travel loyalty points optimization.",
+    "image": "",
+    "url": "#",
+    "category": "personal"
+  },
+  {
+    "name": "Package & Delivery Tracker",
+    "description": "Unified dashboard to track purchases from multiple vendors and coordinate deliveries across locations.",
+    "image": "",
+    "url": "#",
+    "category": "personal"
+  },
+  {
+    "name": "Family Law Directory",
+    "description": "Directory of family law attorneys with a focus on collaborative law practitioners.",
+    "image": "",
+    "url": "#",
+    "category": "personal"
+  },
+  {
+    "name": "AI Learning Platform",
+    "description": "Learning resource to help others build practical AI agent and automation skills.",
+    "image": "",
+    "url": "#",
+    "category": "personal"
+  },
+  {
+    "name": "AI Personal Assistant",
+    "description": "Custom personal and professional AI assistant built for productivity, research, and daily workflows.",
+    "image": "",
+    "url": "#",
+    "category": "personal"
+  },
+  {
+    "name": "Personal Knowledge System",
+    "description": "A system for capturing, organizing, and surfacing knowledge across research, projects, and interests.",
+    "image": "",
+    "url": "#",
+    "category": "personal"
+  },
+  {
+    "name": "Self-Hosted VPS Lab",
+    "description": "Personal VPS on Hostinger using Docker and Tailscale — running n8n, Karakeep, personal sites, and open source exploration.",
+    "image": "",
+    "url": "#",
+    "category": "personal"
+  },
+  {
+    "name": "amyyoung.me",
+    "description": "Personal blog covering AI, data, product, research, Alzheimer's research, travel, and sports.",
+    "image": "",
+    "url": "/",
+    "category": "personal"
+  }
 ]

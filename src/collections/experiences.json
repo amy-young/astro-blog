@@ -1,23 +1,21 @@
 [
-	{
-		"dates": "June 2018 · Present",
-		"role": "Front-end Engineer",
-		"company": "Full Truck Alliance",
-		"description": "Responsible for customer service and CRM system front-end development.",
-		"logo": "/assets/images/experiences/fta.ico"
-	},
-	{
-		"dates": "July 2015 · June 2018",
-		"role": "Front-end Engineer",
-		"company": "YOHO!",
-		"description": "Responsible for mobile front-end development of e-commerce platform.",
-		"logo": "/assets/images/experiences/yoho.ico"
-	},
-	{
-		"dates": "September 2014 · July 2015 ",
-		"role": "Node.JS Developer",
-		"company": "WuLian",
-		"description": "Intern, involved in the development of Internet of Things cloud systems.",
-		"logo": "/assets/images/experiences/wulian.ico"
-	}
+  {
+    "dates": "March 2021 — Present",
+    "role": "Public Information Specialist",
+    "company": "National Alzheimer's Coordinating Center",
+    "shortName": "NACC",
+    "description": "Lead strategic programs supporting 35+ Alzheimer's Disease Research Centers nationwide. Drive digital transformation, AI automation, database management, and communications for the ADRD research community. Scaled award program participation by 359% and grew community engagement by 272%.",
+    "logo": "",
+    "avatarColor": "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+  },
+  {
+    "dates": "October 2012 — March 2021",
+    "role": "Digital Marketing & Research Manager",
+    "company": "ZenCloud Consulting",
+    "shortName": "ZC",
+    "description": "Led multidisciplinary teams in research, digital product development, and strategic communications for premier research institutions including University of Washington and Cornell University.",
+    "logo": "/assets/images/ZenCloud-logo-trans.png",
+    "avatarColor": "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300"
+  }
 ]
+

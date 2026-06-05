@@ -4,69 +4,63 @@
 
 /* Add Your Custom CSS Here */
 
+/* Page background — sticky gradient stays centered as you scroll */
+body {
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(ellipse 70% 60% at 30% 40%, rgba(149, 114, 250, 0.24), transparent),
+    radial-gradient(ellipse 55% 50% at 75% 60%, rgba(251, 178, 20, 0.15), transparent);
+  pointer-events: none;
+}
+
+html.dark body::before {
+  background-image:
+    radial-gradient(ellipse 70% 60% at 30% 40%, rgba(109, 40, 217, 0.18), transparent),
+    radial-gradient(ellipse 55% 50% at 75% 60%, rgba(180, 83, 9, 0.10), transparent);
+}
+
+/* Grid — fades out before reaching divider lines */
+.page-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 750px;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 81px 81px;
+  -webkit-mask-image: linear-gradient(to bottom, black 35%, transparent 85%);
+  mask-image: linear-gradient(to bottom, black 35%, transparent 85%);
+}
+
+html.dark .page-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto", sans-serif;
+}
+
+.prose, .prose p, .prose li, .prose blockquote {
+  font-family: "Source Serif 4", serif;
+}
+
 .prose img {
   border-radius: 30px;
 }
 
-#sun {
-  transform: translate3d(0, 0px, 0);
-}
-
-#moon {
-  transform: translate3d(0, 0px, 0);
-}
-
-#darkToggle:hover #sun {
-  transform: translate3d(0, 10px, 0);
-}
-
-#darkToggle:hover #moon {
-  transform: translate3d(0, 10px, 0);
-}
-
-html.dark #darkToggle:hover .horizon {
-  border-color: #718096 !important;
-}
-
 html.dark {
-    color-scheme: dark;
-}
-
-.horizon .setting {
-  animation: 1s ease 0s 1 setting;
-}
-
-.horizon .rising {
-  animation: 1s ease 0s 1 rising;
-}
-
-@keyframes setting {
-  0% {
-    transform: translate3d(0, 10px, 0)
-  }
-
-  40% {
-    transform: translate3d(0, -2px, 0)
-  }
-
-  to {
-    transform: translate3d(0, 30px, 0)
-  }
-}
-
-@keyframes rising {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 30px, 0)
-  }
-
-  40% {
-    opacity: 1;
-    transform: translate3d(0, -2px, 0)
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 10, 0)
-  }
+  color-scheme: dark;
 }

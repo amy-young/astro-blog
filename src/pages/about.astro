@@ -1,60 +1,568 @@
 ---
 import experiences from "../collections/experiences.json";
-import AboutExperience from "../components/about-experience.astro";
-import PageHeading from "../components/page-heading.astro";
 import Layout from "../layouts/main.astro";
 ---
 
 <Layout title="About Me">
-  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
-    <PageHeading
-      title="About Me"
-      description="Hello 👋 I'm a frontend engineer from Nanjing, China. I'm passionate about building new products and learning new technology."
-    />
 
-    <img src="/assets/images/about.jpg" class="relative z-30 w-full my-10 rounded-xl" />
+  <!-- Hero Section -->
+  <section class="relative z-20 w-full max-w-5xl mx-auto mt-16 px-7 xl:px-0 md:mt-24 lg:mt-28">
+    <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
 
-    <h2 class="mb-2 text-2xl font-bold dark:text-neutral-200">Short Bio</h2>
-    <p
-      class="text-sm leading-6 text-gray-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg"
-    >
-      Front-end cutter 🧑🏻‍💻, back-end amateur 🤷🏻‍♂️, operations digging holes person 🤦🏻‍♂️.
-    </p>
+      <!-- Left: text -->
+      <div class="flex-1">
+        <p class="mb-3 text-sm font-semibold tracking-widest uppercase text-violet-500 dark:text-violet-400">
+          About Me
+        </p>
+        <h1 class="mb-5 text-4xl font-bold leading-tight dark:text-white lg:text-5xl">
+          Hi, I'm Amy Young.
+        </h1>
+        <p class="mb-6 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+          I'm a product manager and AI builder living in Seattle. I love turning messy, complex problems into clear, useful products. And lately, I've been obsessed with what AI can do to accelerate that.
+        </p>
+        <p class="mb-8 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+          My work sits at the crossroads of data, design, and communication. I care about building things that are not only functional but actually make sense to the people using them.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="https://www.linkedin.com/in/amyyoung-data-ai/"
+            target="_blank"
+            class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors duration-200"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            Connect on LinkedIn
+          </a>
+          <a
+            href="mailto:amy@amyyoung.me"
+            class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            </svg>
+            Send me an email
+          </a>
+        </div>
+      </div>
 
-    <h2
-      class="mt-5 mb-2 text-2xl font-bold lg:mt-10 sm:mt-6 dark:text-neutral-200"
-    >
-      Experience
-    </h2>
-    <div class="px-5 py-10">
-      {
-        experiences.map((experience) => {
-          return (
-            <div class="pb-10 border-l border-gray-200 last:border-l-0 dark:border-neutral-700">
-              <AboutExperience
-                dates={experience.dates}
-                role={experience.role}
-                company={experience.company}
-                description={experience.description}
-                logo={experience.logo}
-              />
-            </div>
-          )
-        })
-      }
+      <!-- Right: photo -->
+      <div class="flex-shrink-0 w-72 h-80 md:w-80 md:h-[400px]">
+        <img
+          src="/assets/images/amy-young-dt.jpeg"
+          alt="Amy Young"
+          class="w-full h-full object-cover object-top rounded-3xl border-8 border-white dark:border-neutral-800 shadow-lg"
+        />
+      </div>
+
     </div>
 
-    <h2 class="mt-5 mb-2 text-2xl font-bold lg:mt-10 sm:mt-6 dark:text-neutral-200">Let's Connect</h2>
-    <p
-      class="text-sm leading-6 text-gray-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg"
-    >
-      If you want to stay up to date with my work be sure to <a
-        href="https://x.com/0xKaibi"
-        target="_blank"
-        class="text-indigo-600 underline">follow me on twitter</a
-      >, or you can send me an <a href="mailto:astro-aria#miantiao.me" class="text-indigo-600 underline"
-        >email</a
-      > and I'll be sure to get back to you.
-    </p>
+    <!-- Stats bar -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-px mt-16 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-200 dark:bg-neutral-800">
+      {[
+        { value: "10+", label: "Years in Product" },
+        { value: "30+", label: "Products Shipped" },
+        { value: "5+", label: "AI Projects Built" },
+        { value: "Seattle", label: "Based In" },
+      ].map(stat => (
+        <div class="bg-white dark:bg-neutral-900 px-6 py-6 text-center">
+          <p class="text-2xl font-bold text-neutral-900 dark:text-white">{stat.value}</p>
+          <p class="mt-1 text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">{stat.label}</p>
+        </div>
+      ))}
+    </div>
   </section>
+
+  <!-- Divider -->
+  <div class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="w-full h-px border-t border-dashed border-neutral-300 dark:border-neutral-600 mt-20 mb-20"></div>
+  </div>
+
+  <!-- My Skills Carousel -->
+  <section class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <p class="mb-2 text-sm font-semibold tracking-widest uppercase text-violet-500 dark:text-violet-400">Expertise</p>
+        <h2 class="text-3xl font-bold dark:text-white">My Skills</h2>
+      </div>
+      <div class="flex gap-2">
+        <button id="skills-prev" class="w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </button>
+        <button id="skills-next" class="w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="skills-carousel" class="flex gap-5 overflow-x-auto scroll-smooth pb-4" style="scrollbar-width:none;-ms-overflow-style:none;">
+      {[
+        {
+          icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>`,
+          title: "AI Agents & Automation",
+          desc: "Building intelligent workflows, AI agents, and automation systems that save time and scale output.",
+        },
+        {
+          icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zm9.75-9.75c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v16.5c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V3.375zm-9.75 6c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v10.5c0 .621-.504 1.125-1.125 1.125h-2.25A1.125 1.125 0 013 19.875V9.375z" /></svg>`,
+          title: "Data & Analytics",
+          desc: "Statistical analysis, business intelligence, and data visualization using R, SQL, Tableau, and Power BI.",
+        },
+        {
+          icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-12m0 0v3.75m0-3.75h12m-6 3.75h.008v.008H12v-.008z" /></svg>`,
+          title: "Product Management",
+          desc: "End-to-end program and product development — from strategy and research to launch and iteration.",
+        },
+        {
+          icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803a7.5 7.5 0 0010.607 10.607z" /></svg>`,
+          title: "Research & Strategy",
+          desc: "Quantitative and qualitative research design, market analysis, UX/UI, and strategic planning.",
+        },
+        {
+          icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>`,
+          title: "Communications",
+          desc: "Technical and marketing communications — translating complex ideas into clear, compelling narratives.",
+        },
+        {
+          icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" /></svg>`,
+          title: "Technical Infrastructure",
+          desc: "Cloud platforms, Docker containerization, VPS administration, and web development.",
+        },
+      ].map(item => (
+        <div class="flex-shrink-0 w-64 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:shadow-md transition-shadow duration-200">
+          <div class="mb-4 w-10 h-10 flex items-center justify-center rounded-xl bg-violet-50 dark:bg-violet-950 text-violet-600 dark:text-violet-400" set:html={item.icon}></div>
+          <h3 class="mb-2 text-base font-bold text-neutral-900 dark:text-white">{item.title}</h3>
+          <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="w-full h-px border-t border-dashed border-neutral-300 dark:border-neutral-600 mt-20 mb-20"></div>
+  </div>
+
+  <!-- My Story -->
+  <section class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+      <div class="flex-shrink-0 w-full md:w-[420px] h-72 md:h-[380px] rounded-3xl overflow-hidden border-8 border-white dark:border-neutral-800 shadow-md">
+        <img
+          src="/assets/images/amy-young-sailing-3.jpeg"
+          alt="Amy Young"
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <div class="flex-1">
+        <p class="mb-2 text-sm font-semibold tracking-widest uppercase text-violet-500 dark:text-violet-400">Background</p>
+        <h2 class="mb-5 text-3xl font-bold dark:text-white">My Story</h2>
+
+        <!-- Always visible -->
+        <p class="mb-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+          There's a thread that runs through everything I do: curiosity. An almost compulsive need to understand how things work, why people do what they do, and what becomes possible when you ask the right questions.
+        </p>
+
+        <!-- Expand toggle -->
+        <button
+          id="story-toggle"
+          class="flex items-center gap-2 text-sm font-semibold text-violet-500 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors duration-200 mb-4 group"
+        >
+          <span id="story-toggle-label">It started early</span>
+          <svg id="story-arrow" class="w-4 h-4 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+
+        <!-- Expandable content -->
+        <div id="story-expanded" class="hidden space-y-4">
+          <p class="text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+            It started early. My dad posed math problems on long car rides, not to test me but to teach me critical thinking: that if you understand a problem deeply enough, you'll find your way to a solution. Anything is possible. Military service reinforced it differently, trading puzzles for the kind of resilience you only build by pushing past what feels like your limit.
+          </p>
+          <p class="text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+            Sociology and Statistics gave me a lens I've never stopped using. People plus data, together. That combination led into market research, cross-functional leadership, and eventually product management, where I could combine analytical thinking with user empathy and strategic vision, across technology, healthcare, education, and beyond. Working across industries gave me a habit of finding unexpected connections, and an appreciation for how much context shapes the way we see problems.
+          </p>
+          <p class="text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+            My work at the National Alzheimer's Coordinating Center brought it all into focus. Supporting the Alzheimer's research community showed me what's at stake when the right people, data, and tools find each other, and what it costs when they don't.
+          </p>
+          <p class="text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+            Now, with AI, the work I used to coordinate teams to do, research, design, build, and ship, I'm increasingly doing myself. I spend a lot of time exploring what's possible: building apps, agents, and automated workflows, designing systems that actually work for the people using them. It rewards exactly the kind of curious, cross-disciplinary thinking I've been practicing my whole life.
+          </p>
+          <p class="text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+            What an extraordinary time to be building.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const toggle = document.getElementById("story-toggle");
+    const expanded = document.getElementById("story-expanded");
+    const arrow = document.getElementById("story-arrow");
+    const label = document.getElementById("story-toggle-label");
+    let open = false;
+    toggle?.addEventListener("click", () => {
+      open = !open;
+      expanded?.classList.toggle("hidden", !open);
+      arrow?.classList.toggle("rotate-180", open);
+      if (label) label.textContent = open ? "Read less" : "It started early";
+    });
+  </script>
+
+  <!-- Divider -->
+  <div class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="w-full h-px border-t border-dashed border-neutral-300 dark:border-neutral-600 mt-20 mb-20"></div>
+  </div>
+
+  <!-- My Career -->
+  <section class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="flex flex-col md:flex-row gap-12 md:gap-16">
+      <!-- Left label -->
+      <div class="md:w-44 flex-shrink-0">
+        <div class="mb-3 w-10 h-10 flex items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" /></svg>
+        </div>
+        <h2 class="text-2xl font-bold dark:text-white mb-2">Resume</h2>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">15+ years across data, research, product, and AI.</p>
+      </div>
+      <!-- Right: entries -->
+      <div class="flex-1 divide-y divide-neutral-100 dark:divide-neutral-800">
+        {experiences.map(exp => (
+          <div class="py-7 first:pt-0">
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <div class="flex items-start gap-4">
+                <div class={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0 ${exp.avatarColor}`}>
+                  {exp.shortName}
+                </div>
+                <div>
+                  <p class="font-semibold text-neutral-900 dark:text-white">{exp.company}</p>
+                  <p class="text-sm text-neutral-500 dark:text-neutral-400">{exp.role}</p>
+                </div>
+              </div>
+              <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0 pt-1">{exp.dates}</span>
+            </div>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed pl-14">{exp.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="w-full h-px border-t border-dashed border-neutral-300 dark:border-neutral-600 mt-20 mb-20"></div>
+  </div>
+
+  <!-- Education -->
+  <section class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="flex flex-col md:flex-row gap-12 md:gap-16">
+      <!-- Left label -->
+      <div class="md:w-44 flex-shrink-0">
+        <div class="mb-3 w-10 h-10 flex items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>
+        </div>
+        <h2 class="text-2xl font-bold dark:text-white mb-2">Education</h2>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">Grounded in data, people, and systems thinking.</p>
+      </div>
+      <!-- Right: entries -->
+      <div class="flex-1 divide-y divide-neutral-100 dark:divide-neutral-800">
+        {[
+          {
+            degree: "Master of Science in Information Management",
+            focus: "Data Analytics & Business Intelligence, Program & Product Management",
+            school: "University of Washington",
+            dates: "2022 — 2024",
+          },
+          {
+            degree: "Bachelor of Arts, Sociology & Statistics",
+            focus: "Quantitative methods, social research, and behavioral analysis",
+            school: "University of Minnesota",
+            dates: "1987 — 1991",
+          },
+        ].map(edu => (
+          <div class="py-7 first:pt-0">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="font-semibold text-neutral-900 dark:text-white">{edu.degree}</p>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">{edu.school}</p>
+                <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">{edu.focus}</p>
+              </div>
+              <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0 pt-1">{edu.dates}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="w-full h-px border-t border-dashed border-neutral-300 dark:border-neutral-600 mt-20 mb-20"></div>
+  </div>
+
+  <!-- What I Do Outside of Work -->
+  <section class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <p class="mb-2 text-sm font-semibold tracking-widest uppercase text-violet-500 dark:text-violet-400">Beyond Work </p>
+    <h2 class="mb-3 text-3xl font-bold dark:text-white">The people and things that keep me grounded</h2>
+    <p class="mb-6 text-base text-neutral-500 dark:text-neutral-400">Outside of work, my family and friends are everything, and the people around my table are my anchor and my joy.</p>
+
+    <!-- Tag pills -->
+    <div class="flex flex-wrap gap-3 mb-6">
+      {[
+        { id: "water",     label: "Sailor & Water Sports" },
+        { id: "golf",      label: "Golfer" },
+        { id: "travel",    label: "Traveler" },
+        { id: "food",      label: "Foodie" },
+        { id: "community", label: "Community Builder" },
+      ].map(tag => (
+        <button
+          data-beyond={tag.id}
+          class="beyond-tag px-4 py-2 rounded-full text-sm font-semibold border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:border-violet-400 hover:text-violet-600 dark:hover:border-violet-500 dark:hover:text-violet-400 transition-all duration-200"
+        >
+          {tag.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Expandable content panels -->
+    <div class="max-w-3xl space-y-0">
+      <div id="beyond-water" class="beyond-panel hidden">
+        <p class="py-5 text-base leading-relaxed text-neutral-600 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-800">
+          On the water is where I think best. We own a sailboat on Puget Sound, and some of my best ideas have come from somewhere on or near open water. I also paddleboard, kayak, and recently added wakeboarding to the list. Jury's still out on that one. When the seasons turn, we head to the mountains for skiing and snowboarding. The Pacific Northwest makes it easy to love the outdoors.
+        </p>
+      </div>
+      <div id="beyond-golf" class="beyond-panel hidden">
+        <p class="py-5 text-base leading-relaxed text-neutral-600 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-800">
+          I grew up playing tennis, but my friends introduced me to pickleball and now I understand why it's taken over. And then there's golf, a lifelong love affair. At its heart, golf is about nuance and complexity. It rewards patience and precision, and humbles you more often than not. But there's something about when everything clicks and it all comes together for that one amazing shot. Enough said.
+        </p>
+      </div>
+      <div id="beyond-travel" class="beyond-panel hidden">
+        <p class="py-5 text-base leading-relaxed text-neutral-600 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-800">
+          I love to travel. The anticipation of a new destination, the planning, and then the moment you set it all aside and just wander. Some of my favorite memories have come from turning down an unmarked street or saying yes to something unplanned. The unexpected delight is the point. Sharing all of it, the discoveries, the meals, the stories, with the people I love is what makes it matter.
+        </p>
+      </div>
+      <div id="beyond-food" class="beyond-panel hidden">
+        <p class="py-5 text-base leading-relaxed text-neutral-600 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-800">
+          I love to cook, but really it's about the gathering. Food is just the excuse to bring people together, mark the moments, and celebrate what matters.
+        </p>
+      </div>
+      <div id="beyond-community" class="beyond-panel hidden">
+        <p class="py-5 text-base leading-relaxed text-neutral-600 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-800">
+          My mother instilled in me early that being part of a community means contributing to it. That belief has shaped most of my adult life. I currently serve on the board of the Delridge Neighborhood Development Association, a community-based organization in Seattle that provides affordable housing and free arts, sports, and nature programming for young people. It keeps the rest of the work in perspective.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const tags = document.querySelectorAll<HTMLButtonElement>(".beyond-tag");
+    tags.forEach(tag => {
+      tag.addEventListener("click", () => {
+        const id = tag.dataset.beyond;
+        const panel = document.getElementById(`beyond-${id}`);
+        const isOpen = !panel?.classList.contains("hidden");
+
+        // Close all panels and reset all tags
+        document.querySelectorAll(".beyond-panel").forEach(p => p.classList.add("hidden"));
+        tags.forEach(t => {
+          t.classList.remove("border-violet-400", "text-violet-600", "dark:border-violet-500", "dark:text-violet-400", "bg-violet-50", "dark:bg-violet-950/30");
+        });
+
+        // Toggle clicked one
+        if (!isOpen) {
+          panel?.classList.remove("hidden");
+          tag.classList.add("border-violet-400", "text-violet-600", "dark:border-violet-500", "dark:text-violet-400", "bg-violet-50", "dark:bg-violet-950/30");
+        }
+      });
+    });
+  </script>
+
+  <!-- Divider -->
+  <div class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="w-full h-px border-t border-dashed border-neutral-300 dark:border-neutral-600 mt-20 mb-20"></div>
+  </div>
+
+  <!-- What I'm Working On -->
+  <section class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <p class="mb-2 text-sm font-semibold tracking-widest uppercase text-violet-500 dark:text-violet-400">Now</p>
+        <h2 class="text-3xl font-bold dark:text-white">What I'm Working On</h2>
+      </div>
+      <a
+        href="/projects"
+        class="flex items-center gap-1 text-sm font-semibold text-violet-500 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors duration-200"
+      >
+        View all projects
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Two featured projects in blog-card style -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {[
+        {
+          category: "Work",
+          title: "ADRD Researcher Community & Database",
+          summary: "A living platform connecting Alzheimer's disease research scientists across 35+ ADRCs nationwide, enabling collaboration and shared data access.",
+          image: "",
+          gradient: "from-blue-50 to-indigo-100/70 dark:from-blue-900/30 dark:to-indigo-900/20",
+          url: "/projects",
+        },
+        {
+          category: "Personal",
+          title: "ADRD Research Hub",
+          summary: "A platform for neuroscience researchers to find funding opportunities, jobs, and stay current on ADRD research trends and AI's emerging role.",
+          image: "",
+          gradient: "from-violet-50 to-purple-100/70 dark:from-violet-900/30 dark:to-purple-900/20",
+          url: "/projects",
+        },
+      ].map(project => (
+        <a
+          href={project.url}
+          class="group flex flex-col rounded-2xl overflow-hidden border border-neutral-100 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-600 bg-white dark:bg-neutral-900 shadow-sm hover:shadow-md transition-all duration-300"
+        >
+          <!-- Image / gradient panel -->
+          <div class={`h-44 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}>
+            <span class="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-semibold tracking-widest uppercase rounded-full bg-white/80 dark:bg-neutral-900/80 text-violet-600 dark:text-violet-400">
+              {project.category}
+            </span>
+            <svg class="w-12 h-12 text-neutral-300 dark:text-neutral-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-12m0 0v3.75m0-3.75h12m-6 3.75h.008v.008H12v-.008z"/>
+            </svg>
+          </div>
+          <!-- Content -->
+          <div class="flex flex-col justify-between flex-1 p-6">
+            <div>
+              <h3 class="text-base font-bold text-neutral-900 dark:text-white mb-2 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors duration-200">
+                {project.title}
+              </h3>
+              <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                {project.summary}
+              </p>
+            </div>
+            <div class="flex items-center justify-between mt-5 pt-4 border-t border-neutral-100 dark:border-neutral-800">
+              <span class="text-xs font-semibold text-violet-500 dark:text-violet-400 group-hover:gap-2 flex items-center gap-1 transition-all duration-200">
+                View project
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="w-full max-w-5xl mx-auto px-7 xl:px-0">
+    <div class="w-full h-px border-t border-dashed border-neutral-300 dark:border-neutral-600 mt-20 mb-20"></div>
+  </div>
+
+  <!-- Let's Connect -->
+  <section class="w-full max-w-5xl mx-auto px-7 xl:px-0 mb-24">
+    <p class="mb-2 text-sm font-semibold tracking-widest uppercase text-violet-500 dark:text-violet-400">Get in Touch</p>
+    <h2 class="mb-4 text-3xl font-bold dark:text-white">Let's Connect</h2>
+    <p class="mb-8 max-w-xl text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+      Whether you want to talk shop about AI, product, or data, or just say hi, I'd love to hear from you. Find me on any of the platforms below.
+    </p>
+
+    <!-- Email button -->
+    <div class="mb-6">
+      <button
+        id="email-toggle"
+        class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full bg-neutral-900 dark:bg-violet-600 text-white hover:bg-neutral-700 dark:hover:bg-violet-500 transition-colors duration-200"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+        </svg>
+        Send me an email
+      </button>
+
+      <!-- Email compose panel -->
+      <div id="email-panel" class="hidden mt-4 max-w-lg p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm">
+        <div class="mb-4 pb-3 border-b border-neutral-100 dark:border-neutral-800">
+          <div class="flex items-center gap-2 text-sm">
+            <span class="text-neutral-400 dark:text-neutral-500 w-8">To:</span>
+            <span class="font-medium text-neutral-700 dark:text-neutral-300">amy@amyyoung.me</span>
+          </div>
+        </div>
+        <div class="mb-4">
+          <input
+            id="email-subject"
+            type="text"
+            placeholder="Subject"
+            class="w-full text-sm text-neutral-700 dark:text-neutral-300 bg-transparent border-b border-neutral-100 dark:border-neutral-800 pb-3 mb-4 outline-none placeholder-neutral-400 dark:placeholder-neutral-600 focus:border-violet-400 dark:focus:border-violet-500 transition-colors duration-200"
+          />
+          <textarea
+            id="email-body"
+            rows="5"
+            placeholder="Your message..."
+            class="w-full text-sm text-neutral-700 dark:text-neutral-300 bg-transparent outline-none placeholder-neutral-400 dark:placeholder-neutral-600 resize-none"
+          ></textarea>
+        </div>
+        <div class="flex items-center justify-between pt-3 border-t border-neutral-100 dark:border-neutral-800">
+          <button
+            id="email-send"
+            class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors duration-200"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            Send
+          </button>
+          <button id="email-cancel" class="text-xs text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors duration-200">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-4">
+      {[
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/amyyoung-data-ai/", icon: `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>` },
+        { label: "Instagram", href: "https://www.instagram.com/amyyoung.me/", icon: `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"/></svg>` },
+        { label: "Bluesky", href: "https://bsky.app/profile/amyyoung1.bsky.social", icon: `<svg class="w-5 h-5" viewBox="0 0 568 501" fill="currentColor"><path d="M123.121 33.664C188.241 82.553 258.281 181.68 284 234.873c25.719-53.192 95.759-152.32 160.879-201.209C491.866-1.611 568-28.906 568 57.947c0 17.346-9.945 145.713-15.778 166.555-20.275 72.453-94.155 90.933-159.875 79.748C507.905 328.723 521.88 398.431 458.208 448c-121.06 91.648-174.341-22.879-196.208-52.309C240.041 425.121 186.76 539.648 65.7 448c-63.672-49.569-49.647-119.277 65.875-143.75C65.854 314.626-8.026 296.146 2.25 223.502 7.325 207.714 15.575 157.707 35.85 112.207 57.575 62.857 92.221 10.493 123.121 33.664z"/></svg>` },
+        { label: "GitHub", href: "https://github.com/amy-young", icon: `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>` },
+        { label: "X / Twitter", href: "https://x.com/amyyoung", icon: `<svg class="w-5 h-5" viewBox="0 0 100 100" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M95 50c0 24.853-20.147 45-45 45S5 74.853 5 50 25.147 5 50 5s45 20.147 45 45Zm-51.21 2.688-21.51-28.76h16.578l14.1 18.855 17.453-18.855h4.872L55.135 45.694l22.72 30.377H61.279L45.967 55.598l-18.95 20.473h-4.873L43.79 52.688Zm-6.73-25.172h-7.616l33.63 44.967h7.616L37.06 27.516Z"/></svg>` },
+      ].map(link => (
+        <a
+          href={link.href}
+          target="_blank"
+          class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors duration-200"
+          set:html={`${link.icon}<span>${link.label}</span>`}
+        >
+        </a>
+      ))}
+    </div>
+  </section>
+
+
+<script>
+  // Email panel
+  const emailToggle = document.getElementById("email-toggle");
+  const emailPanel = document.getElementById("email-panel");
+  const emailCancel = document.getElementById("email-cancel");
+  const emailSend = document.getElementById("email-send");
+
+  emailToggle?.addEventListener("click", () => {
+    emailPanel?.classList.toggle("hidden");
+  });
+  emailCancel?.addEventListener("click", () => {
+    emailPanel?.classList.add("hidden");
+  });
+  emailSend?.addEventListener("click", () => {
+    const subject = (document.getElementById("email-subject") as HTMLInputElement)?.value || "";
+    const body = (document.getElementById("email-body") as HTMLTextAreaElement)?.value || "";
+    window.location.href = `mailto:amy@amyyoung.me?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
+
+<script>
+  const carousel = document.getElementById("skills-carousel");
+  document.getElementById("skills-prev")?.addEventListener("click", () => {
+    carousel?.scrollBy({ left: -288, behavior: "smooth" });
+  });
+  document.getElementById("skills-next")?.addEventListener("click", () => {
+    carousel?.scrollBy({ left: 288, behavior: "smooth" });
+  });
+</script>
+
 </Layout>
+
+

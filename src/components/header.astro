@@ -1,116 +1,121 @@
 ---
 import menus from "../collections/menu.json";
-import Logo from "../components/logo.astro";
 ---
 
-<!-- This is an invisible div with relative position so that it takes up the height of the menu (because menu is absolute/fixed) -->
+<!-- Spacer so content isn't hidden behind the fixed header -->
 <div class="relative w-full h-20 opacity-0 pointer-events-none"></div>
-<header id="header" class="absolute top-0 z-50 w-full h-20">
+
+<header id="header" class="absolute top-0 z-50 w-full h-20 flex items-center justify-center">
+  <!-- Pill nav container -->
   <div
-    class="flex items-center justify-between h-full max-w-5xl pl-6 pr-4 mx-auto border-b border-l-0 border-r-0 border-transparent select-none lg:border-r lg:border-l lg:rounded-b-xl"
+    class="relative flex items-center gap-1 px-3 py-2 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border border-neutral-200/70 dark:border-neutral-700/60 rounded-2xl shadow-sm select-none"
   >
-    <Logo />
+    <!-- Mobile menu background overlay -->
     <div
       id="mobileMenuBackground"
       onclick="closeMobileMenu()"
       class="fixed inset-0 z-20 hidden w-screen h-screen duration-300 ease-out bg-white/90 dark:bg-neutral-950/90"
     >
     </div>
-    <nav
-      class="relative z-30 flex flex-row-reverse justify-start w-full text-sm sm:justify-end text-neutral-500 dark:text-neutral-400 sm:flex-row"
+
+    <!-- Home icon link -->
+    <a
+      href="/"
+      class="flex items-center justify-center w-9 h-9 rounded-xl text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"
     >
-      <div
-        id="openMenu"
-        class="flex flex-col items-end justify-center w-6 h-6 ml-4 cursor-pointer sm:hidden"
-      >
-        <svg
-          class="w-8 h-8 dark:text-neutral-200"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"><path d="M4 8h16M4 16h16"></path></svg
-        >
-      </div>
-      <div
-        id="closeMenu"
-        class="flex flex-col items-end justify-center hidden w-6 h-6 ml-4 -translate-x-1 cursor-pointer sm:hidden"
-      >
-        <svg
-          class="w-6 h-6 text-neutral-600 dark:text-neutral-200"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg
-        >
-      </div>
-      <div
-        id="menu"
-        class="fixed top-[75px] ease-out duration-300 sm:top-0 w-full left-0 sm:py-0 pt-7 pb-4 dm:mx-0 left-0 z-40 flex-col items-end justify-start hidden w-full h-auto text-sm sm:text-base sm:h-auto sm:relative sm:flex-row sm:flex sm:text-sm sm:w-auto sm:pr-0 sm:pt-0"
-      >
-        <div
-          class="absolute inset-0 top-0 right-0 block w-full h-full px-3 sm:hidden"
-        >
-          <div
-            class="relative w-full h-full bg-white border border-dashed border-neutral-300 dark:border-neutral-700 backdrop-blur-sm rounded-xl dark:bg-neutral-950"
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+        <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+      </svg>
+    </a>
+
+    <!-- Divider -->
+    <div class="w-px h-5 bg-neutral-200 dark:bg-neutral-700 mx-1"></div>
+
+    <!-- Nav links (desktop) -->
+    <nav
+      class="relative z-30 hidden sm:flex items-center gap-1 text-[15px] text-neutral-500 dark:text-neutral-400"
+    >
+      {
+        menus.filter(m => m.url !== "/").map((menu) => (
+          <a
+            href={menu.url}
+            class="px-3 py-1.5 rounded-xl font-medium tracking-wide hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"
           >
-          </div>
-        </div>
+            {menu.name}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Divider -->
+    <div class="w-px h-5 bg-neutral-200 dark:bg-neutral-700 mx-1 hidden sm:block"></div>
+
+    <!-- Dark mode toggle -->
+    <div
+      id="darkToggle"
+      class="relative flex items-center justify-center w-9 h-9 rounded-xl cursor-pointer text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200 group"
+    >
+      <svg
+        class="w-5 h-5 transition duration-300"
+        id="sun"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      ><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+      <svg
+        class="hidden w-5 h-5 transition duration-300"
+        id="moon"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      ><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+      <!-- Required by main.js dark mode toggle -->
+      <span id="dayText" class="hidden"></span>
+      <span id="nightText" class="hidden"></span>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <div
+      id="openMenu"
+      class="flex flex-col items-center justify-center w-9 h-9 rounded-xl cursor-pointer sm:hidden text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+    >
+      <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M4 8h16M4 16h16"></path>
+      </svg>
+    </div>
+    <div
+      id="closeMenu"
+      class="hidden flex-col items-center justify-center w-9 h-9 rounded-xl cursor-pointer sm:hidden text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+    >
+      <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </div>
+
+    <!-- Mobile dropdown menu -->
+    <div
+      id="menu"
+      class="fixed top-[75px] left-4 right-4 z-40 flex-col items-start hidden sm:hidden"
+    >
+      <div class="w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow-lg overflow-hidden">
         {
-          menus.map((menu) => {
-            return (
-              <a
-                href={menu.url}
-                class="relative flex items-center justify-center w-full px-3 py-2 font-medium tracking-wide text-center duration-200 ease-out sm:py-0 sm:mb-0 md:w-auto hover:text-neutral-900 dark:hover:text-white"
-              >
-                {menu.name}
-              </a>
-            )
-          })
+          menus.map((menu) => (
+            <a
+              href={menu.url}
+              class="flex items-center w-full px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200 border-b border-neutral-100 dark:border-neutral-800 last:border-0"
+            >
+              {menu.name}
+            </a>
+          ))
         }
       </div>
-      <div
-        id="darkToggle"
-        class="relative flex items-center pl-6 ml-4 font-medium tracking-wide cursor-pointer text-neutral-800 group dark:text-white"
-      >
-        <div
-          class="absolute left-0 flex items-center justify-center w-6 h-6 overflow-hidden border-b border-transparent horizon group-hover:border-neutral-600"
-        >
-          <svg
-            class="absolute w-6 h-6 transition duration-700 transform ease"
-            id="sun"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            ><path
-              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-            ></path></svg
-          >
-          <svg
-            class="absolute hidden w-6 h-6 transition duration-700 transform ease"
-            id="moon"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            ><path
-              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-            ></path></svg
-          >
-        </div>
-        <span class="hidden sm:inline-block">
-          <span id="dayText" class="ml-2">Day mode</span>
-          <span id="nightText" class="hidden ml-2">Night mode</span>
-        </span>
-      </div>
-    </nav>
+    </div>
   </div>
 </header>

@@ -17,7 +17,10 @@ const { name, description, url, image } = Astro.props;
     class="relative z-30 block duration-300 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1"
   >
     <span class="block w-full">
-      <img src={image} class="w-full h-auto rounded-lg aspect-[16/9] object-cover" />
+      {image
+        ? <img src={image} class="w-full h-auto rounded-lg aspect-[16/9] object-cover" />
+        : <span class="block w-full aspect-[16/9] rounded-lg bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-950 dark:to-neutral-900 border border-violet-100 dark:border-violet-900" />
+      }
     </span>
     <span class="block w-full px-1 mt-5 mb-1 sm:mt-3">
       <span
