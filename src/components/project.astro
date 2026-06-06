@@ -1,10 +1,11 @@
 ---
 const { name, description, url, image } = Astro.props;
+const isExternal = url.startsWith("http") || url === "#";
 ---
 
 <a
   href={url}
-  target="_blank"
+  target={isExternal ? "_blank" : "_self"}
   class="relative flex flex-col items-stretch duration-300 ease-out p-7 sm:p-3 group h-100 rounded-2xl"
 >
   <span
