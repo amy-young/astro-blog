@@ -1,30 +1,32 @@
 ---
-layout: ../../../layouts/project.astro
+layout: ../../layouts/project.astro
 title: Personal Knowledge System
-description: A living AI orchestration layer that spans work, ventures, and life — built to compound over time and free up the work that actually matters.
+description: A living AI orchestration layer that spans work, ventures, and life, built to compound over time and free up the work that actually matters.
 status: active
 category: personal
-startDate: 2024
+startDate: "2024"
 tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
 ---
 
-For most of my career as an entrepreneur, I ran on people.
+For most of my career, I've been an entrepreneur - executing projects for clients by finding and working with great people.
 
-When I had my digital marketing consulting company, I'd assemble teams — web designers, copywriters, brand developers — and coordinate them around a research foundation I'd built. My background is in market research and sociology, so I'd lead with discovery: understanding the market, the audience, the positioning. That research would funnel into a rebrand, a website redesign, automated funnels, social media systems. Each person had their expertise. The work was good. But the operational overhead was real — enormous energy spent just keeping people coordinated, informed, and moving in the same direction.
+When I had my digital marketing consulting company, I'd assemble teams - web designers, copywriters, brand developers, and programmers - and coordinate them around a research foundation I'd built. My background is in market research and sociology, so I'd lead with discovery: understanding the market, the audience, the positioning. That research would funnel into a rebrand, a website redesign, automated funnels, social media systems. Each person had their expertise. The work was good. But the operational overhead was real - enormous energy spent just keeping people coordinated, informed, and moving in the same direction.
 
-I was always more drawn to the work that moved the needle: the insight, the strategy, the thing that actually changed something. The operational layer was a tax on that.
+I was always more drawn to the work that moved the needle: the insight, the strategy, the thing that actually changed something. The operational layer consumed time I would rather have spent on the work itself.
 
-Now I'm building subagents and AI assistants to handle much of what those teams used to do. Not as a replacement for human creativity — but as a way to get back to working on what matters. That shift is what this system is built around.
+Now I'm building subagents and AI assistants to handle much of what those teams used to do. Not as a replacement for human creativity - but as a way to get back to working on what matters. That shift is what this system is built around.
 
 ---
 
 ## What it actually is
 
-My PKA (Personal Knowledge and Action) system is a Claude Code-based AI orchestration layer that spans three contexts: my day job at the University of Washington, nine personal ventures I'm actively building, and my personal life. It's not a note-taking app or a task manager. It's a system that knows who I am, what I'm working on, and what I need — and acts on that knowledge across every session.
+My PKA (Personal Knowledge Assistant) system is a model-agnostic AI orchestration layer that spans three contexts: my day job at the University of Washington, nine personal ventures I'm actively building, and my personal life. It's not a note-taking app or a task manager. It's a system that knows who I am, what I'm working on, and what I need - and acts on that knowledge across every session.
 
-I think of it as a **life operating system** — not a product you finish, but infrastructure you build over time. It is, by design, never complete. The longer I invest in it, the better it gets.
+I think of it as a **life operating system** - not a product you finish, but infrastructure you build over time. It is, by design, never complete. The longer I invest in it, the better it gets.
 
-I also use Obsidian for longer-form knowledge and reference material, and Wispr Flow as my daily driver for input. Wispr Flow isn't just for capturing ideas on the go — it's how I interact with my system throughout the day, dictating context, thoughts, and instructions at the speed of speech. The productivity gain from voice-first input is hard to overstate once you've built your workflow around it.
+I also use Obsidian as a mirror of my PKA system and as the destination for my meeting notes, which flow in automatically from Granola. I've always admired people who were disciplined about maintaining an Obsidian vault and taking daily notes - but those systems always required so much manual upkeep that I could never stick with it. Now I've built the automations and orchestration so it happens on its own. When I want to explore my knowledge visually, I can open Obsidian's graph view and see the entire PKA system and everything in it. The content is there. I just didn't have to maintain it by hand.
+
+Wispr Flow is my daily driver for input - not just for capturing ideas on the go, but for how I interact with my system throughout the day, dictating context, thoughts, and instructions at the speed of speech. The productivity gain from voice-first input is hard to overstate once you've built your workflow around it.
 
 ---
 
@@ -32,17 +34,17 @@ I also use Obsidian for longer-form knowledge and reference material, and Wispr 
 
 I didn't build this in isolation. The AI builder community has been extraordinarily generous with their thinking, and my system is a direct product of that generosity.
 
-It started with **OpenClaw**, which introduced concepts like `SOUL.md` — a file that defines your personality and working style — and persistent memory across sessions. The ideas were compelling, but early on the project had real security concerns that gave a lot of us pause.
+It started with **Cole Medin** (if you're not watching his YouTube channel, start there). OpenClaw had just come out at the time, and while the concepts were compelling - `SOUL.md` for defining your personality and working style, `MEMORY.md` for persistent memory across sessions - there were real security concerns being raised early on. Cole wanted more control, so he built his own system using Claude Code, taking the best ideas and implementing them on his own terms. His approach to structuring context, routing between tasks, and keeping the system lean was hugely influential on how I designed my own.
 
-**Cole Medin** (if you're not watching his YouTube channel, start there) took the best of what OpenClaw introduced and rebuilt it properly using Claude Code. His approach to structuring context, routing between tasks, and keeping the system lean was hugely influential on how I designed my own.
+This is actually a pattern worth internalizing: once you've built your own system, you don't wholesale replace it when something new comes out. You might run a separate instance to explore it - on a spare machine, a VPS, a sandboxed environment - but what you're really doing is identifying the best-in-class concepts and integrating those into what you've already built. Your system stays yours.
 
-**Goda Go** developed her own Claude Code-based system with a similar philosophy, and seeing multiple people arrive at similar architectural decisions independently gave me confidence I was on the right track.
+**Ev Chapman** introduced me to the concept of threads - dedicated files for tracking every active project, capturing where you left off, what progress has been made, and what the next move is. This sounds simple, but it changed everything. Now I can ask my system "where did we leave off on the travel app?" and pick up exactly where we stopped. No reconstruction, no lost context. That alone is one of the biggest time savers in the system.
 
-**Ev Chapman** introduced me to the concept of threads — dedicated files for tracking every active project, capturing where you left off, what progress has been made, and what the next move is. This sounds simple, but it changed everything. Now I can ask my system "where did we leave off on the travel app?" and pick up exactly where we stopped. No reconstruction, no lost context. That alone is one of the biggest time savers in the system.
+**Nate Jones** from AI News and Strategy Daily developed the OpenBrain concept - a database-backed system for capturing and retrieving everything he processes: research, meeting notes, content, ideas. When Andrej Karpathy introduced his wiki concept, Nate layered that on top of OpenBrain to create a living, connected knowledge base. I use that system too, adapted to self-hosted Postgres rather than Supabase. Since Postgres is the foundation Supabase is built on, I decided to go straight to the source. Nate may well be on a paid Supabase plan - and that makes sense for his use case - but I've found that the open source versions of many tools are truncated compared to their paid counterparts, often missing the UX polish that makes them genuinely pleasant to use. So I went straight to Postgres and self-hosted it on my own VPS, skipping the Supabase layer entirely. I'm sure Supabase is great - but that's the beauty of building your own system. You get to make that call.
 
-**Nate Jones** from AI News and Strategy Daily developed the OpenBrain concept — a database-backed system for capturing and retrieving everything he processes: research, meeting notes, content, ideas. When Andrej Karpathy introduced his wiki concept, Nate layered that on top of OpenBrain to create a living, connected knowledge base. I use that system too, adapted to self-hosted Postgres rather than Supabase — since Postgres is the foundation Supabase is built on anyway, and self-hosting is always my first choice.
+In practice, once everything is connected, I rarely interact with the database directly. I run queries, retrieve notes, and surface research right from inside my PKA system. The database is there doing its job quietly in the background.
 
-I'm a committed open-source advocate. If I can self-host a high-quality, well-supported tool for free, that's what I do. The entire infrastructure for this system — database, task manager, automation layer, and this website — runs on a single self-hosted VPS.
+I'm a committed open-source advocate. If I can self-host a high-quality, well-supported tool for free, that's what I do. The entire infrastructure for this system - database, task manager, automation layer, and this website - runs on a single self-hosted VPS.
 
 ---
 
@@ -50,7 +52,7 @@ I'm a committed open-source advocate. If I can self-host a high-quality, well-su
 
 This is the part that matters most, and the part that's hardest to explain until you've experienced it.
 
-Every meeting I have is logged. Every conversation with my AI agent is captured. Every platform decision, every research thread, every insight worth keeping — it goes into the system. OpenBrain stores it. The wiki organizes it. Thread files track where each project stands.
+Every meeting I have is logged. Every conversation with my AI agent is captured. Every platform decision, every research thread, every insight worth keeping - it goes into the system. OpenBrain stores it. The wiki synthesizes it into connected, navigable pages you can actually read and reference - not just search. Thread files track where each project stands.
 
 The system doesn't just remember what I told it. It builds on it. Each session starts with more context than the last. Decisions I made six months ago inform decisions I'm making today. Research I did for one project surfaces when it's relevant to another. The knowledge connects, and the connections compound.
 
@@ -60,11 +62,11 @@ That flywheel is why this is a long-term investment, not a setup project. The va
 
 ## A philosophy of continuous evolution
 
-One of my favorite things to do when a new framework or agent harness gets traction is sit down with Claude, pull up the repo, and go through it systematically. We review the architecture, the design decisions, the ideas that are genuinely new — and I identify what's worth incorporating into my system.
+One of my favorite things to do when a new framework or agent harness gets traction is sit down with Claude, pull up the repo, and go through it systematically. We review the architecture, the design decisions, the ideas that are genuinely new - and I identify what's worth incorporating into my system.
 
 I did this recently with the Hermes agent. Not to switch systems, but to look for what's best-in-class and add it to what I've already built.
 
-The result is a system that's mine — structured around how I actually think and work — but continuously enriched by the best ideas coming out of the broader community. The builders who share their work openly make that possible.
+The result is a system that's mine - structured around how I actually think and work - but continuously enriched by the best ideas coming out of the broader community. The builders who share their work openly make that possible.
 
 ---
 
@@ -74,29 +76,28 @@ One of the most important architectural decisions I made early on: **don't build
 
 Different LLMs have genuine strengths. I use Claude Code for the majority of my work, but I still reach for ChatGPT and Codex for specific workflows where they shine. Because I work in VS Code, I can use extensions to bring different models into the same environment without changing my workflow.
 
-I also manage my tokens deliberately. I maintain subscriptions to both Claude and ChatGPT — work and personal accounts for each — and I route work accordingly:
+I also manage my tokens deliberately. I maintain subscriptions to both Claude and ChatGPT - work and personal accounts for each - and I route work accordingly:
 
-- **Claude Desktop (work account)** — connected to my PKA system's `work/` folder only. Work tokens for work activities.
-- **Claude Code (personal account)** — for personal ventures, app builds, and system development.
-- **Claude Desktop (personal account)** — also connected to the personal knowledge system for a different interaction mode.
-- **ChatGPT / Codex** — for specific workflows where those models have an edge.
+- **Claude Desktop (work account)** - connected to my PKA system's `work/` folder only, so work activities run on work tokens rather than my own.
+- **Claude Code (personal account)** - for personal ventures, app builds, and system development.
+- **ChatGPT / Codex** - for specific workflows where those models have an edge.
 
-This sounds like overhead, but in practice it's frictionless — and it means I'm never locked in, never rate-limited at a critical moment, and never paying work tokens for personal projects or vice versa.
+This sounds like overhead, but in practice it's straightforward. The goal is simply to maximize the tokens I have available and route work to the right account. I tend to gravitate toward the VS Code environment for most things - personal and work alike - but working with a colleague recently pushed me to explore the Claude Desktop app more seriously, both as a way to make better use of my work tokens and because it genuinely has great features. There's something to be said for running your morning brief in a well-designed UI rather than a terminal. It's a different mode, and sometimes that's exactly what you need.
 
 ---
 
 ## How it's structured
 
-The system lives in a single folder with three sub-contexts — `work/`, `ventures/`, and `life/` — each with its own routing file, index, and thread files for active projects. A master routing layer at the root directs each session to the right context.
+The system lives in a single folder with three sub-contexts - `work/`, `ventures/`, and `life/` - each with its own routing file, index, and thread files for active projects. A master routing layer at the root directs each session to the right context.
 
 Key files loaded at the start of every session:
 
-- `SOUL.md` — my personality, working style, and rules for how the AI should show up
-- `USER.md` — who I am, my background, how I work best
-- `hot.md` — what's most urgent right now
-- `MEMORY.md` — a curated index of key decisions and lessons across all past sessions
+- `SOUL.md` - my personality, working style, and rules for how the AI should show up
+- `USER.md` - who I am, my background, how I work best
+- `hot.md` - what's most urgent right now
+- `MEMORY.md` - a curated index of key decisions and lessons across all past sessions
 
-The AI never loads everything — just what's relevant to the current task.
+The AI never loads everything - just what's relevant to the current task.
 
 ---
 
@@ -106,15 +107,16 @@ The AI never loads everything — just what's relevant to the current task.
 |------|------|
 | Claude Code | Primary orchestration layer |
 | Wispr Flow | Voice-first daily input |
-| Obsidian | Long-form knowledge and reference |
-| OpenBrain (Postgres) | Cross-session knowledge capture and retrieval |
-| Wiki layer | Connected knowledge organization |
+| Obsidian | Meeting notes, daily notes, and a visual mirror of the PKA system. The graph view makes connections across your knowledge visible in a way nothing else does. |
+| OpenBrain (Postgres) | Persistent storage for everything worth remembering - the knowledge base that grows with every session. |
+| Wiki layer | Synthesizes captured knowledge into interconnected reference pages - turns raw inputs into something you can actually navigate and read, like a personal encyclopedia that builds itself. |
 | Vikunja | Self-hosted task management |
 | Asana | Institutional task management |
-| Granola | Meeting transcription → thread files |
+| Granola | Meeting transcription and structured notes using templates like 1:1s and weekly meetings, routed automatically into thread files. Integrates well with other tools in the stack. |
 | Google Workspace | Calendar, Gmail, Drive |
 | Firecrawl | Web research and content ingestion |
 | n8n | Automation workflows |
+| YouTube | A primary learning source. I organize videos into playlists by topic, and I'm building a workflow to automatically pull transcripts, draft summaries, and route anything worth keeping into my knowledge base. In progress - and one I'm genuinely excited about. |
 
 ---
 
@@ -122,18 +124,28 @@ The AI never loads everything — just what's relevant to the current task.
 
 It feels like working with someone who actually knows you.
 
-I open a session, run a morning brief, and get a cross-context orientation — what's urgent, what's in flight, what needs a decision today. Before a call, I pull a meeting brief: calendar context, the relevant thread file, notes on the people involved. At the end of the day, the system processes what I captured, routes it to the right files, previews tomorrow, and updates priorities.
+I open a session, run a morning brief, and get a cross-context orientation - what's urgent, what's in flight, what needs a decision today. Before a call, I pull a meeting brief: calendar context, the relevant thread file, notes on the people involved. At the end of the day, the system processes what I captured, routes it to the right files, previews tomorrow, and updates priorities.
 
-The skills compound. Every workflow I formalize is one I never have to think about again. Every decision I log becomes context for the next session. What used to require a coordinated team now runs through a system I built — and continue to build.
+The skills compound. Every workflow I formalize is one I never have to think about again. Every decision I log becomes context for the next session. What used to require a coordinated team now runs through a system I built - and continue to build.
 
 ---
 
 ## If you want to build one
 
-Start smaller than you think. One context, one skill, one memory file. Follow the builders who are doing this work in public — Cole Medin, Goda Go, Nate Jones, Ev Chapman are all worth your time. Look at what resonates with how you actually think. Adapt it. Make it yours.
+The most important thing: just start. It's okay to start small.
 
-Build it model-agnostic from the start. The landscape shifts too fast to bet everything on one provider.
+Pick one context - your work, one project, one area of your life that feels chaotic. Then find a framework or harness that resonates with you - one you trust. Research what other people are building so you can start to understand how these systems actually work. Because at the end of the day, it's a system of folders with markdown files. That's it. On your hard drive, or in the cloud if you prefer - but you have to start building.
 
-And when new frameworks come out, don't feel pressure to adopt them wholesale. Pull up the repo, look at what's genuinely new, take what's best-in-class, and leave the rest.
+From there, build incrementally. Watch YouTube - it's one of the best learning resources out there for this. When you find a video that resonates, copy the transcript into Claude and ask it what's valuable. Then ask it to integrate that into your system. Work with your LLM of choice - Claude, Codex, whatever you trust - and ask it to help you connect your apps: your calendar, your notes, your project management. Pretty soon you have an automated workflow. Then ask it to turn that into a skill, so you can start running a morning brief that pulls everything into one view. Do that enough times and the system starts to take shape on its own.
 
-The tools are available to anyone. What matters is deciding what the system is *for* — which specific tax you're tired of paying, and what work you'd rather be doing instead. The more you invest in it, the more it gives back. That's the whole idea.
+If you want to explore agent frameworks, try one. Hermes seems to be the most popular one right now. But don't feel pressure to adopt anything wholesale. The better approach is to pull up the repo, go through it with your AI, identify what's genuinely new or best-in-class, and fold that into what you've already built. Your system stays yours.
+
+**Build it model-agnostic from the start.** The landscape shifts too fast to bet everything on one provider. Design your system so it can work with whatever tools make sense for a given task - and you'll never be locked in.
+
+**Follow the builders who are doing this in public.** Cole Medin, Nate Hurk, Jack Roberts, Nate Jones, and Ev Chapman are all worth your time. They share their thinking openly and generously. But there are many great people doing incredible work out there - find someone you genuinely enjoy listening to, who resonates with how you think, and ideally someone with expertise in your particular space or vertical. Look at what they're building, adapt it, and make it your own.
+
+Start learning. That's the most important thing. Start learning and start building. These AI skills are what employers are looking for - but more importantly, do it for yourself. A well-built system frees you from the operational grind: manually creating tasks, copying and pasting meeting notes, reorganizing files. It puts that time back toward the high-leverage work - planning, executing, developing applications and workflows that make your organization better. And when you get there, share it with your team. That's how it compounds beyond just you.
+
+Most of all - don't let the chat window be the ceiling. So much of what people think AI can do is defined entirely by what they've experienced in a chat interface. When you start connecting your apps, your meetings, your knowledge, your ideas - when you bring it all into one place and let it compound - that's when something shifts. That's when it stops being a tool and starts feeling like something that actually knows you.
+
+That's the magic. And it's available to anyone willing to start building.
