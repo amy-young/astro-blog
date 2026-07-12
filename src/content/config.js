@@ -21,6 +21,8 @@ const projectCollection = defineCollection({
 		startDate: z.string().optional(),
 		liveUrl: z.string().optional(),
 		githubUrl: z.string().optional(),
+		downloadUrl: z.string().optional(),
+		heroImage: z.string().optional(),
 	}),
 });
 

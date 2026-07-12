@@ -1,6 +1,20 @@
 ---
 import Layout from "./main.astro";
-const { frontmatter } = Astro.props;
+
+interface Frontmatter {
+  title: string;
+  description: string;
+  status: "active" | "building" | "shipped";
+  category: "work" | "personal";
+  tags?: string[];
+  startDate?: string;
+  liveUrl?: string;
+  githubUrl?: string;
+  downloadUrl?: string;
+  heroImage?: string;
+}
+
+const { frontmatter } = Astro.props as { frontmatter: Frontmatter };
 
 const statusLabel = {
   active: "Active",
@@ -77,8 +91,8 @@ const categoryColor = {
             ))}
           </div>
         )}
-        {(frontmatter.liveUrl || frontmatter.githubUrl) && (
-          <div class="flex gap-3 ml-auto">
+        {(frontmatter.liveUrl || frontmatter.githubUrl || frontmatter.downloadUrl) && (
+          <div class="flex gap-3 ml-auto flex-wrap">
             {frontmatter.liveUrl && (
               <a href={frontmatter.liveUrl} target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors duration-200">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -95,13 +109,49 @@ const categoryColor = {
                 GitHub
               </a>
             )}
+            {frontmatter.downloadUrl && (
+              <a href={frontmatter.downloadUrl} class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-full border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors duration-200">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+                </svg>
+                Download
+              </a>
+            )}
           </div>
         )}
       </div>
     </div>
 
+    <!-- Hero -->
+    <div class="w-full max-w-2xl mx-auto px-7 lg:px-0 pt-10">
+      {frontmatter.heroImage ? (
+        <img
+          src={frontmatter.heroImage}
+          alt={frontmatter.title}
+          class="w-full rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm mb-10"
+        />
+      ) : (
+        <div class="relative w-full rounded-2xl overflow-hidden border border-dashed border-violet-200 dark:border-violet-900 bg-gradient-to-br from-violet-50 via-white to-amber-50 dark:from-violet-950/30 dark:via-neutral-950 dark:to-amber-950/20 mb-10 p-8 min-h-[180px] flex flex-col justify-between">
+          <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(rgba(109,40,217,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(109,40,217,0.15) 1px, transparent 1px); background-size: 28px 28px;" />
+          <div class="relative">
+            <div class="text-[10px] font-semibold tracking-[0.2em] uppercase text-violet-500 dark:text-violet-400 mb-3">{frontmatter.category} project · {frontmatter.status}</div>
+            <div class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 leading-tight max-w-sm">{frontmatter.title}</div>
+          </div>
+          {frontmatter.tags && frontmatter.tags.length > 0 && (
+            <div class="relative flex flex-wrap gap-2 mt-6">
+              {frontmatter.tags.map((tag: string) => (
+                <span class="px-2.5 py-1 text-[11px] font-medium rounded-full bg-white/70 dark:bg-neutral-900/70 border border-violet-100 dark:border-violet-900 text-violet-700 dark:text-violet-300 backdrop-blur-sm">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+
     <!-- Content -->
-    <article class="w-full max-w-2xl mx-auto mb-20 prose-sm prose px-7 lg:px-0 lg:prose-lg dark:prose-invert pt-10">
+    <article class="w-full max-w-2xl mx-auto mb-20 prose-sm prose px-7 lg:px-0 lg:prose-lg dark:prose-invert">
       <slot />
     </article>
   </main>

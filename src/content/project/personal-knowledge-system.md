@@ -8,6 +8,120 @@ startDate: "2024"
 tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
 ---
 
+<style>
+  .pka-diagram { font-family: "Roboto", sans-serif; }
+  .pka-node {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .pka-node:hover { transform: translateY(-2px); }
+  .pka-node.selected {
+    box-shadow: 0 0 0 2px rgb(139 92 246);
+    transform: translateY(-2px);
+  }
+  .pka-detail { transition: opacity 0.2s ease, max-height 0.3s ease; }
+  .pka-connector line { stroke-dasharray: 4 3; animation: dash 20s linear infinite; }
+  @keyframes dash { to { stroke-dashoffset: -100; } }
+</style>
+
+<div class="not-prose pka-diagram my-10">
+
+  <!-- Context row -->
+  <p class="text-[10px] font-semibold tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-500 text-center mb-4">Three contexts, one orchestration layer</p>
+  <div class="flex gap-3 justify-center mb-2">
+    <button class="pka-node flex-1 max-w-[168px] p-4 rounded-xl border border-violet-200 dark:border-violet-800 bg-white dark:bg-neutral-900 text-left" data-context="work" onclick="selectContext(this)">
+      <div class="text-[10px] font-semibold tracking-widest uppercase text-violet-500 dark:text-violet-400 mb-1">Work</div>
+      <div class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">NACC · UW</div>
+      <div class="text-[11px] text-neutral-500 mt-1">Research, comms, directory</div>
+    </button>
+    <button class="pka-node flex-1 max-w-[168px] p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-white dark:bg-neutral-900 text-left" data-context="ventures" onclick="selectContext(this)">
+      <div class="text-[10px] font-semibold tracking-widest uppercase text-amber-500 dark:text-amber-400 mb-1">Ventures</div>
+      <div class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">9 Projects</div>
+      <div class="text-[11px] text-neutral-500 mt-1">Apps, sites, content engine</div>
+    </button>
+    <button class="pka-node flex-1 max-w-[168px] p-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-neutral-900 text-left" data-context="life" onclick="selectContext(this)">
+      <div class="text-[10px] font-semibold tracking-widest uppercase text-emerald-500 dark:text-emerald-400 mb-1">Life</div>
+      <div class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">Personal</div>
+      <div class="text-[11px] text-neutral-500 mt-1">Family, finances, health</div>
+    </button>
+  </div>
+
+  <!-- Connectors down to center -->
+  <div class="flex justify-center">
+    <svg class="pka-connector w-full max-w-[540px] h-8 overflow-visible" viewBox="0 0 540 32" fill="none">
+      <line x1="90" y1="0" x2="270" y2="32" stroke="rgb(167 139 250)" stroke-width="1.5"/>
+      <line x1="270" y1="0" x2="270" y2="32" stroke="rgb(251 191 36)" stroke-width="1.5"/>
+      <line x1="450" y1="0" x2="270" y2="32" stroke="rgb(52 211 153)" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <!-- Central orchestration node -->
+  <div class="flex justify-center mb-0">
+    <div class="px-7 py-4 rounded-xl bg-neutral-900 dark:bg-white border border-neutral-800 dark:border-neutral-200 text-center">
+      <div class="text-[10px] font-semibold tracking-widest uppercase text-neutral-400 dark:text-neutral-500 mb-1">Orchestration layer</div>
+      <div class="text-base font-bold text-white dark:text-neutral-900">Claude Code + PKA System</div>
+      <div class="text-[11px] text-neutral-400 dark:text-neutral-600 mt-0.5">SOUL.md · MEMORY.md · hot.md · thread files · skills</div>
+    </div>
+  </div>
+
+  <!-- Connectors down to tools -->
+  <div class="flex justify-center">
+    <svg class="pka-connector w-full max-w-[540px] h-8 overflow-visible" viewBox="0 0 540 32" fill="none">
+      <line x1="270" y1="0" x2="90" y2="32" stroke="rgb(163 163 163)" stroke-width="1.5"/>
+      <line x1="270" y1="0" x2="190" y2="32" stroke="rgb(163 163 163)" stroke-width="1.5"/>
+      <line x1="270" y1="0" x2="270" y2="32" stroke="rgb(163 163 163)" stroke-width="1.5"/>
+      <line x1="270" y1="0" x2="350" y2="32" stroke="rgb(163 163 163)" stroke-width="1.5"/>
+      <line x1="270" y1="0" x2="450" y2="32" stroke="rgb(163 163 163)" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <!-- Tool row -->
+  <div class="flex flex-wrap gap-2 justify-center">
+    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">OpenBrain (Postgres)</span>
+    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">n8n Automation</span>
+    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Vikunja Tasks</span>
+    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Granola</span>
+    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Obsidian</span>
+    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Asana</span>
+    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Google Workspace</span>
+    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Wispr Flow</span>
+  </div>
+
+  <!-- Context detail panel -->
+  <div id="pka-detail" class="pka-detail mt-6 rounded-xl border border-dashed border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50 p-4 text-sm text-neutral-600 dark:text-neutral-400 hidden">
+    <div id="pka-detail-content"></div>
+  </div>
+
+</div>
+
+<script>
+const contextDetails = {
+  work: {
+    label: "Work — NACC / University of Washington",
+    detail: "Day job context: NACC directory, REDCap, NEXT platform, website redesign, communications. Asana tracks tasks; thread files track every active project. Morning brief pulls calendar and due tasks each day."
+  },
+  ventures: {
+    label: "Ventures — 9 Active Projects",
+    detail: "Alz researcher site, memory care directory, travel app, booking app, women's sports blog, portfolio, and more. Each gets its own thread file. The content engine and marketing skills stack live here."
+  },
+  life: {
+    label: "Life — Personal",
+    detail: "Finances (Firefly III + PrivateZone), health, family, personal goals. Sensitive data stays local in D:\\PrivateZone. Bridge scripts post sanitized tasks to Vikunja for daily routing."
+  }
+};
+
+function selectContext(el) {
+  document.querySelectorAll('.pka-node').forEach(n => n.classList.remove('selected'));
+  el.classList.add('selected');
+  const ctx = el.dataset.context;
+  const detail = contextDetails[ctx];
+  const panel = document.getElementById('pka-detail');
+  const content = document.getElementById('pka-detail-content');
+  content.innerHTML = '<span class="font-semibold text-neutral-800 dark:text-neutral-200">' + detail.label + '</span><br/>' + detail.detail;
+  panel.classList.remove('hidden');
+}
+</script>
+
 For most of my career, I've been an entrepreneur - executing projects for clients by finding and working with great people.
 
 When I had my digital marketing consulting company, I'd assemble teams - web designers, copywriters, brand developers, and programmers - and coordinate them around a research foundation I'd built. My background is in market research and sociology, so I'd lead with discovery: understanding the market, the audience, the positioning. That research would funnel into a rebrand, a website redesign, automated funnels, social media systems. Each person had their expertise. The work was good. But the operational overhead was real - enormous energy spent just keeping people coordinated, informed, and moving in the same direction.

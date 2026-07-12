@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: #0d0d0d;
+    font-family: 'Inter', sans-serif;
+    color: #d0d0d0;
+    overflow: hidden;
+  }
+
+  .app {
+    display: grid;
+    grid-template-rows: 38px 1fr 24px;
+    grid-template-columns: 1fr;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    background: #111;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 2px;
+  }
+  .tab {
+    padding: 5px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #666;
+    border-radius: 4px 4px 0 0;
+  }
+  .tab.active {
+    background: #1a1a1a;
+    color: #ddd;
+    border: 1px solid #2a2a2a;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  /* ── MAIN 3-COLUMN ── */
+  .main {
+    display: grid;
+    grid-template-columns: 230px 1fr 250px;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    background: #111;
+    border-right: 1px solid #222;
+    overflow: hidden;
+    padding: 14px 0;
+  }
+  .sidebar-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #555;
+    padding: 0 14px 10px;
+  }
+  .tree-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: #999;
+    white-space: nowrap;
+  }
+  .tree-row.active { background: #1c1230; color: #e8e8e8; }
+  .tree-row .ic { color: #5b21b6; font-size: 9px; width: 12px; }
+  .tree-row.active .ic { color: #a78bfa; }
+  .tree-row .fc { color: #7c3aed; font-size: 9px; width: 12px; }
+  .tree-row.dim { color: #666; }
+  .i1 { padding-left: 22px; }
+  .i2 { padding-left: 34px; }
+  .sep { height: 1px; background: #1e1e1e; margin: 7px 0; }
+
+  /* ── EDITOR ── */
+  .editor {
+    background: #0f0f0f;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .breadcrumb {
+    padding: 10px 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #555;
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .breadcrumb em { color: #7c3aed; font-style: normal; }
+  .editor-body {
+    padding: 28px 40px;
+    overflow: hidden;
+    flex: 1;
+  }
+  .doc-eyebrow {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7c3aed;
+    margin-bottom: 8px;
+  }
+  .doc-title {
+    font-size: 30px;
+    font-weight: 600;
+    color: #f2f2f2;
+    letter-spacing: -0.02em;
+    margin-bottom: 5px;
+  }
+  .doc-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  .pills { display: flex; gap: 8px; margin-bottom: 22px; }
+  .pill {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .pill-green { background: #052e16; color: #4ade80; border: 1px solid #14532d; }
+  .pill-purple { background: #1e1530; color: #c4b5fd; border: 1px solid #4c1d95; }
+
+  .field { display: flex; gap: 8px; margin-bottom: 7px; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+  .fk { color: #555; min-width: 100px; }
+  .fv { color: #c0c0c0; }
+  .fv-violet { color: #a78bfa; }
+  .fv-green { color: #4ade80; }
+
+  .section-head {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #555;
+    margin: 20px 0 10px;
+  }
+  .card {
+    background: #161616;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+  }
+  .card-title { font-size: 12px; font-weight: 500; color: #e0e0e0; margin-bottom: 4px; }
+  .card-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; }
+  .card-sub em { color: #7c3aed; font-style: normal; }
+
+  /* ── RIGHT PANEL ── */
+  .right {
+    background: #111;
+    border-left: 1px solid #222;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .panel-head {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  .conn-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 6px;
+    border-radius: 5px;
+    margin-bottom: 3px;
+  }
+  .cdot { width: 6px; height: 6px; border-radius: 50%; background: #7c3aed; flex-shrink: 0; }
+  .cdot.dim { background: #333; }
+  .clabel { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #bbb; }
+  .clabel.dim { color: #666; }
+
+  .graph-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
+
+  .stat-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+  .sk { color: #555; }
+  .sv { color: #c0c0c0; }
+  .sv-v { color: #a78bfa; }
+  .sv-g { color: #4ade80; }
+
+  /* ── STATUS BAR ── */
+  .statusbar {
+    background: #0d0d0d;
+    border-top: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 20px;
+  }
+  .si { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: #444; display: flex; align-items: center; gap: 4px; }
+  .si.on { color: #7c3aed; }
+  .sdot { width: 5px; height: 5px; border-radius: 50%; background: #4ade80; }
+  .si-right { margin-left: auto; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="tab">MEMORY.md</div>
+    <div class="tab active">travel-app.md</div>
+    <div class="tab">hot.md</div>
+    <div class="tab">SOUL.md</div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-label">PKA System</div>
+
+      <div class="tree-row"><span class="fc">▾</span> pka-system</div>
+      <div class="tree-row i1"><span class="ic">◆</span> SOUL.md</div>
+      <div class="tree-row i1"><span class="ic">◆</span> USER.md</div>
+      <div class="tree-row i1 active"><span class="ic">◆</span> hot.md</div>
+      <div class="tree-row i1"><span class="ic">◆</span> MEMORY.md</div>
+
+      <div class="sep"></div>
+
+      <div class="tree-row i1"><span class="fc">▾</span> work/</div>
+      <div class="tree-row i2"><span class="ic">◆</span> CLAUDE.md</div>
+      <div class="tree-row i2 dim"><span class="ic">▸</span> threads/</div>
+      <div class="tree-row i2 dim"><span class="ic">▸</span> intelligence/</div>
+      <div class="tree-row i2 dim"><span class="ic">▸</span> context/</div>
+
+      <div class="sep"></div>
+
+      <div class="tree-row i1"><span class="fc">▾</span> ventures/</div>
+      <div class="tree-row i2"><span class="ic">◆</span> CLAUDE.md</div>
+      <div class="tree-row i2 dim"><span class="ic">▸</span> threads/</div>
+      <div class="tree-row i2"><span class="ic">◆</span> travel-app.md</div>
+      <div class="tree-row i2"><span class="ic">◆</span> alz-research.md</div>
+      <div class="tree-row i2"><span class="ic">◆</span> portfolio-site.md</div>
+
+      <div class="sep"></div>
+
+      <div class="tree-row i1 dim"><span class="ic">▸</span> life/</div>
+      <div class="tree-row i1 dim"><span class="ic">▸</span> skills/</div>
+      <div class="tree-row i1 dim"><span class="ic">▸</span> capture/</div>
+    </div>
+
+    <!-- EDITOR -->
+    <div class="editor">
+      <div class="breadcrumb">pka-system / ventures / threads / <em>travel-app.md</em></div>
+      <div class="editor-body">
+        <div class="doc-eyebrow">Thread — Ventures</div>
+        <div class="doc-title">Travel Companion App</div>
+        <div class="doc-meta">Last updated: 2026-06-05 &nbsp;·&nbsp; 14 sessions &nbsp;·&nbsp; 7 decisions logged</div>
+
+        <div class="pills">
+          <span class="pill pill-green">● Active</span>
+          <span class="pill pill-purple">Personal</span>
+        </div>
+
+        <div class="field"><span class="fk">status</span><span class="fv-violet">in progress</span></div>
+        <div class="field"><span class="fk">last session</span><span class="fv">Reviewed booking flow wireframes, decided on itinerary model</span></div>
+        <div class="field"><span class="fk">next</span><span class="fv">Draft user testing plan, finalize onboarding flow</span></div>
+        <div class="field"><span class="fk">platform</span><span class="fv-green">Astro + Supabase + Claude API</span></div>
+
+        <div class="section-head">Recent decisions</div>
+        <div class="card">
+          <div class="card-title">Itinerary data model</div>
+          <div class="card-sub">Chose flat structure over nested — <em>easier to query, simpler to render</em></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Auth approach</div>
+          <div class="card-sub">Magic link over OAuth — <em>lower friction for travel context</em></div>
+        </div>
+        <div class="card">
+          <div class="card-title">AI integration layer</div>
+          <div class="card-sub">Claude API via edge functions — <em>itinerary suggestions + packing lists</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right">
+      <div>
+        <div class="panel-head">Connections</div>
+        <div class="conn-row"><div class="cdot"></div><div class="clabel">MEMORY.md</div></div>
+        <div class="conn-row"><div class="cdot"></div><div class="clabel">hot.md</div></div>
+        <div class="conn-row"><div class="cdot dim"></div><div class="clabel dim">portfolio-site.md</div></div>
+        <div class="conn-row"><div class="cdot dim"></div><div class="clabel dim">alz-research.md</div></div>
+        <div class="conn-row"><div class="cdot dim"></div><div class="clabel dim">2026-06-05.md</div></div>
+        <div class="conn-row"><div class="cdot dim"></div><div class="clabel dim">2026-06-01.md</div></div>
+      </div>
+
+      <div class="graph-wrap">
+        <svg width="210" height="180" viewBox="0 0 210 180" style="display:block;">
+          <line x1="105" y1="90" x2="50" y2="40" stroke="#2a1f4a" stroke-width="1.5"/>
+          <line x1="105" y1="90" x2="165" y2="40" stroke="#2a1f4a" stroke-width="1.5"/>
+          <line x1="105" y1="90" x2="155" y2="145" stroke="#2a1f4a" stroke-width="1.5"/>
+          <line x1="105" y1="90" x2="50" y2="145" stroke="#2a1f4a" stroke-width="1.5"/>
+          <line x1="105" y1="90" x2="105" y2="22" stroke="#3b1f6e" stroke-width="1.5"/>
+          <line x1="50" y1="40" x2="18" y2="75" stroke="#1e1e1e" stroke-width="1"/>
+          <line x1="165" y1="40" x2="196" y2="75" stroke="#1e1e1e" stroke-width="1"/>
+          <circle cx="18" cy="75" r="3" fill="#222" stroke="#333" stroke-width="1"/>
+          <circle cx="196" cy="75" r="3" fill="#222" stroke="#333" stroke-width="1"/>
+          <circle cx="50" cy="40" r="6" fill="#1a1030" stroke="#4c1d95" stroke-width="1.5"/>
+          <circle cx="165" cy="40" r="6" fill="#1a1030" stroke="#4c1d95" stroke-width="1.5"/>
+          <circle cx="155" cy="145" r="6" fill="#1a1030" stroke="#4c1d95" stroke-width="1.5"/>
+          <circle cx="50" cy="145" r="6" fill="#1a1030" stroke="#4c1d95" stroke-width="1.5"/>
+          <circle cx="105" cy="22" r="7" fill="#1e1530" stroke="#6d28d9" stroke-width="1.5"/>
+          <circle cx="105" cy="90" r="13" fill="#3b1f6e" stroke="#7c3aed" stroke-width="2"/>
+          <circle cx="105" cy="90" r="7" fill="#7c3aed"/>
+          <text x="105" y="11" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#666" dominant-baseline="auto">MEMORY.md</text>
+          <text x="28" y="34" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#555">hot.md</text>
+          <text x="187" y="34" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#555">SOUL.md</text>
+          <text x="172" y="158" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#555">alz-research</text>
+          <text x="34" y="158" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#555">portfolio</text>
+          <text x="105" y="108" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#c4b5fd">travel-app</text>
+        </svg>
+      </div>
+
+      <div>
+        <div class="panel-head">Session Stats</div>
+        <div class="stat-row"><span class="sk">sessions</span><span class="sv">14</span></div>
+        <div class="stat-row"><span class="sk">decisions</span><span class="sv-v">7 logged</span></div>
+        <div class="stat-row"><span class="sk">context</span><span class="sv-g">ventures/</span></div>
+        <div class="stat-row"><span class="sk">model</span><span class="sv">claude-sonnet-4</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="statusbar">
+    <div class="si on"><div class="sdot"></div> PKA Active</div>
+    <div class="si">OpenBrain connected</div>
+    <div class="si">ventures/ context loaded</div>
+    <div class="si">Wispr Flow ready</div>
+    <div class="si si-right">2026-06-05</div>
+  </div>
+
+</div>
+</body>
+</html>
