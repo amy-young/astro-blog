@@ -1,0 +1,139 @@
+---
+import "../assets/css/home.css";
+const { title = "Amy Young — Researcher, Designer, Builder · Seattle" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href="/assets/images/ZenCloud-logo-dk-trans.png" />
+    <Fragment set:html={import.meta.env.HEADER_INJECT} />
+  </head>
+  <body>
+    <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">Amy Young</div>
+      <div class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/projects">Projects</a>
+        <a href="/about">About</a>
+        <a href="/posts">Articles</a>
+      </div>
+      <a class="nav-contact" href="#contact">Contact</a>
+    </div>
+  </nav>
+
+    <slot />
+
+    <!-- SHAPE FOOTER -->
+  <div class="shape-sec" id="contact">
+    <div class="wrap shape-grid">
+      <div>
+        <div class="shape-title rv">Let's compare notes.</div>
+        <div class="shape-sub rv">If you're building with AI in health, science, research, or marketing, I'd like to hear what you're working on.</div>
+      </div>
+      <div class="shape-side rv">
+        <div class="shape-person">
+          <img class="shape-avatar" src="/assets/images/home/amy-young-portrait.jpg" alt="Amy Young" width="56" height="56">
+          <div>
+            <div class="shape-person-name">Amy Young</div>
+            <div class="shape-person-role">Researcher, Designer, Builder</div>
+            <div class="shape-socials">
+              <a class="shape-social" href="https://www.linkedin.com/in/amyyoung-data-ai/" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+              <a class="shape-social" href="https://github.com/amy-young" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg></a>
+              <a class="shape-social" href="https://x.com/amyyoung" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"></path></svg></a>
+              <a class="shape-social" href="https://bsky.app/profile/amyyoung1.bsky.social" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            </div>
+          </div>
+        </div>
+        <div class="shape-lbl">Contact me</div>
+        <a href="mailto:hello@amyyoung.me" class="shape-email">hello@amyyoung.me</a>
+        <div class="shape-btns">
+          <a href="mailto:hello@amyyoung.me" class="shape-btn-dark">Say hello <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="news-sec">
+    <div><h3>New posts by email.</h3><p>I write about AI, research, and what I'm building.</p></div>
+    <form class="news-form" onsubmit="return false">
+      <input type="email" required="" placeholder="Enter your email">
+      <button>Subscribe</button>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <div class="wrap">
+      <div class="foot-inner">
+        <div class="foot-logo">Amy<span>Young</span></div>
+        <nav class="foot-nav">
+          <div class="foot-col"><div class="foot-col-h">Work</div><a href="/projects">Projects</a></div>
+          <div class="foot-col"><div class="foot-col-h">Writing</div><a href="/why-i-write">Why I Write</a></div>
+          <div class="foot-col"><div class="foot-col-h">About</div><a href="#contact">Contact</a></div>
+        </nav>
+        <div class="foot-links"><a href="https://www.linkedin.com/in/amyyoung-data-ai/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/amy-young" target="_blank" rel="noopener">GitHub</a><a href="https://x.com/amyyoung" target="_blank" rel="noopener">X</a></div>
+        <div class="foot-copy">© 2026 Amy Young. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+
+    <div id="cursor-ring"></div>
+    <Fragment set:html={import.meta.env.FOOTER_INJECT} />
+  </body>
+</html>
+
+<script>
+const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('stuck', window.scrollY > 10), { passive: true });
+
+    // Hero "+" expanders — one open at a time
+    document.querySelectorAll('.hero-svc-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.hero-svc');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.hero-svc.open').forEach(o => {
+          o.classList.remove('open');
+          o.querySelector('.hero-svc-btn').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    const rvEls = document.querySelectorAll('.rv');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: '0px 0px -30px 0px' });
+    rvEls.forEach(el => obs.observe(el));
+    setTimeout(() => rvEls.forEach(el => el.classList.add('in')), 400);
+
+    // Custom cursor
+    const ring = document.getElementById('cursor-ring');
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let rx = mx, ry = my;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      document.body.classList.add('cursor-active');
+    }, { passive: true });
+    document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+    document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+    document.querySelectorAll('a, button, .proj-card, .blog-card, .why-card, .svc-arrow').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+    (function tick() {
+      rx += (mx - rx) * 0.18;
+      ry += (my - ry) * 0.18;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(tick);
+    })();
+</script>

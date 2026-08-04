@@ -1,118 +1,204 @@
 ---
-import Projects from "../components/home/projects.astro";
-import Separator from "../components/home/separator.astro";
-import Writings from "../components/home/writings.astro";
-import Layout from "../layouts/main.astro";
+import Layout from "../layouts/home.astro";
 ---
 
-<Layout title="Amy">
-  <div class="relative z-20 w-full max-w-4xl mx-auto mt-16 px-7 md:mt-24 lg:mt-28 xl:px-0">
-    <!-- Decorative glow behind the card -->
-    <div class="absolute -inset-8 rounded-[3rem] bg-gradient-to-br from-stone-200/60 via-amber-100/30 to-transparent dark:from-neutral-800/60 dark:via-neutral-700/20 dark:to-transparent blur-3xl pointer-events-none -z-10"></div>
+<Layout>
+<!-- HERO -->
+  <section class="hero">
 
-    <!-- Hero card -->
-    <div class="flex flex-col md:flex-row overflow-hidden rounded-3xl border-[10px] border-white dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-md min-h-[420px]">
-
-      <!-- Left: text content -->
-      <div class="flex flex-col justify-center p-10 md:p-12 md:w-1/2 bg-gradient-to-br from-stone-100 via-amber-50/60 to-neutral-50 dark:from-neutral-800 dark:via-neutral-850 dark:to-neutral-900">
-        <h1 class="mb-4 text-4xl font-bold leading-tight lg:text-5xl dark:text-white">
-          Hello, I'm Amy.
-        </h1>
-        <p class="mb-5 text-base text-neutral-600 dark:text-neutral-400 leading-relaxed">
-          I'm a product manager and aspiring AI builder living in Seattle.
-        </p>
-        <p class="mb-2 text-sm font-semibold text-neutral-800 dark:text-neutral-200">
-          I enjoy working on a variety of projects, including:
-        </p>
-        <ul class="py-2 space-y-1 text-sm list-disc list-inside text-neutral-500 dark:text-neutral-400">
-          <li>AI Agents & Automation</li>
-          <li>Communications & Information Management</li>
-          <li>Product Design & Development</li>
-          <li>Data Science & Analytics</li>
-        </ul>
-        <a
-          href="https://www.linkedin.com/in/amyyoung-data-ai/"
-          class="inline-flex items-center gap-2 w-auto self-start px-4 py-2 mt-6 text-xs font-semibold duration-300 ease-out border rounded-full bg-neutral-900 dark:bg-white dark:text-neutral-900 text-neutral-100 hover:border-neutral-700 border-neutral-900 dark:hover:border-neutral-300 hover:bg-white dark:hover:bg-black dark:hover:text-white hover:text-neutral-900"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
-          Follow me on LinkedIn
-        </a>
+    <!-- LEFT: social, bio, big name -->
+    <div class="hero-left">
+      <div class="hero-social">
+        <a href="https://www.linkedin.com/in/amyyoung-data-ai/" target="_blank" rel="noopener">LinkedIn</a>,
+        <a href="https://www.instagram.com/amyyoung.me/" target="_blank" rel="noopener">Instagram</a>,
+        <a href="https://bsky.app/profile/amyyoung1.bsky.social" target="_blank" rel="noopener">Bluesky</a>,
+        <a href="https://github.com/amy-young" target="_blank" rel="noopener">GitHub</a>,
+        <a href="https://x.com/amyyoung" target="_blank" rel="noopener">X / Twitter</a>
       </div>
-
-      <!-- Right: photo full-bleed, clipped by card's rounded corners -->
-      <div class="md:w-1/2 min-h-[360px] md:min-h-0">
-        <img
-          src="/assets/images/amy-young-dt.jpeg"
-          loading="eager"
-          decoding="auto"
-          class="w-full h-full object-cover object-top"
-        />
-      </div>
-
+      <p class="hero-bio">I build AI systems. Research first, then the system that meets the need. My own runs on persistent memory and rewrites its own playbook.</p>
+      <div class="hero-name">Hello, I'm<br>Amy Young</div>
     </div>
-  </div>
 
-  <!-- About Me section -->
-  <div class="w-full max-w-4xl mx-auto px-7 xl:px-0">
-    <!-- Divider above -->
-    <div class="w-full h-px border-t border-dashed border-neutral-300 dark:border-neutral-600 mt-16 mb-16"></div>
-
-    <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
-
-      <!-- Left: stacked polaroid photos -->
-      <div class="relative flex-shrink-0 w-80 h-[360px] mr-8 md:mr-12">
-        <!-- Back photo -->
-        <div class="absolute top-0 left-0 w-56 h-56 bg-white dark:bg-neutral-800 rounded-2xl shadow-lg p-2.5 -rotate-3">
-          <img
-            src="/assets/images/amy-young_sailing-2.jpeg"
-            alt=""
-            class="w-full h-full object-cover rounded-xl"
-          />
-        </div>
-        <!-- Front photo — overlaps only the bottom-right corner of the back photo -->
-        <div class="absolute top-[170px] left-[155px] w-52 h-52 bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-2.5 rotate-3">
-          <img
-            src="/assets/images/amy-young-street-jj.jpeg"
-            alt="Amy Young"
-            class="w-full h-full object-cover object-top rounded-xl"
-          />
-        </div>
-      </div>
-
-      <!-- Right: text content -->
-      <div class="flex-1">
-        <h2 class="text-4xl font-bold tracking-tight md:text-5xl dark:text-white mb-6">
-          About me
-        </h2>
-        <p class="text-base text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-          I'm a product manager and AI builder living in Seattle, WA. I have a passion for building things that make people's lives easier and more meaningful.
-        </p>
-        <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mb-6">
-          My background spans data science, communications, and product design — a combination that lets me approach problems from multiple perspectives and build end-to-end solutions.
-        </p>
-        <ul class="space-y-2.5">
-          {[
-            "AI Agents & Automation",
-            "Product Design & Development",
-            "Data Science & Analytics",
-            "Communications & Information Management",
-          ].map((skill) => (
-            <li class="flex items-center gap-2.5 text-sm text-neutral-700 dark:text-neutral-300">
-              <svg class="w-4 h-4 flex-shrink-0 text-neutral-900 dark:text-neutral-100" viewBox="0 0 24 24" fill="currentColor">
-                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-              </svg>
-              {skill}
-            </li>
-          ))}
-        </ul>
+    <!-- CENTER: circular photo -->
+    <div class="hero-center">
+      <div class="hero-circle">
+        <img src="/assets/images/home/amy-young-portrait.jpg" alt="Amy Young — UX Designer">
       </div>
     </div>
 
-  </div>
+    <!-- RIGHT: services, tagline, location -->
+    <div class="hero-right">
+      <div class="hero-services">
+        <div class="hero-svc">
+          <button class="hero-svc-btn" type="button" aria-expanded="false" aria-controls="svc-ai"><span class="plus">+</span> AI Systems</button>
+          <div class="hero-svc-panel" id="svc-ai"><p>Agentic workflows, retrieval pipelines, and automation that runs in production rather than in a demo. Two years building a system that orchestrates my own work: persistent memory across sessions, automated capture and routing, processes that update themselves as I learn.</p></div>
+        </div>
+        <div class="hero-svc">
+          <button class="hero-svc-btn" type="button" aria-expanded="false" aria-controls="svc-ps"><span class="plus">+</span> Product Strategy</button>
+          <div class="hero-svc-panel" id="svc-ps"><p>Deciding what to build and why, from problem framing through roadmap, scope, and the tradeoffs nobody wants to make.</p></div>
+        </div>
+        <div class="hero-svc">
+          <button class="hero-svc-btn" type="button" aria-expanded="false" aria-controls="svc-ra"><span class="plus">+</span> Research &amp; Analytics</button>
+          <div class="hero-svc-panel" id="svc-ra"><p>Mixed-methods research and the data work behind it. Evidence that changes decisions, not decks that get filed.</p></div>
+        </div>
+      </div>
+      <div class="hero-right-bottom" style="text-align:right; width:100%;">
+        <p class="hero-tagline">The hard part isn't adding AI.<br>It's knowing which parts should never touch it.</p>
+        <div class="hero-location">Based in<br>Seattle, WA</div>
+      </div>
+    </div>
 
-  <Separator text="My Workbench" />
-  <Projects />
-  <Writings />
+  </section>
+
+  <div style="height:1px; background:var(--border); width:100%;"></div>
+
+  <!-- XENON AI SECTION -->
+  <section class="xn-sec">
+    <div class="wrap">
+      <div class="xn-headline rv">The workshop side of<br><strong>Artificial Intelligence.</strong></div>
+      <div class="xn-main">
+        <div class="xn-imgs">
+          <div class="xn-img"><img src="/assets/images/home/eb145399-9c4f-4eb4-b711-3221df2f500a.jpg" alt="AI visualization"></div>
+          <div class="xn-img"><img src="/assets/images/home/d9a0f8cb-70cb-4cef-85d9-6ae483cf8f8b.jpg" alt="AI architecture"></div>
+        </div>
+        <div class="xn-info rv">
+          <div class="xn-arrows">►►</div>
+          <div class="xn-name-lbl">I'm Amy Young</div>
+          <div class="xn-role-big">Researcher<br>Designer<br>Builder.</div>
+          <div class="xn-role-desc">I research where AI is heading, design what it makes possible, and build it.</div>
+          <div class="xn-scroll"><span class="xn-scroll-arrow">↓</span>Scroll</div>
+        </div>
+      </div>
+      <div class="xn-about rv">
+        <div>
+          <div class="xn-about-lbl">I'm Amy Young</div>
+          <img src="/assets/images/home/amy-young-sailing.jpg" alt="Amy Young" class="xn-about-photo">
+        </div>
+        <div>
+          <div class="xn-about-label">About</div>
+          <p class="xn-about-text">I came up through <strong>market research and data analytics</strong>, then digital marketing, where research met brand and web design. Today I work in <strong>information management and communications for a national research center</strong>. A master's in Information Management from UW pointed me at AI, and I've been <strong>building AI systems and teaching colleagues to do the same</strong> ever since.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SKILLS -->
+  <section class="skills-sec">
+    <div class="wrap">
+      <div class="skills-layout">
+        <div class="skills-left rv">
+          <div class="skills-lbl">What I Work On</div>
+          <div class="skills-heading">My <strong>skills &amp;</strong><br><strong>passions</strong><br>these days</div>
+          <a href="#contact" class="skills-contact">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            Contact me
+          </a>
+        </div>
+        <div class="skills-list rv">
+          <div class="skill-row active">
+            <div class="skill-num">01</div>
+            <div class="skill-name">Research &amp; Data Analysis</div>
+            <a class="skill-arrow" href="/projects"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a>
+          </div>
+          <div class="skill-row">
+            <div class="skill-num">02</div>
+            <div class="skill-name">Brand &amp; Communications</div>
+            <a class="skill-arrow" href="/projects"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a>
+          </div>
+          <div class="skill-row">
+            <div class="skill-num">03</div>
+            <div class="skill-name">AI Systems &amp; Automation</div>
+            <a class="skill-arrow" href="/projects"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a>
+          </div>
+          <div class="skill-row">
+            <div class="skill-num">04</div>
+            <div class="skill-name">Knowledge &amp; Retrieval Systems</div>
+            <a class="skill-arrow" href="/projects"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a>
+          </div>
+          <div class="skill-row">
+            <div class="skill-num">05</div>
+            <div class="skill-name">Self-Hosted Infrastructure</div>
+            <a class="skill-arrow" href="/projects"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a>
+          </div>
+          <div class="skill-row">
+            <div class="skill-num">06</div>
+            <div class="skill-name">AI Enablement &amp; Training</div>
+            <a class="skill-arrow" href="/projects"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MY WORKSHOP — two featured projects. Rebuilt 2026-08-04 with Amy's own project data
+       (2026-07-14 export). Metric pairs deliberately omitted: they were the cut stat line
+       redistributed to card level. -->
+  <section class="sec sec-white wrap">
+    <div class="sh rv">
+      <div class="sh-label">My Workshop</div>
+      <div class="sh-title">Start with these.</div>
+    </div>
+    <div class="feat-stack">
+      <div class="feat-card rv">
+        <div class="feat-img-wrap"><img src="/assets/images/home/cb229aa1-33d7-418d-bff3-86a25bb5f39f.jpg" alt="ADRD Research Hub"></div>
+        <div class="feat-body">
+          <div class="feat-cat">Platform · Shipped</div>
+          <div class="feat-title">ADRD Researcher Community</div>
+          <div class="feat-desc">Comprehensive database and collaboration platform for Alzheimer's disease research scientists across the ADRC network.</div>
+          <a href="/projects" class="feat-link">Lead PM <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        </div>
+      </div>
+      <div class="feat-card rv">
+        <div class="feat-body feat-body-dark">
+          <div class="feat-cat">Knowledge · Building</div>
+          <div class="feat-title">Personal Knowledge System</div>
+          <div class="feat-desc">A system for capturing, organizing, and surfacing knowledge across research, projects, and interests.</div>
+          <a href="/project/personal-knowledge-system" class="feat-link">Take it apart <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        </div>
+        <div class="feat-img-wrap"><img src="/assets/images/home/18873180-d88d-4f06-acd9-994be3e56bef.jpg" alt="Personal Knowledge System"></div>
+      </div>
+    </div>
+  </section>
+
+<!-- PROJECT GRID -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sh rv sh-row">
+        <div><div class="sh-label">Portfolio</div><div class="sh-title" style="margin-bottom:0;">Showcase Project Work</div></div>
+        <a class="btn btn-outline" href="/projects">View All Projects</a>
+      </div>
+      <div class="proj-grid">
+        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/49f5da6f-02c5-4a72-85a8-02cee2a59e8e.jpg" alt="ADRD Researcher Community"></div><div class="proj-body"><div class="proj-cat">Discovery</div><div class="proj-title">ADRD Research Hub</div><div class="proj-sub">Concept &rarr; MVP &middot; Building</div></div></a>
+        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/a8913842-4096-487c-a405-395634f5a81e.jpg" alt="NACC Website"></div><div class="proj-body"><div class="proj-cat">Website</div><div class="proj-title">NACC Website</div><div class="proj-sub">PM + Build &middot; Shipped</div></div></a>
+        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/2a46598f-e89b-4439-84a3-61d8d9a5c803.jpg" alt="Self-Hosted VPS Lab"></div><div class="proj-body"><div class="proj-cat">Infra</div><div class="proj-title">Self-Hosted VPS Lab</div><div class="proj-sub">Self-hosted &middot; Shipped</div></div></a>
+        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/3c359c35-cdc8-4ff5-9f24-4bce70749111.jpg" alt="Researcher Profile App"></div><div class="proj-body"><div class="proj-cat">Web App</div><div class="proj-title">Researcher Profile App</div><div class="proj-sub">Product + Design &middot; Building</div></div></a>
+        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/d03cf20c-e85b-464d-8da3-a6322b4236a6.png" alt="Personal Knowledge System"></div><div class="proj-body"><div class="proj-cat">AI Agent</div><div class="proj-title">AI Personal Assistant</div><div class="proj-sub">Personal build &middot; Building</div></div></a>
+        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/f679bcf7-ce8a-4ac1-929d-88d9087eda77.jpg" alt="AI Learning Platform"></div><div class="proj-body"><div class="proj-cat">Education</div><div class="proj-title">AI Learning Platform</div><div class="proj-sub">Concept &rarr; MVP &middot; Building</div></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION section removed 2026-08-04 — relocated to the About page (Amy's call).
+       Real data recovered from the 2026-07-14 export: M.S. Information Management, UW (2024);
+       B.A. Sociology & Statistics, University of Minnesota (1991); NIA Certificate of
+       Appreciation, UDS v4 (2021); Board Member, Delridge Neighborhood Development Assn (2015-2026). -->
+  <!-- WRITING — rebuilt 2026-08-04 at three posts per Amy's reduction from six.
+       !! THE THREE CARDS BELOW ARE PLACEHOLDERS. No real posts exist yet: the Astro repo
+       has one post and it is the Aria theme's demo. DO NOT SHIP until these are written. -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sh rv sh-row">
+        <div><div class="sh-label">Writing</div><div class="sh-title" style="margin-bottom:0;">Latest from My Blog</div></div>
+        <a class="btn btn-outline" href="/posts">All Articles</a>
+      </div>
+      <div class="blog-grid">
+        <div class="blog-card rv"><div class="blog-img"><img src="/assets/images/home/24bf0b3f-47ce-4cd3-8770-1e435c3bb477.jpg" alt=""></div><div class="blog-body"><div class="blog-cat">Placeholder</div><div class="blog-title">Post one — to be written</div><div class="blog-meta">Draft in progress</div></div></div>
+        <div class="blog-card rv"><div class="blog-img"><img src="/assets/images/home/43cd1f62-278a-457f-8924-c5763c2daa3b.png" alt=""></div><div class="blog-body"><div class="blog-cat">Placeholder</div><div class="blog-title">Post two — to be written</div><div class="blog-meta">Draft in progress</div></div></div>
+        <div class="blog-card rv"><div class="blog-img"><img src="/assets/images/home/7b30060b-3a44-4f13-a886-9404eb6da98a.jpg" alt=""></div><div class="blog-body"><div class="blog-cat">Placeholder</div><div class="blog-title">Post three — to be written</div><div class="blog-meta">Draft in progress</div></div></div>
+      </div>
+    </div>
+  </section>
+  <!-- STATS BAR removed 2026-08-03 — fabricated placeholder -->
+  <!-- TESTIMONIALS removed 2026-08-03 — fabricated placeholder -->
 </Layout>
