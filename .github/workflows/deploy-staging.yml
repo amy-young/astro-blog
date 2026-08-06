@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - staging
+  # Manual trigger. Added 2026-08-06 after a push to staging landed on the remote but
+  # GitHub never created a run, leaving no way to deploy short of an empty commit and
+  # nothing to `gh run rerun` against. Lets a stuck deploy be kicked off by hand:
+  #   gh workflow run "Build and Deploy (Staging)" -R amy-young/astro-blog --ref staging
+  workflow_dispatch:
 
 jobs:
   deploy:
