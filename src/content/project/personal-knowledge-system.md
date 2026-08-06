@@ -8,6 +8,15 @@ startDate: "2024"
 tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
 ---
 
+<!-- Full system map. Moved here from the homepage 2026-08-06: at homepage column width
+     its labels were unreadable, and this is the page where the detail is wanted. -->
+<figure class="not-prose my-10">
+  <img src="/assets/images/pka-system-architecture.png" loading="lazy" width="2000" height="1414" class="w-full h-auto" alt="Full architecture map of the PKA system, running left to right through five stages. Capture: Granola, Drive _INBOX, YouTube playlists, the Telegram bot, /venture-research, scratch-today.md and capture_thought. Process: the n8n pipeline, digest mining, /ingest, /panning-for-gold and vault import. Store: three knowledge folders over a Postgres brain running OpenBrain and pgvector. Synthesize: entity extraction, the wiki compiler, content briefs and compiled entity pages. Retrieve: pka_retrieve.py manifest search, MEMORY.md, semantic search and hot.md. A feedback loop runs from retrieval back to the brain.">
+  <figcaption class="mt-3 text-[13px] leading-relaxed text-neutral-500 dark:text-neutral-400">
+    The whole system on one page. Source of truth is <code>PKA-ARCHITECTURE.md</code>; the map is re-verified whenever the architecture changes.
+  </figcaption>
+</figure>
+
 <style>
   .pka-diagram { font-family: "Roboto", sans-serif; }
   .pka-node {

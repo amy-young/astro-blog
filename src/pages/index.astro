@@ -56,9 +56,30 @@ import Layout from "../layouts/home.astro";
     <div class="wrap">
       <div class="xn-headline rv">The workshop side of<br><strong>Artificial Intelligence.</strong></div>
       <div class="xn-main">
-        <div class="xn-imgs">
-          <div class="xn-img"><img src="/assets/images/home/eb145399-9c4f-4eb4-b711-3221df2f500a.jpg" alt="AI visualization"></div>
-          <div class="xn-img"><img src="/assets/images/home/d9a0f8cb-70cb-4cef-85d9-6ae483cf8f8b.jpg" alt="AI architecture"></div>
+        <!-- The PKA system's five stages, as markup rather than an image. The full
+             diagram moved to /project/personal-knowledge-system on 2026-08-06: at this
+             column width its labels read as texture, and its baked-in headline competed
+             with the section headline above. Numbered because the order is real. -->
+        <div class="xn-system">
+          <div class="xn-system-lbl">Personal knowledge and AI operating system</div>
+          <p class="xn-system-lead">Everything I capture <strong>becomes structure.</strong></p>
+          <p class="xn-system-sub">Meetings, documents, research, and voice notes route through one pipeline into a Postgres brain I host myself. It extracts the entities, compiles the wiki, and hands back the right file in zero tokens.</p>
+          <ol class="xn-flow">
+            <li class="xn-flow-step"><span class="xn-flow-n">01</span><span class="xn-flow-name">Capture</span><span class="xn-flow-sub">Seven surfaces. Everything in.</span></li>
+            <li class="xn-flow-step"><span class="xn-flow-n">02</span><span class="xn-flow-name">Process</span><span class="xn-flow-sub">Clean. Enrich. Structure.</span></li>
+            <li class="xn-flow-step"><span class="xn-flow-n">03</span><span class="xn-flow-name">Store</span><span class="xn-flow-sub">Postgres and pgvector.</span></li>
+            <li class="xn-flow-step"><span class="xn-flow-n">04</span><span class="xn-flow-name">Synthesize</span><span class="xn-flow-sub">Entities. Edges. Wiki.</span></li>
+            <li class="xn-flow-step"><span class="xn-flow-n">05</span><span class="xn-flow-name">Retrieve</span><span class="xn-flow-sub">Deterministic. Relevant.</span></li>
+          </ol>
+          <!-- Real counts from the system map, verified 2026-08-05. Not the fabricated
+               stats bar that was cut on 2026-08-03. -->
+          <dl class="xn-stats">
+            <div class="xn-stat"><dt class="xn-stat-n">1,834</dt><dd class="xn-stat-l">entities extracted</dd></div>
+            <div class="xn-stat"><dt class="xn-stat-n">2,034</dt><dd class="xn-stat-l">typed edges</dd></div>
+            <div class="xn-stat"><dt class="xn-stat-n">122</dt><dd class="xn-stat-l">wiki pages compiled</dd></div>
+            <div class="xn-stat"><dt class="xn-stat-n">0</dt><dd class="xn-stat-l">tokens to find a file</dd></div>
+          </dl>
+          <a class="xn-system-link" href="/project/personal-knowledge-system">See the full architecture <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
         </div>
         <div class="xn-info rv">
           <div class="xn-arrows">►►</div>
@@ -134,50 +155,39 @@ import Layout from "../layouts/home.astro";
        (2026-07-14 export). Metric pairs deliberately omitted: they were the cut stat line
        redistributed to card level. -->
   <section class="sec sec-white wrap">
-    <div class="sh rv">
-      <div class="sh-label">My Workshop</div>
-      <div class="sh-title">Start with these.</div>
+    <div class="sh rv sh-row">
+      <div><div class="sh-label">My Workshop</div><div class="sh-title" style="margin-bottom:0;">Start with these.</div></div>
+      <a class="btn btn-outline" href="/projects">View All Projects</a>
     </div>
     <div class="feat-stack">
+      <!-- PKA leads (Amy's call 2026-08-06), image left / copy right, on the dark body.
+           Layout order settled after trying both: image-left reads better than the
+           original copy-left, and the dark treatment stays on PKA. -->
       <div class="feat-card rv">
-        <div class="feat-img-wrap"><img src="/assets/images/home/cb229aa1-33d7-418d-bff3-86a25bb5f39f.jpg" alt="ADRD Research Hub"></div>
-        <div class="feat-body">
-          <div class="feat-cat">Platform · Shipped</div>
-          <div class="feat-title">ADRD Researcher Community</div>
-          <div class="feat-desc">Comprehensive database and collaboration platform for Alzheimer's disease research scientists across the ADRC network.</div>
-          <a href="/projects" class="feat-link">Lead PM <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
-        </div>
-      </div>
-      <div class="feat-card rv">
+        <div class="feat-img-wrap"><img src="/assets/images/home/18873180-d88d-4f06-acd9-994be3e56bef.jpg" alt="Personal Knowledge System"></div>
         <div class="feat-body feat-body-dark">
           <div class="feat-cat">Knowledge · Building</div>
           <div class="feat-title">Personal Knowledge System</div>
           <div class="feat-desc">A system for capturing, organizing, and surfacing knowledge across research, projects, and interests.</div>
           <a href="/project/personal-knowledge-system" class="feat-link">Take it apart <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
         </div>
-        <div class="feat-img-wrap"><img src="/assets/images/home/18873180-d88d-4f06-acd9-994be3e56bef.jpg" alt="Personal Knowledge System"></div>
+      </div>
+      <div class="feat-card rv">
+        <div class="feat-body">
+          <div class="feat-cat">Platform · Shipped</div>
+          <div class="feat-title">ADRD Researcher Community</div>
+          <div class="feat-desc">Comprehensive database and collaboration platform for Alzheimer's disease research scientists across the ADRC network.</div>
+          <a href="/projects" class="feat-link">Lead PM <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        </div>
+        <div class="feat-img-wrap"><img src="/assets/images/home/cb229aa1-33d7-418d-bff3-86a25bb5f39f.jpg" alt="ADRD Research Hub"></div>
       </div>
     </div>
   </section>
 
-<!-- PROJECT GRID -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="sh rv sh-row">
-        <div><div class="sh-label">Portfolio</div><div class="sh-title" style="margin-bottom:0;">Showcase Project Work</div></div>
-        <a class="btn btn-outline" href="/projects">View All Projects</a>
-      </div>
-      <div class="proj-grid">
-        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/49f5da6f-02c5-4a72-85a8-02cee2a59e8e.jpg" alt="ADRD Researcher Community"></div><div class="proj-body"><div class="proj-cat">Discovery</div><div class="proj-title">ADRD Research Hub</div><div class="proj-sub">Concept &rarr; MVP &middot; Building</div></div></a>
-        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/a8913842-4096-487c-a405-395634f5a81e.jpg" alt="NACC Website"></div><div class="proj-body"><div class="proj-cat">Website</div><div class="proj-title">NACC Website</div><div class="proj-sub">PM + Build &middot; Shipped</div></div></a>
-        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/2a46598f-e89b-4439-84a3-61d8d9a5c803.jpg" alt="Self-Hosted VPS Lab"></div><div class="proj-body"><div class="proj-cat">Infra</div><div class="proj-title">Self-Hosted VPS Lab</div><div class="proj-sub">Self-hosted &middot; Shipped</div></div></a>
-        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/3c359c35-cdc8-4ff5-9f24-4bce70749111.jpg" alt="Researcher Profile App"></div><div class="proj-body"><div class="proj-cat">Web App</div><div class="proj-title">Researcher Profile App</div><div class="proj-sub">Product + Design &middot; Building</div></div></a>
-        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/d03cf20c-e85b-464d-8da3-a6322b4236a6.png" alt="Personal Knowledge System"></div><div class="proj-body"><div class="proj-cat">AI Agent</div><div class="proj-title">AI Personal Assistant</div><div class="proj-sub">Personal build &middot; Building</div></div></a>
-        <a class="proj-card rv" href="/projects"><div class="proj-img"><img src="/assets/images/home/f679bcf7-ce8a-4ac1-929d-88d9087eda77.jpg" alt="AI Learning Platform"></div><div class="proj-body"><div class="proj-cat">Education</div><div class="proj-title">AI Learning Platform</div><div class="proj-sub">Concept &rarr; MVP &middot; Building</div></div></a>
-      </div>
-    </div>
-  </section>
-
+  <!-- PROJECT GRID removed 2026-08-06 (Amy's call). The six cards duplicated what "My
+       Workshop" already does, and its "View All Projects" pill moved up into the Workshop
+       header. The .proj-* styles are left in home.css on purpose: the /projects rebuild in
+       this design system is the next piece of work and will reuse them. -->
   <!-- EDUCATION section removed 2026-08-04 — relocated to the About page (Amy's call).
        Real data recovered from the 2026-07-14 export: M.S. Information Management, UW (2024);
        B.A. Sociology & Statistics, University of Minnesota (1991); NIA Certificate of
