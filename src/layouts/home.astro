@@ -23,6 +23,17 @@ const { title = "Amy Young — Researcher, Designer, Builder · Seattle" } = Ast
         <a href="/posts">Articles</a>
       </div>
       <a class="nav-contact" href="#contact">Contact</a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
+    <div class="nav-panel" id="nav-panel">
+      <a href="/" class="active">Home</a>
+      <a href="/projects">Projects</a>
+      <a href="/about">About</a>
+      <a href="/posts">Articles</a>
     </div>
   </nav>
 
@@ -92,6 +103,26 @@ const { title = "Amy Young — Researcher, Designer, Builder · Seattle" } = Ast
 const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav.classList.toggle('stuck', window.scrollY > 10), { passive: true });
 
+    // Mobile hamburger
+    const navToggle = document.querySelector('.nav-toggle');
+    const navPanel = document.getElementById('nav-panel');
+    if (nav && navToggle && navPanel) {
+      const setMenu = (open) => {
+        nav.classList.toggle('open', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+        navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      };
+      navToggle.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+      navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+      // Tap anywhere outside the nav closes it. The toggle lives inside .nav, so its own
+      // click never reaches this and cannot fight the open/close it just performed.
+      document.addEventListener('click', (e) => {
+        if (nav.classList.contains('open') && !nav.contains(e.target)) setMenu(false);
+      });
+      window.addEventListener('resize', () => { if (window.innerWidth > 760) setMenu(false); }, { passive: true });
+    }
+
     // Hero "+" expanders — one open at a time
     document.querySelectorAll('.hero-svc-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -106,6 +137,16 @@ const nav = document.getElementById('nav');
           btn.setAttribute('aria-expanded', 'true');
         }
       });
+    });
+
+    // Skill rows — the purple/white state follows the pointer and stays on the last row entered
+    document.querySelectorAll('.skill-row').forEach(row => {
+      const setActive = () => {
+        document.querySelectorAll('.skill-row.active').forEach(r => r.classList.remove('active'));
+        row.classList.add('active');
+      };
+      row.addEventListener('mouseenter', setActive);
+      row.addEventListener('focusin', setActive);
     });
 
     const rvEls = document.querySelectorAll('.rv');
