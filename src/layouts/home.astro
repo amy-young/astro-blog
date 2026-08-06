@@ -118,7 +118,9 @@ const nav = document.getElementById('nav');
       // Tap anywhere outside the nav closes it. The toggle lives inside .nav, so its own
       // click never reaches this and cannot fight the open/close it just performed.
       document.addEventListener('click', (e) => {
-        if (nav.classList.contains('open') && !nav.contains(e.target)) setMenu(false);
+        // e.target is EventTarget, which nav.contains() will not accept — narrow it to a
+        // Node first. This is also correct at runtime, not just a cast to quiet the checker.
+        if (nav.classList.contains('open') && e.target instanceof Node && !nav.contains(e.target)) setMenu(false);
       });
       window.addEventListener('resize', () => { if (window.innerWidth > 760) setMenu(false); }, { passive: true });
     }
