@@ -115,6 +115,20 @@
     .wrap { max-width: var(--mw); margin: 0 auto; padding-inline: var(--g); }
     .sec { padding-block: var(--sec); }
     .sec-white { background: var(--bg-white); }
+    /* Full-bleed divider, matching the border-bottom rules on .xn-sec and .skills-sec.
+       Applied as a border-top because "My Workshop" carries .wrap on the section itself,
+       so a border-bottom there would stop at 1200px instead of spanning the viewport. */
+    .sec-rule { border-top: 1px solid var(--border); }
+    /* "See more" link that follows a grid. Same treatment as .feat-link and
+       .xn-system-link so the page has one idiom for onward links, not two. */
+    .sec-more {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: clamp(26px, 3.2vw, 40px);
+      font-size: 1.005rem; font-weight: 700; color: var(--accent);
+      transition: gap .18s;
+    }
+    .sec-more:hover { gap: 12px; }
+    .sec-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
 
     /* Section header */
     .sh { margin-bottom: clamp(32px, 5vw, 52px); }
@@ -128,7 +142,9 @@
     .btn-primary  { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: var(--sh-ac); }
     .btn-primary:hover  { background: var(--accent-h); border-color: var(--accent-h); transform: translateY(-1px); }
     .btn-outline  { background: transparent; color: var(--ink); border-color: var(--border-str); }
-    .btn-outline:hover  { border-color: var(--accent); color: var(--accent); }
+    /* Fills with --accent-h, the palette's designated darker hover purple (same fill
+       .btn-primary:hover uses). White on #3D2D80 measures 11.14:1. */
+    .btn-outline:hover  { background: var(--accent-h); border-color: var(--accent-h); color: #fff; }
     .btn-white    { background: #fff; color: var(--dark); border-color: #fff; }
     .btn-white:hover    { background: var(--accent-wash); }
     .btn-ghost-white    { background: rgba(255,255,255,.09); color: #fff; border-color: rgba(255,255,255,.2); }
@@ -771,6 +787,80 @@
     .skill-arrow { width: 44px; height: 44px; border-radius: 10px; border: 1.5px solid var(--border-str); display: flex; align-items: center; justify-content: center; color: var(--ink-3); transition: all .2s; flex-shrink: 0; }
     .skill-row.active .skill-arrow { background: var(--accent); color: #fff; border-color: var(--accent); }
     .skill-row.active .skill-name { color: var(--ink); font-weight: 700; }
+
+    /* =============================================
+       PROJECTS PAGE (2026-08-06)
+       Text-forward cards on purpose: there is no real project imagery, and 13 stock
+       placeholders would say less than the words do.
+    ============================================= */
+    .page-head { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: clamp(36px, 5vw, 60px); }
+    .page-head .sh-label { margin-bottom: 12px; }
+    /* Same light-300 / heavy-800 device the homepage headlines use. */
+    .page-title {
+      font-family: var(--f);
+      font-size: clamp(2.3rem, 5.4vw, 4.2rem);
+      font-weight: 300; color: var(--ink-3);
+      letter-spacing: -.035em; line-height: 1.06;
+      margin: 0 0 18px; text-wrap: balance;
+    }
+    .page-title strong { font-weight: 800; color: var(--ink); }
+    .page-lead { font-size: clamp(1rem, 1.4vw, 1.12rem); color: var(--ink-3); line-height: 1.65; max-width: 62ch; margin: 0 0 30px; }
+    .page-stats { width: 100%; max-width: 640px; }
+
+    /* Filter */
+    .pj-filter { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin-bottom: clamp(24px, 3vw, 34px); }
+    .pj-filter-lbl { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-4); margin-right: 4px; }
+    .pj-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--f); font-size: .84rem; font-weight: 600;
+      padding: 8px 15px; border-radius: 9999px;
+      border: 1px solid var(--border-str); background: transparent; color: var(--ink-2);
+      transition: all .18s ease;
+    }
+    .pj-chip:hover { border-color: var(--accent); color: var(--accent); }
+    .pj-chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .pj-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .pj-chip-n { font-size: .74rem; font-variant-numeric: tabular-nums; opacity: .7; }
+
+    /* Cards */
+    .pj-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 900px) { .pj-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .pj-grid { grid-template-columns: 1fr; } }
+    .pj-item[hidden] { display: none; }
+    .pj-card {
+      display: flex; flex-direction: column; height: 100%;
+      padding: 22px 22px 20px;
+      border: 1px solid var(--border); border-radius: 16px;
+      background: var(--bg-white); color: inherit;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+    a.pj-card:hover { border-color: var(--accent-bdr); box-shadow: var(--sh-md); transform: translateY(-3px); }
+    a.pj-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .pj-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .pj-no { font-size: .72rem; font-weight: 700; color: var(--accent); letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+    .pj-cat { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-4); }
+    .pj-status { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; font-size: .68rem; font-weight: 700; letter-spacing: .04em; color: var(--ink-3); white-space: nowrap; }
+    .pj-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-4); flex-shrink: 0; }
+    /* Status is encoded in form as well as word, so it reads at a glance. */
+    .pj-status[data-s="shipped"] .pj-dot  { background: #2E6B3E; }
+    .pj-status[data-s="building"] .pj-dot { background: var(--accent); }
+    .pj-status[data-s="concept"] .pj-dot  { background: var(--border-str); }
+
+    .pj-name { font-size: 1.12rem; font-weight: 800; letter-spacing: -.022em; line-height: 1.25; color: var(--ink); margin: 0 0 8px; }
+    .pj-desc { font-size: .84rem; color: var(--ink-3); line-height: 1.6; margin: 0 0 18px; }
+    .pj-foot { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border); }
+    .pj-meta { font-size: .76rem; font-weight: 600; color: var(--ink-4); }
+    .pj-go { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; font-size: .8rem; font-weight: 700; color: var(--accent); transition: gap .18s; }
+    a.pj-card:hover .pj-go { gap: 11px; }
+
+    .pj-empty { font-size: .92rem; color: var(--ink-3); margin: 28px 0 0; }
+    .pj-empty[hidden] { display: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pj-card, .pj-chip { transition: border-color .18s ease, color .18s ease; }
+      a.pj-card:hover { transform: none; }
+    }
 
     /* Reveal */
     .rv { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }

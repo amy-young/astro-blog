@@ -173,13 +173,18 @@ import Layout from "../layouts/home.astro";
         </div>
       </div>
       <div class="feat-card rv">
+        <!-- Was "ADRD Researcher Community" until 2026-08-06. That label was wrong twice
+             over: it implied a Discourse-style community platform Amy never ran, and it
+             was conflating the NACC Directory with the ADRD funding platform. Amy's call
+             was to feature the VPS lab here instead. Image is the one the old Portfolio
+             grid had already chosen for this project. -->
         <div class="feat-body">
-          <div class="feat-cat">Platform · Shipped</div>
-          <div class="feat-title">ADRD Researcher Community</div>
-          <div class="feat-desc">Comprehensive database and collaboration platform for Alzheimer's disease research scientists across the ADRC network.</div>
-          <a href="/projects" class="feat-link">Lead PM <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+          <div class="feat-cat">Infrastructure · Shipped</div>
+          <div class="feat-title">Self-Hosted VPS Lab</div>
+          <div class="feat-desc">Docker and Caddy on a personal VPS: Postgres with pgvector, n8n automation, Vikunja, KaraKeep, and both of my sites, behind Tailscale.</div>
+          <a href="/projects" class="feat-link">See the stack <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
         </div>
-        <div class="feat-img-wrap"><img src="/assets/images/home/cb229aa1-33d7-418d-bff3-86a25bb5f39f.jpg" alt="ADRD Research Hub"></div>
+        <div class="feat-img-wrap"><img src="/assets/images/home/2a46598f-e89b-4439-84a3-61d8d9a5c803.jpg" alt="Self-Hosted VPS Lab"></div>
       </div>
     </div>
   </section>
@@ -195,17 +200,21 @@ import Layout from "../layouts/home.astro";
   <!-- WRITING — rebuilt 2026-08-04 at three posts per Amy's reduction from six.
        !! THE THREE CARDS BELOW ARE PLACEHOLDERS. No real posts exist yet: the Astro repo
        has one post and it is the Aria theme's demo. DO NOT SHIP until these are written. -->
-  <section class="sec">
+  <section class="sec sec-rule">
     <div class="wrap">
-      <div class="sh rv sh-row">
-        <div><div class="sh-label">Writing</div><div class="sh-title" style="margin-bottom:0;">Latest from My Blog</div></div>
-        <a class="btn btn-outline" href="/posts">All Articles</a>
+      <!-- The "All Articles" pill moved below the grid as a text link 2026-08-06: it was
+           competing with the longer headline, and a "see more" belongs after the thing it
+           expands. Matches the .feat-link / .xn-system-link treatment used elsewhere. -->
+      <div class="sh rv">
+        <div class="sh-label">Writing</div>
+        <div class="sh-title">What I'm reading, building, and thinking about.</div>
       </div>
       <div class="blog-grid">
         <div class="blog-card rv"><div class="blog-img"><img src="/assets/images/home/24bf0b3f-47ce-4cd3-8770-1e435c3bb477.jpg" alt=""></div><div class="blog-body"><div class="blog-cat">Placeholder</div><div class="blog-title">Post one — to be written</div><div class="blog-meta">Draft in progress</div></div></div>
         <div class="blog-card rv"><div class="blog-img"><img src="/assets/images/home/43cd1f62-278a-457f-8924-c5763c2daa3b.png" alt=""></div><div class="blog-body"><div class="blog-cat">Placeholder</div><div class="blog-title">Post two — to be written</div><div class="blog-meta">Draft in progress</div></div></div>
         <div class="blog-card rv"><div class="blog-img"><img src="/assets/images/home/7b30060b-3a44-4f13-a886-9404eb6da98a.jpg" alt=""></div><div class="blog-body"><div class="blog-cat">Placeholder</div><div class="blog-title">Post three — to be written</div><div class="blog-meta">Draft in progress</div></div></div>
       </div>
+      <a class="sec-more rv" href="/posts">See all articles <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
   </section>
   <!-- STATS BAR removed 2026-08-03 — fabricated placeholder -->

@@ -1,32 +1,191 @@
 ---
-import projects from "../collections/projects.json";
-import PageHeading from "../components/page-heading.astro";
-import Project from "../components/project.astro";
-import Layout from "../layouts/main.astro";
+import Layout from "../layouts/home.astro";
+
+// Rebuilt 2026-08-06 in the homepage design system, replacing the Aria-theme page.
+// Data reconciled against the current ventures registry and thread files rather than
+// ported straight from the 2026-07-14 export, which had drifted in six places.
+//
+// Reconciliation notes:
+//  - "ADRD Researcher Community" + "Researcher Profile App" were the same system, and
+//    both were mislabelled: the real work is the NACC Directory. Merged and reframed.
+//  - "ADRD Research Hub" is the ADRD research funding platform (thread name: neuspace).
+//    Displayed descriptively until the domain is registered — see the thread file.
+//  - Personal Knowledge System was "building"; it runs Amy's whole operation. Shipped.
+//  - Women's Sports Blog, Publications Intelligence and Memory Care Directory were
+//    missing from the export entirely.
+//
+// Ordered shipped -> building -> concept, so the page opens on what actually exists.
+
+type Status = "shipped" | "building" | "concept";
+
+interface Project {
+  no: string;
+  cat: string;
+  status: Status;
+  name: string;
+  desc: string;
+  meta: string;
+  url?: string;
+}
+
+const PROJECTS: Project[] = [
+  {
+    no: "01", cat: "Database", status: "shipped", name: "NACC Directory", meta: "Product Manager",
+    desc: "REDCap-backed directory and custom CRM for the ADRC network. Ten forms and 1,600+ fields tracking expertise, leadership, and committee service across NACC and its research partners, and gating access to the NACC Data Platform. Updated daily.",
+  },
+  {
+    no: "02", cat: "Website", status: "shipped", name: "NACC Website", meta: "PM + Build",
+    desc: "New NACC website on a WordPress block theme, integrated with NACC's data and community platforms and deployed through a GitHub pipeline.",
+  },
+  {
+    no: "03", cat: "Knowledge", status: "shipped", name: "Personal Knowledge System", meta: "Personal build",
+    desc: "The AI operating system I run my own work on. Seven capture surfaces feed one pipeline into a self-hosted Postgres brain that extracts entities, compiles a wiki, and returns the right file in zero tokens.",
+    url: "/project/personal-knowledge-system",
+  },
+  {
+    no: "04", cat: "Infrastructure", status: "shipped", name: "Self-Hosted VPS Lab", meta: "Self-hosted",
+    desc: "A personal VPS running Docker and Caddy: Postgres with pgvector, n8n automation, Vikunja, KaraKeep, and both of my sites, behind Tailscale.",
+  },
+  {
+    no: "05", cat: "Writing", status: "shipped", name: "amyyoung.me", meta: "Ongoing",
+    desc: "This site. Writing on AI, data, product, research, and the things I am building.",
+  },
+  {
+    no: "06", cat: "Education", status: "building", name: "AI Learning Platform", meta: "Concept to MVP",
+    desc: "A curriculum and delivery repo for teaching colleagues practical AI agent and automation skills, built from what actually worked in my own practice.",
+  },
+  {
+    no: "07", cat: "Data", status: "building", name: "Publications Intelligence", meta: "Product + Design",
+    desc: "A queryable database of research published using NACC data, with a companion for handling data requests. Postgres and pgvector, with separate public and internal data planes.",
+  },
+  {
+    no: "08", cat: "Writing", status: "building", name: "Women's Sports Blog", meta: "Research + Content",
+    desc: "Coverage of women's professional and college sport, publishing first on amyyoung.me while the audience is validated.",
+  },
+  {
+    no: "09", cat: "Discovery", status: "concept", name: "ADRD Research Funding Platform", meta: "Product Design",
+    desc: "Funding opportunities, training programs, and job openings for ADRD researchers in one place. AI-native rather than a site with AI added on: a standing profile-match feed instead of a search box.",
+  },
+  {
+    no: "10", cat: "Mobile", status: "concept", name: "Travel Companion App", meta: "Product Design",
+    desc: "Trip organizer with itinerary management, fellow traveler insights, and travel loyalty points optimization.",
+  },
+  {
+    no: "11", cat: "Dashboard", status: "concept", name: "Package & Delivery Tracker", meta: "Product Design",
+    desc: "Unified dashboard to track purchases from multiple vendors and coordinate deliveries across locations.",
+  },
+  {
+    no: "12", cat: "Directory", status: "concept", name: "Family Law Directory", meta: "Product Design",
+    desc: "Directory of family law attorneys, focused on collaborative law practitioners.",
+  },
+  {
+    no: "13", cat: "Directory", status: "concept", name: "Memory Care Directory", meta: "Product Design",
+    desc: "A directory of memory care options, written for the family members doing the searching rather than the facilities being listed.",
+  },
+];
+
+const STATUS_LABEL: Record<Status, string> = {
+  shipped: "Shipped",
+  building: "Building",
+  concept: "Concept",
+};
+
+const counts = {
+  all: PROJECTS.length,
+  shipped: PROJECTS.filter((p) => p.status === "shipped").length,
+  building: PROJECTS.filter((p) => p.status === "building").length,
+  concept: PROJECTS.filter((p) => p.status === "concept").length,
+};
+
+const FILTERS: [string, string][] = [
+  ["all", "All"],
+  ["shipped", "Shipped"],
+  ["building", "Building"],
+  ["concept", "Concept"],
+];
 ---
 
-<Layout title="Latest Work">
-  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
-    <PageHeading
-      title="Latest Work"
-      description="I build tools that make complex information easier to work with. Some are polished and shipped. Some are still on the bench. All of them started with a problem worth solving."
-    />
+<Layout title="Projects — Amy Young">
+  <section class="sec">
+    <div class="wrap">
 
-    <div
-      class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7 sm:gap-5 sm:grid-cols-2"
-    >
-      {
-        projects.map((project) => {
+      <header class="page-head">
+        <div class="sh-label rv">Latest work</div>
+        <h1 class="page-title rv">Things I've<br><strong>designed and built.</strong></h1>
+        <p class="page-lead rv">I build tools that make complex information easier to work with. Some are shipped and in daily use, some are in progress, and some are designs waiting for their turn. Every one started with a problem worth solving.</p>
+
+        <dl class="xn-stats page-stats rv">
+          <div class="xn-stat"><dt class="xn-stat-n">{counts.all}</dt><dd class="xn-stat-l">projects</dd></div>
+          <div class="xn-stat"><dt class="xn-stat-n">{counts.shipped}</dt><dd class="xn-stat-l">shipped</dd></div>
+          <div class="xn-stat"><dt class="xn-stat-n">{counts.building}</dt><dd class="xn-stat-l">building</dd></div>
+          <div class="xn-stat"><dt class="xn-stat-n">{counts.concept}</dt><dd class="xn-stat-l">concept</dd></div>
+        </dl>
+      </header>
+
+      <div class="pj-filter rv">
+        <span class="pj-filter-lbl">Filter</span>
+        {FILTERS.map(([key, label]) => (
+          <button class="pj-chip" type="button" data-filter={key} aria-pressed={key === "all"}>
+            {label} <span class="pj-chip-n">{counts[key as keyof typeof counts]}</span>
+          </button>
+        ))}
+      </div>
+
+      <ul class="pj-grid" id="pj-grid">
+        {PROJECTS.map((p) => {
+          const Tag = p.url ? "a" : "div";
           return (
-            <Project
-              name={project.name}
-              description={project.description}
-              image={project.image}
-              url={project.url}
-            />
-          )
-        })
-      }
+            <li class="pj-item rv" data-status={p.status}>
+              <Tag class="pj-card" {...(p.url ? { href: p.url } : {})}>
+                <div class="pj-top">
+                  <span class="pj-no">{p.no}</span>
+                  <span class="pj-cat">{p.cat}</span>
+                  <span class="pj-status" data-s={p.status}><span class="pj-dot"></span>{STATUS_LABEL[p.status]}</span>
+                </div>
+                <h2 class="pj-name">{p.name}</h2>
+                <p class="pj-desc">{p.desc}</p>
+                <div class="pj-foot">
+                  <span class="pj-meta">{p.meta}</span>
+                  {p.url && (
+                    <span class="pj-go">Take it apart <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+                  )}
+                </div>
+              </Tag>
+            </li>
+          );
+        })}
+      </ul>
+
+      <p class="pj-empty" id="pj-empty" hidden>Nothing in that stage right now.</p>
+
     </div>
   </section>
 </Layout>
+
+<script>
+  const grid = document.getElementById('pj-grid');
+  const empty = document.getElementById('pj-empty');
+  const chips = Array.from(document.querySelectorAll('.pj-chip'));
+
+  if (grid && chips.length) {
+    const items = Array.from(grid.querySelectorAll('.pj-item'));
+
+    const apply = (filter: string) => {
+      let shown = 0;
+      items.forEach((el) => {
+        if (!(el instanceof HTMLElement)) return;
+        const match = filter === 'all' || el.dataset.status === filter;
+        el.hidden = !match;
+        if (match) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c instanceof HTMLElement && c.dataset.filter === filter)));
+    };
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        if (chip instanceof HTMLElement && chip.dataset.filter) apply(chip.dataset.filter);
+      });
+    });
+  }
+</script>
