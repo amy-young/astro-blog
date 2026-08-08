@@ -1,14 +1,7 @@
 [
   {
-    "name": "ADRD Researcher Community",
-    "description": "Comprehensive database and collaboration platform for Alzheimer's disease research scientists across the ADRC network.",
-    "image": "",
-    "url": "#",
-    "category": "work"
-  },
-  {
-    "name": "Researcher Profile App",
-    "description": "Web application for ADRD researchers to manage profiles, data permissions, and discover collaborators by expertise.",
+    "name": "NACC Directory",
+    "description": "REDCap-backed CRM connecting Alzheimer's disease researchers across 37 ADRCs nationwide, routing access to the NACC Data Platform, the Discourse community, and the rest of NACC's researcher resources. Updated in real time.",
     "image": "",
     "url": "#",
     "category": "work"
@@ -21,8 +14,8 @@
     "category": "work"
   },
   {
-    "name": "ADRD Research Hub",
-    "description": "Platform for neuroscience researchers to find funding opportunities, jobs, and stay current on ADRD and AI research trends.",
+    "name": "ADRD Research Funding Platform",
+    "description": "Funding opportunities, training programs, and job openings for ADRD researchers in one place, with a standing profile-match feed instead of a search box.",
     "image": "",
     "url": "#",
     "category": "personal"

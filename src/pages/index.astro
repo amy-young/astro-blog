@@ -3,10 +3,10 @@ import Layout from "../layouts/home.astro";
 ---
 
 <Layout>
-<!-- HERO -->
+{/* HERO */}
   <section class="hero">
 
-    <!-- LEFT: social, bio, big name -->
+    {/* LEFT: social, bio, big name */}
     <div class="hero-left">
       <div class="hero-social">
         <a class="sm-li" href="https://www.linkedin.com/in/amyyoung-data-ai/" target="_blank" rel="noopener">LinkedIn</a>,
@@ -18,14 +18,14 @@ import Layout from "../layouts/home.astro";
       <div class="hero-name">Hello, I'm<br>Amy Young</div>
     </div>
 
-    <!-- CENTER: circular photo -->
+    {/* CENTER: circular photo */}
     <div class="hero-center">
       <div class="hero-circle">
         <img src="/assets/images/home/amy-young-portrait.jpg" alt="Amy Young — UX Designer">
       </div>
     </div>
 
-    <!-- RIGHT: services, tagline, location -->
+    {/* RIGHT: services, tagline, location */}
     <div class="hero-right">
       <div class="hero-services">
         <div class="hero-svc">
@@ -51,15 +51,15 @@ import Layout from "../layouts/home.astro";
 
   <div style="height:1px; background:var(--border); width:100%;"></div>
 
-  <!-- XENON AI SECTION -->
+  {/* XENON AI SECTION */}
   <section class="xn-sec">
     <div class="wrap">
       <div class="xn-headline rv">The workshop side of<br><strong>Artificial Intelligence.</strong></div>
       <div class="xn-main">
-        <!-- The PKA system's five stages, as markup rather than an image. The full
+        {/* The PKA system's five stages, as markup rather than an image. The full
              diagram moved to /project/personal-knowledge-system on 2026-08-06: at this
              column width its labels read as texture, and its baked-in headline competed
-             with the section headline above. Numbered because the order is real. -->
+             with the section headline above. Numbered because the order is real. */}
         <div class="xn-system">
           <div class="xn-system-lbl">Personal knowledge and AI operating system</div>
           <p class="xn-system-lead">Everything I capture <strong>becomes structure.</strong></p>
@@ -71,8 +71,8 @@ import Layout from "../layouts/home.astro";
             <li class="xn-flow-step"><span class="xn-flow-n">04</span><span class="xn-flow-name">Synthesize</span><span class="xn-flow-sub">Entities. Edges. Wiki.</span></li>
             <li class="xn-flow-step"><span class="xn-flow-n">05</span><span class="xn-flow-name">Retrieve</span><span class="xn-flow-sub">Deterministic. Relevant.</span></li>
           </ol>
-          <!-- Real counts from the system map, verified 2026-08-05. Not the fabricated
-               stats bar that was cut on 2026-08-03. -->
+          {/* Real counts from the system map, verified 2026-08-05. Not the fabricated
+               stats bar that was cut on 2026-08-03. */}
           <dl class="xn-stats">
             <div class="xn-stat"><dt class="xn-stat-n">1,834</dt><dd class="xn-stat-l">entities extracted</dd></div>
             <div class="xn-stat"><dt class="xn-stat-n">2,034</dt><dd class="xn-stat-l">typed edges</dd></div>
@@ -103,7 +103,7 @@ import Layout from "../layouts/home.astro";
   </section>
 
 
-  <!-- SKILLS -->
+  {/* SKILLS */}
   <section class="skills-sec">
     <div class="wrap">
       <div class="skills-layout">
@@ -151,18 +151,18 @@ import Layout from "../layouts/home.astro";
     </div>
   </section>
 
-  <!-- MY WORKSHOP — two featured projects. Rebuilt 2026-08-04 with Amy's own project data
+  {/* MY WORKSHOP — two featured projects. Rebuilt 2026-08-04 with Amy's own project data
        (2026-07-14 export). Metric pairs deliberately omitted: they were the cut stat line
-       redistributed to card level. -->
+       redistributed to card level. */}
   <section class="sec sec-white wrap">
     <div class="sh rv sh-row">
       <div><div class="sh-label">My Workshop</div><div class="sh-title" style="margin-bottom:0;">Start with these.</div></div>
       <a class="btn btn-outline" href="/projects">View All Projects</a>
     </div>
     <div class="feat-stack">
-      <!-- PKA leads (Amy's call 2026-08-06), image left / copy right, on the dark body.
+      {/* PKA leads (Amy's call 2026-08-06), image left / copy right, on the dark body.
            Layout order settled after trying both: image-left reads better than the
-           original copy-left, and the dark treatment stays on PKA. -->
+           original copy-left, and the dark treatment stays on PKA. */}
       <div class="feat-card rv">
         <div class="feat-img-wrap"><img src="/assets/images/home/18873180-d88d-4f06-acd9-994be3e56bef.jpg" alt="Personal Knowledge System"></div>
         <div class="feat-body feat-body-dark">
@@ -173,11 +173,11 @@ import Layout from "../layouts/home.astro";
         </div>
       </div>
       <div class="feat-card rv">
-        <!-- Was "ADRD Researcher Community" until 2026-08-06. That label was wrong twice
+        {/* Was "ADRD Researcher Community" until 2026-08-06. That label was wrong twice
              over: it implied a Discourse-style community platform Amy never ran, and it
              was conflating the NACC Directory with the ADRD funding platform. Amy's call
              was to feature the VPS lab here instead. Image is the one the old Portfolio
-             grid had already chosen for this project. -->
+             grid had already chosen for this project. */}
         <div class="feat-body">
           <div class="feat-cat">Infrastructure · Shipped</div>
           <div class="feat-title">Self-Hosted VPS Lab</div>
@@ -189,22 +189,22 @@ import Layout from "../layouts/home.astro";
     </div>
   </section>
 
-  <!-- PROJECT GRID removed 2026-08-06 (Amy's call). The six cards duplicated what "My
+  {/* PROJECT GRID removed 2026-08-06 (Amy's call). The six cards duplicated what "My
        Workshop" already does, and its "View All Projects" pill moved up into the Workshop
        header. The .proj-* styles are left in home.css on purpose: the /projects rebuild in
-       this design system is the next piece of work and will reuse them. -->
-  <!-- EDUCATION section removed 2026-08-04 — relocated to the About page (Amy's call).
+       this design system is the next piece of work and will reuse them. */}
+  {/* EDUCATION section removed 2026-08-04 — relocated to the About page (Amy's call).
        Real data recovered from the 2026-07-14 export: M.S. Information Management, UW (2024);
        B.A. Sociology & Statistics, University of Minnesota (1991); NIA Certificate of
-       Appreciation, UDS v4 (2021); Board Member, Delridge Neighborhood Development Assn (2015-2026). -->
-  <!-- WRITING — rebuilt 2026-08-04 at three posts per Amy's reduction from six.
+       Appreciation, UDS v4 (2021); Board Member, Delridge Neighborhood Development Assn (2015-2026). */}
+  {/* WRITING — rebuilt 2026-08-04 at three posts per Amy's reduction from six.
        !! THE THREE CARDS BELOW ARE PLACEHOLDERS. No real posts exist yet: the Astro repo
-       has one post and it is the Aria theme's demo. DO NOT SHIP until these are written. -->
+       has one post and it is the Aria theme's demo. DO NOT SHIP until these are written. */}
   <section class="sec sec-rule">
     <div class="wrap">
-      <!-- The "All Articles" pill moved below the grid as a text link 2026-08-06: it was
+      {/* The "All Articles" pill moved below the grid as a text link 2026-08-06: it was
            competing with the longer headline, and a "see more" belongs after the thing it
-           expands. Matches the .feat-link / .xn-system-link treatment used elsewhere. -->
+           expands. Matches the .feat-link / .xn-system-link treatment used elsewhere. */}
       <div class="sh rv">
         <div class="sh-label">Writing</div>
         <div class="sh-title">What I'm reading, building, and thinking about.</div>
@@ -217,6 +217,6 @@ import Layout from "../layouts/home.astro";
       <a class="sec-more rv" href="/posts">See all articles <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
   </section>
-  <!-- STATS BAR removed 2026-08-03 — fabricated placeholder -->
-  <!-- TESTIMONIALS removed 2026-08-03 — fabricated placeholder -->
+  {/* STATS BAR removed 2026-08-03 — fabricated placeholder */}
+  {/* TESTIMONIALS removed 2026-08-03 — fabricated placeholder */}
 </Layout>

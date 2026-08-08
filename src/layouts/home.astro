@@ -39,10 +39,10 @@ const { title = "Amy Young — Researcher, Designer, Builder · Seattle" } = Ast
 
     <slot />
 
-    <!-- CONTACT — rebuilt 2026-08-06 on the About page's "Let's Connect" pattern:
+    {/* CONTACT — rebuilt 2026-08-06 on the About page's "Let's Connect" pattern:
          deep-purple ground, an inline compose panel that hands off to the mail client,
          and labelled social pills. Copy stays "Let's compare notes." (settled 2026-08-01)
-         rather than the About page's generic "Let's Connect". -->
+         rather than the About page's generic "Let's Connect". */}
   <div class="shape-sec" id="contact">
     <div class="wrap ct-grid">
       <div class="ct-main">
@@ -82,19 +82,21 @@ const { title = "Amy Young — Researcher, Designer, Builder · Seattle" } = Ast
         <a href="/projects">Projects</a>
         <a href="/posts">Articles</a>
         <a href="/about">About</a>
-        <!-- !! /resume DOES NOT EXIST. Added at Amy's request 2026-08-06; this link 404s
-             until the page is built. DO NOT SHIP to main without creating it. -->
+        {/* !! /resume DOES NOT EXIST and this link 404s. Added at Amy's request
+             2026-08-06. Amy ruled 2026-08-07 that the link STAYS while the page is built
+             with her, so do not remove it. Still a gate on merging to main: build the
+             page first, or drop the link at merge time. */}
         <a href="/resume">Resume</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </div>
 
-  <!-- FOOTER -->
+  {/* FOOTER */}
   <div class="foot">
     <div class="wrap">
-      <!-- Stripped to the copyright 2026-08-06. Nav and socials moved up into the
-           contact band's sitemap column, so repeating them here was duplication. -->
+      {/* Stripped to the copyright 2026-08-06. Nav and socials moved up into the
+           contact band's sitemap column, so repeating them here was duplication. */}
       <div class="foot-inner">
         <div class="foot-copy">© 2026 · Amy Young. All rights reserved.</div>
       </div>
