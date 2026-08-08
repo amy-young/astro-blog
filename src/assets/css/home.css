@@ -837,6 +837,25 @@
     a.pj-card:hover { border-color: var(--accent-bdr); box-shadow: var(--sh-md); transform: translateY(-3px); }
     a.pj-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
+    /* Card media. Full-bleed to the card edge, so it needs to cancel .pj-card padding.
+       Tinted ground means a not-yet-saved image reads as an empty frame rather than a
+       broken icon, which matters while art is still being made for the other cards. */
+    .pj-media {
+      position: relative;
+      margin: -22px -22px 16px; border-radius: 15px 15px 0 0;
+      overflow: hidden; background: var(--accent-tint);
+      border-bottom: 1px solid var(--border);
+    }
+    .pj-media img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center top; }
+    /* Concept work is labelled on the image itself. The mockups are built as live product
+       marketing (signup CTAs, beta badges), so the frame has to say what it actually is. */
+    .pj-media-cap {
+      position: absolute; left: 10px; bottom: 10px;
+      padding: 4px 9px; border-radius: 999px;
+      background: rgba(13, 10, 30, .82); color: #fff;
+      font-size: .64rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    }
+
     .pj-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
     .pj-no { font-size: .72rem; font-weight: 700; color: var(--accent); letter-spacing: .06em; font-variant-numeric: tabular-nums; }
     .pj-cat { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-4); }

@@ -11,8 +11,18 @@ import Layout from "../layouts/home.astro";
 //  - "ADRD Research Hub" is the ADRD research funding platform (thread name: neuspace).
 //    Displayed descriptively until the domain is registered — see the thread file.
 //  - Personal Knowledge System was "building"; it runs Amy's whole operation. Shipped.
-//  - Women's Sports Blog, Publications Intelligence and Memory Care Directory were
-//    missing from the export entirely.
+//  - Publications Intelligence was missing from the export entirely. Added.
+//
+// Amy's rulings 2026-08-07 (do not silently restore these):
+//  - Women's Sports Blog, Memory Care Directory and Family Law Directory REMOVED. She does
+//    not want unlaunched ideas public until they ship.
+//  - Travel Companion App and Package & Delivery Tracker KEPT, with hero art, under their
+//    generic names rather than their product names. Concept cards self-label "Design concept"
+//    off the status field, because the mockups are drawn as live product marketing.
+//  - NACC Website REMOVED until the redesign is complete.
+//  - The "amyyoung.me" card REMOVED as self-referential; the reader is already on it.
+//  - YouTube Capture Pipeline ADDED. Link it once github.com/amy-young/youtube-capture-pipeline
+//    is flipped public; it is private as of this writing.
 //
 // Ordered shipped -> building -> concept, so the page opens on what actually exists.
 
@@ -26,61 +36,53 @@ interface Project {
   desc: string;
   meta: string;
   url?: string;
+  /* Card art. Amy is making images for every card before the site goes live, so this is
+     optional for now and cards without it simply render text-forward as before. */
+  img?: string;
+  imgAlt?: string;
 }
 
 const PROJECTS: Project[] = [
   {
     no: "01", cat: "Database", status: "shipped", name: "NACC Directory", meta: "Product Manager",
-    desc: "REDCap-backed directory and custom CRM for the ADRC network. Ten forms and 1,600+ fields tracking expertise, leadership, and committee service across NACC and its research partners, and gating access to the NACC Data Platform. Updated daily.",
+    desc: "REDCap-backed CRM connecting Alzheimer's disease researchers across 37 ADRCs nationwide. Ten forms and 1,600+ fields tracking expertise, leadership, and committee service, routing access to the NACC Data Platform, the Discourse community, and the rest of NACC's researcher resources. Updated in real time.",
   },
   {
-    no: "02", cat: "Website", status: "shipped", name: "NACC Website", meta: "PM + Build",
-    desc: "New NACC website on a WordPress block theme, integrated with NACC's data and community platforms and deployed through a GitHub pipeline.",
-  },
-  {
-    no: "03", cat: "Knowledge", status: "shipped", name: "Personal Knowledge System", meta: "Personal build",
+    no: "02", cat: "Knowledge", status: "shipped", name: "Personal Knowledge System", meta: "Personal build",
     desc: "The AI operating system I run my own work on. Seven capture surfaces feed one pipeline into a self-hosted Postgres brain that extracts entities, compiles a wiki, and returns the right file in zero tokens.",
     url: "/project/personal-knowledge-system",
   },
   {
-    no: "04", cat: "Infrastructure", status: "shipped", name: "Self-Hosted VPS Lab", meta: "Self-hosted",
+    no: "03", cat: "Infrastructure", status: "shipped", name: "Self-Hosted VPS Lab", meta: "Self-hosted",
     desc: "A personal VPS running Docker and Caddy: Postgres with pgvector, n8n automation, Vikunja, KaraKeep, and both of my sites, behind Tailscale.",
   },
   {
-    no: "05", cat: "Writing", status: "shipped", name: "amyyoung.me", meta: "Ongoing",
-    desc: "This site. Writing on AI, data, product, research, and the things I am building.",
+    no: "04", cat: "Automation", status: "shipped", name: "YouTube Capture Pipeline", meta: "Personal build",
+    desc: "Save a YouTube video from my phone and wake up to a summary, the resources it mentioned pulled out, and the good material filed into my knowledge base on its own. n8n, yt-dlp, and Gemini, running on my own VPS.",
   },
   {
-    no: "06", cat: "Education", status: "building", name: "AI Learning Platform", meta: "Concept to MVP",
+    no: "05", cat: "Education", status: "building", name: "AI Learning Platform", meta: "Concept to MVP",
     desc: "A curriculum and delivery repo for teaching colleagues practical AI agent and automation skills, built from what actually worked in my own practice.",
   },
   {
-    no: "07", cat: "Data", status: "building", name: "Publications Intelligence", meta: "Product + Design",
+    no: "06", cat: "Data", status: "building", name: "Publications Intelligence", meta: "Product + Design",
     desc: "A queryable database of research published using NACC data, with a companion for handling data requests. Postgres and pgvector, with separate public and internal data planes.",
   },
   {
-    no: "08", cat: "Writing", status: "building", name: "Women's Sports Blog", meta: "Research + Content",
-    desc: "Coverage of women's professional and college sport, publishing first on amyyoung.me while the audience is validated.",
-  },
-  {
-    no: "09", cat: "Discovery", status: "concept", name: "ADRD Research Funding Platform", meta: "Product Design",
+    no: "07", cat: "Discovery", status: "concept", name: "ADRD Research Funding Platform", meta: "Product Design",
     desc: "Funding opportunities, training programs, and job openings for ADRD researchers in one place. AI-native rather than a site with AI added on: a standing profile-match feed instead of a search box.",
   },
   {
-    no: "10", cat: "Mobile", status: "concept", name: "Travel Companion App", meta: "Product Design",
+    no: "08", cat: "Mobile", status: "concept", name: "Travel Companion App", meta: "Product Design",
     desc: "Trip organizer with itinerary management, fellow traveler insights, and travel loyalty points optimization.",
+    img: "/assets/images/projects/travel-companion-hero.png",
+    imgAlt: "Landing page design for the travel companion app, showing a trip itinerary with flights, hotels, and bookings tracked by status.",
   },
   {
-    no: "11", cat: "Dashboard", status: "concept", name: "Package & Delivery Tracker", meta: "Product Design",
+    no: "09", cat: "Dashboard", status: "concept", name: "Package & Delivery Tracker", meta: "Product Design",
     desc: "Unified dashboard to track purchases from multiple vendors and coordinate deliveries across locations.",
-  },
-  {
-    no: "12", cat: "Directory", status: "concept", name: "Family Law Directory", meta: "Product Design",
-    desc: "Directory of family law attorneys, focused on collaborative law practitioners.",
-  },
-  {
-    no: "13", cat: "Directory", status: "concept", name: "Memory Care Directory", meta: "Product Design",
-    desc: "A directory of memory care options, written for the family members doing the searching rather than the facilities being listed.",
+    img: "/assets/images/projects/package-tracker-hero.png",
+    imgAlt: "Landing page design for the package tracker, showing a delivery dashboard with packages grouped by in transit, out for delivery, and delivered.",
   },
 ];
 
@@ -137,6 +139,12 @@ const FILTERS: [string, string][] = [
           return (
             <li class="pj-item rv" data-status={p.status}>
               <Tag class="pj-card" {...(p.url ? { href: p.url } : {})}>
+                {p.img && (
+                  <div class="pj-media">
+                    <img src={p.img} alt={p.imgAlt ?? ""} loading="lazy" decoding="async" width="640" height="360" />
+                    {p.status === "concept" && <span class="pj-media-cap">Design concept</span>}
+                  </div>
+                )}
                 <div class="pj-top">
                   <span class="pj-no">{p.no}</span>
                   <span class="pj-cat">{p.cat}</span>
