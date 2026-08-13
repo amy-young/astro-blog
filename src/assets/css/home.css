@@ -409,16 +409,9 @@
     .svc-arrow:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
     @media (max-width: 600px) { .svc { grid-template-columns: 44px 1fr; } .svc-arrow { display: none; } }
 
-    /* =============================================
-       WHY CHOOSE
-    ============================================= */
-    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 2vw, 20px); }
-    @media (max-width: 620px) { .why-grid { grid-template-columns: 1fr; } }
-    .why-card { padding: 28px; border: 1px solid var(--border); border-radius: 18px; background: var(--bg-white); transition: box-shadow .2s, border-color .2s; }
-    .why-card:hover { box-shadow: var(--sh-md); border-color: var(--accent-bdr); }
-    .why-n { font-size: 3rem; font-weight: 800; letter-spacing: -.04em; color: var(--accent); opacity: .12; line-height: 1; margin-bottom: 10px; }
-    .why-t { font-size: 1.08rem; font-weight: 700; margin-bottom: 8px; }
-    .why-d { font-size: .875rem; color: var(--ink-3); line-height: 1.65; }
+    /* WHY CHOOSE (.why-grid/.why-card/.why-n/.why-t/.why-d) removed 2026-08-13. About was
+       its only consumer, and the Systems section it backed is now .sys-* — stat-led
+       columns rather than bordered cards. In git if it is ever wanted back. */
 
     /* =============================================
        FEATURED SHOWCASE
@@ -463,16 +456,17 @@
     .proj-sub { font-size: .78rem; color: var(--ink-4); }
 
     /* =============================================
-       AWARDS
+       AWARDS  (About page: Background list)
+       2026-08-13: icons dropped and rows re-topped to match the new Background layout,
+       which pairs the list with a photo instead of running two icon columns. The year
+       moved from --ink-4 to --accent so the page has ONE year-column idiom shared with
+       .cj-yr in Experience, rather than two treatments for the same thing.
     ============================================= */
-    .awards-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
-    @media (max-width: 760px) { .awards-layout { grid-template-columns: 1fr; } }
-    .award { display: flex; align-items: center; gap: 14px; padding: 17px 0; border-bottom: 1px solid var(--border); }
+    .award { display: flex; align-items: start; gap: 14px; padding: 21px 0; border-bottom: 1px solid var(--border); }
     .award:first-child { border-top: 1px solid var(--border); }
-    .award-icon { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--accent-bdr); background: var(--accent-wash); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
-    .award-name { font-size: .95rem; font-weight: 700; margin-bottom: 2px; }
-    .award-org  { font-size: .8rem; color: var(--ink-3); }
-    .award-yr   { font-size: .78rem; color: var(--ink-4); font-weight: 600; margin-left: auto; flex-shrink: 0; }
+    .award-name { font-size: .95rem; font-weight: 700; margin-bottom: 4px; letter-spacing: -.01em; }
+    .award-org  { font-size: .82rem; color: var(--ink-3); line-height: 1.6; }
+    .award-yr   { font-size: .78rem; color: var(--accent); font-weight: 700; margin-left: auto; flex-shrink: 0; font-variant-numeric: tabular-nums; }
 
     /* =============================================
        BLOG
@@ -889,7 +883,109 @@
     @media (prefers-reduced-motion: reduce) {
       .pj-card, .pj-chip { transition: border-color .18s ease, color .18s ease; }
       a.pj-card:hover { transform: none; }
+      .tk-sign { transition: none; }
     }
+
+    /* =============================================
+       ABOUT PAGE (2026-08-13)
+       Ported from the 2026-08-12 claude.ai/design export. Two structural additions over
+       the 2026-08-07 build: a "My Story" expander and a six-item Toolkit accordion.
+
+       Ground rule for this page: banded sections use --bg-soft, and --ink-4 is never
+       allowed on them. #767676 on #F5F5F5 measures 4.17:1 and fails AA (the documented
+       trap). --ink-3 on --bg-soft is 5.26:1 and is the floor used here instead.
+    ============================================= */
+    .sec-soft { background: var(--bg-soft); }
+
+    /* --- Hero: copy left, portrait + focus rail right --- */
+    .ab-hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(36px, 5vw, 80px); align-items: end; }
+    @media (max-width: 860px) { .ab-hero { grid-template-columns: 1fr; align-items: start; } }
+    /* .page-head is shared with /projects, so its bottom margin is cancelled here
+       rather than changed at the source. */
+    .ab-hero .page-head { margin-bottom: 0; }
+    .ab-leads { display: grid; gap: 16px; }
+    .ab-leads .page-lead { margin: 0; }
+
+    .ab-rail { display: grid; gap: clamp(20px, 2.6vw, 30px); justify-items: end; text-align: right; padding-bottom: 8px; }
+    @media (max-width: 860px) { .ab-rail { justify-items: start; text-align: left; padding-bottom: 0; } }
+    .ab-portrait { width: 100%; max-width: 320px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; }
+    .ab-focus { display: grid; gap: 7px; font-size: .845rem; font-weight: 700; color: var(--ink); }
+    .ab-focus span::before { content: "+"; color: var(--accent); margin-right: 7px; }
+    .ab-where { font-size: clamp(1.5rem, 2.4vw, 2.1rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
+
+    /* --- My Story: display heading left, expandable narrative right --- */
+    .ab-story { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.5fr); gap: clamp(36px, 5vw, 72px); align-items: start; }
+    @media (max-width: 860px) { .ab-story { grid-template-columns: 1fr; } }
+    /* Same light-300 / heavy-800 device as .page-title and .skills-heading. */
+    .ab-dh { font-family: var(--f); font-size: clamp(1.9rem, 3.4vw, 2.75rem); font-weight: 300; color: var(--ink-3); letter-spacing: -.032em; line-height: 1.05; margin: 0; }
+    .ab-dh strong { font-weight: 800; color: var(--ink); }
+    .ab-story-body { display: grid; gap: 18px; justify-items: start; max-width: 68ch; font-size: 1.01rem; line-height: 1.75; color: var(--ink-3); text-wrap: pretty; }
+    .ab-story-body p { margin: 0; }
+    .ab-more { display: grid; gap: 18px; }
+    .ab-more[hidden] { display: none; }
+    .ab-kicker { font-size: clamp(1.15rem, 1.8vw, 1.38rem); font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
+    .ab-toggle {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--f); font-size: .84rem; font-weight: 700;
+      padding: 10px 18px; border-radius: 9px;
+      border: 1px solid var(--accent-bdr); background: var(--accent-wash); color: var(--accent);
+      transition: background .18s ease, border-color .18s ease, color .18s ease;
+    }
+    .ab-toggle:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .ab-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* --- Systems: four stat columns under a heavy top rule --- */
+    .sys-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 32px); }
+    @media (max-width: 900px) { .sys-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 520px) { .sys-grid { grid-template-columns: 1fr; } }
+    .sys-card { border-top: 2px solid var(--ink); padding-top: 18px; display: grid; gap: 10px; align-content: start; }
+    /* --ink-3, not --ink-4: this section sits on --bg-soft. */
+    .sys-n { font-size: .72rem; font-weight: 700; letter-spacing: .14em; color: var(--ink-3); }
+    .sys-stat { font-size: clamp(2.1rem, 3.2vw, 2.75rem); font-weight: 800; letter-spacing: -.04em; line-height: 1; color: var(--accent); }
+    .sys-stat-l { font-size: .78rem; font-weight: 600; letter-spacing: .03em; color: var(--ink-3); margin-top: -4px; }
+    .sys-t { font-size: 1rem; font-weight: 700; letter-spacing: -.01em; margin-top: 6px; }
+    .sys-d { font-size: .875rem; line-height: 1.65; color: var(--ink-3); }
+    .sys-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+
+    /* --- Toolkit: sticky heading left, accordion right --- */
+    .tk-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.6fr); gap: clamp(36px, 5vw, 72px); align-items: start; }
+    @media (max-width: 860px) { .tk-layout { grid-template-columns: 1fr; } }
+    .tk-left { position: sticky; top: 100px; }
+    @media (max-width: 860px) { .tk-left { position: static; } }
+    .tk-desc { font-size: .97rem; line-height: 1.7; color: var(--ink-3); margin: 20px 0 0; max-width: 34ch; }
+    .tk-all { margin-top: 26px; }
+    .tk-list { border-top: 1px solid var(--border); }
+    .tk-item { border-bottom: 1px solid var(--border); }
+    .tk-btn {
+      display: grid; grid-template-columns: 42px 1fr 28px; align-items: center; gap: 12px;
+      width: 100%; padding: 22px 4px;
+      background: none; border: 0; text-align: left;
+      font-family: var(--f); color: inherit;
+      transition: background .18s ease;
+    }
+    .tk-btn:hover { background: var(--accent-tint); }
+    .tk-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+    .tk-n { font-size: .72rem; font-weight: 700; color: var(--ink-4); letter-spacing: .04em; }
+    .tk-t { font-size: clamp(1.05rem, 1.7vw, 1.25rem); font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
+    /* Rotating "+" is the site's existing expander idiom (.hero-svc .plus). */
+    .tk-sign { justify-self: end; font-size: 1.3rem; font-weight: 400; color: var(--accent); line-height: 1; transition: transform .28s ease; }
+    .tk-item.open .tk-sign { transform: rotate(45deg); }
+    .tk-panel { padding: 0 4px 28px 54px; display: grid; gap: 16px; }
+    .tk-panel[hidden] { display: none; }
+    @media (max-width: 520px) { .tk-panel { padding-left: 4px; } }
+    .tk-lede { font-size: .95rem; line-height: 1.7; color: var(--ink-3); max-width: 64ch; margin: 0; text-wrap: pretty; }
+    .tk-points { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .tk-point { display: grid; grid-template-columns: 14px 1fr; gap: 12px; align-items: start; font-size: .9rem; line-height: 1.6; color: var(--ink-3); }
+    .tk-point::before { content: "\2014"; color: var(--accent); }
+    .tk-point strong { color: var(--ink); font-weight: 700; }
+    .tk-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* --- Background: commencement photo left, credential list right --- */
+    .bg-layout { display: grid; grid-template-columns: minmax(0, .62fr) minmax(0, 1.5fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+    @media (max-width: 760px) { .bg-layout { grid-template-columns: 1fr; } }
+    .bg-figure { margin: 0; display: grid; gap: 12px; }
+    .bg-figure img { width: 100%; border-radius: 14px; }
+    .bg-cap { font-size: .78rem; line-height: 1.55; color: var(--ink-3); }
 
     /* Reveal */
     .rv { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }

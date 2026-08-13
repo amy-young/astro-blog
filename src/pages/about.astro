@@ -1,75 +1,167 @@
 ---
 import Layout from "../layouts/home.astro";
 
-// Rebuilt 2026-08-07 in the homepage design system, replacing the Aria-theme page.
+// Rebuilt 2026-08-13 from Amy's "Amy Young - About-20260812.html" claude.ai/design export
+// (unpacked with tools/unpack_bundler_export.py; source kept in Drive at
+// "Web Development/Portfolio website_about/"). Replaces the 2026-08-07 build.
 //
-// Content provenance: built from "Amy Young - About v1.html" in the 2026-07-14 export,
-// NOT the base version. The base version's career history was fabricated (Fintelo,
-// Stackwise, Novo Craft Agency) and it carried a consulting "How I Work" process. v1 and
-// v2 have identical visible text and had already replaced both with real content.
+// What the new export adds over the 2026-08-07 page:
+//  - A portrait + focus rail beside the hero, and "Based in Seattle, WA".
+//  - A "My Story" section with a Read more expander (six paragraphs behind it).
+//  - Systems became stat-led: each card now leads with a real number, not a faded "01".
+//  - A six-item Toolkit accordion. Entirely new.
+//  - Background merged Education and Recognition into ONE list beside a photo, instead
+//    of two icon columns.
 //
-// Cut from v1, on Amy's ruling 2026-08-07:
-//  - Three testimonials (James Sullivan, Maya Rodriguez, Tom Chen). Fabricated. Two of
-//    them cited Fintelo and Stackwise, the fake companies v1 itself had already deleted.
-//  - The "Let's Build Together" closing CTA. It pitched services, and the site selling
-//    nothing is settled. The layout's contact band replaces it.
+// Carried over unchanged, still confirmed:
+//  - The CRG Research (1994-2011) / The Body Shop (1996-2009) overlap is correct and
+//    intentional. She ran both concurrently. Do not "fix" the dates.
+//  - "Public Information Specialist" is the real UW title (work/context/communications/
+//    key-contacts.md), so the hero's "Information specialist by title ... and in practice"
+//    does NOT contradict the "Communications & Funding Program Manager" role below it.
+//  - Facts spot-checked against threads: Ubuntu 24.04 (ventures/context/infrastructure.md),
+//    1,834 entities / 122 wiki pages (memory: project_openbrain).
 //
-// Career journey CONFIRMED by Amy 2026-08-07. The CRG Research (1994-2011) and The Body
-// Shop (1996-2009) overlap is correct and intentional: she ran both concurrently. Do not
-// "fix" the dates.
+// !! "I work at the intersection of data, product, and communications." — the hero's
+// opening line. "At the intersection of" IS on the Never list in
+// ventures/context/writing/style-guide.md -> "Site and Interface Copy" -> Worn
+// constructions, and "at the crossroads of" was cut from this page on 2026-08-07 for
+// being the same construction. It was flagged to Amy on 2026-08-13 and she RULED IT
+// STAYS, with "communication" pluralized. Do not "fix" it again on a later pass.
 //
-// Copy rewritten against ventures/context/writing/style-guide.md -> "Site and Interface
-// Copy". Five things in v1 tripped it: "AI Expertise" (self-grading), "Working at the edge
-// of agentic AI" ("agentic" rejected as a permanent label), "at the crossroads of" (same
-// construction as the banned "at the intersection of"), "Grounded in data, people, and
-// systems thinking" (abstract stack), and "Beyond interface design" (leftover from the
-// base version's UX-designer framing).
+// Two more were flagged and left as she wrote them: "Agentic" as a standing label (hero
+// rail + Toolkit 01), and "cross-disciplinary thinking I've practiced my whole life".
+//
+// The only copy the port changed: em dashes in the Toolkit label/value pairs became
+// colons (the style guide's em-dash rule is not NACC-only), and the Background section's
+// sub-line ("Two degrees, one award from the NIA, and eleven years on a neighborhood
+// board.") was cut on Amy's instruction 2026-08-13.
 
-interface Capability { no: string; title: string; desc: string; }
-interface Entry { name: string; org: string; yr: string; }
-interface Role { yr: string; role: string; org: string; }
+interface System { n: string; stat: string; statLabel: string; title: string; body: string; chips: string[]; }
+interface Point  { k: string; v: string; }
+interface Tool   { title: string; lede: string; points: Point[]; chips: string[]; }
+interface Entry  { name: string; org: string; yr: string; }
+interface Role   { yr: string; role: string; org: string; }
 
-const CAPABILITIES: Capability[] = [
+const SYSTEMS: System[] = [
   {
-    no: "01", title: "Claude Code Environment",
-    desc: "Claude Code as a daily-driver dev environment: 30+ custom skills, hooks, and multi-agent routing across dev, content, research, and ops.",
+    n: "01", stat: "40+", statLabel: "custom skills authored",
+    title: "Agent Environment",
+    body: "Multi-agent routing across dev, content, research, and ops, model-agnostic underneath.",
+    chips: ["Claude Code", "Subagents"],
   },
   {
-    no: "02", title: "Harness and Hooks",
-    desc: "Direct control over Claude Code's harness layer: deterministic hooks, permission tuning, and a clear line between what gets automated and what stays with the model.",
+    n: "02", stat: "100%", statLabel: "deterministic at the edges",
+    title: "Harness and Hooks",
+    body: "Permission tuning and a clear line between what gets automated and what stays with the model.",
+    chips: ["Hooks", "Permissions"],
   },
   {
-    no: "03", title: "Personal Knowledge Graph",
-    desc: "A self-hosted memory system built on Postgres, with automated ingestion and an LLM pipeline that turns raw captures into structured knowledge.",
+    n: "03", stat: "1,834", statLabel: "entities in the graph",
+    title: "Personal Knowledge Graph",
+    body: "Self-hosted memory on Postgres, with an LLM pipeline that turns raw captures into structure.",
+    chips: ["Postgres", "MCP", "122 wiki pages"],
   },
   {
-    no: "04", title: "Automation and Retrieval",
-    desc: "Custom n8n pipelines for document and video ingestion, plus a deterministic retrieval index built for auditable recall over ad-hoc similarity search.",
+    n: "04", stat: "0", statLabel: "tokens to find a file",
+    title: "Automation and Retrieval",
+    body: "n8n ingestion pipelines plus a deterministic index built for auditable recall, not fuzzy guessing.",
+    chips: ["n8n", "pka_retrieve"],
   },
 ];
 
-const EDUCATION: Entry[] = [
+const TOOLKIT: Tool[] = [
+  {
+    title: "AI & Agentic Systems",
+    lede: "Claude Code is my daily driver, but the agentic system and personal knowledge assistant underneath it are model-agnostic, wired into a memory layer and a set of specialist agents that route my own research, content, and ops work.",
+    points: [
+      { k: "Claude Code", v: "40+ custom skills authored, hooks configuration, subagent orchestration, and multi-agent specialist routing across dev, content, research, and ops." },
+      { k: "MCP (Model Context Protocol)", v: "built and deployed a custom server (OpenBrain: 1,834 entities, 122 wiki pages, VPS-hosted worker on hourly cron), plus Asana, Gmail, Google Calendar/Drive, PubMed, and Postgres integrations." },
+      { k: "n8n workflow automation", v: "PDF/DOCX ingestion pipeline, YouTube capture pipeline, newsletter routing." },
+      { k: "Deterministic retrieval", v: "a custom retrieval index (pka_retrieve.py) with an OKF frontmatter spec, built for auditable recall over ad-hoc similarity search." },
+      { k: "Anthropic Claude API / SDK", v: "direct API usage underlying all of the above." },
+    ],
+    chips: ["Claude Code", "MCP", "n8n", "Claude API", "Postgres", "RAG"],
+  },
+  {
+    title: "Dev Tooling",
+    lede: "Multi-model by design. Claude Code is the daily driver, Codex gets used alongside it, and self-hosted open-source models run the work that stays inside my private AI zone.",
+    points: [
+      { k: "VS Code", v: "primary IDE." },
+      { k: "Claude Code", v: "skill authoring, memory architecture design, hook-based automation." },
+      { k: "Codex and open-source models", v: "used alongside Claude, including self-hosted local models for private-zone work." },
+      { k: "Landscape fluency", v: "evaluated and compared Claude Code, Cursor, and OpenAI Codex on model-switching tradeoffs, ADE positioning, and enterprise vs. personal-plan economics." },
+    ],
+    chips: ["VS Code", "Claude Code", "Codex", "Cursor", "Self-hosted models"],
+  },
+  {
+    title: "Market Research",
+    lede: "A grounded research pipeline plus real-time intelligence tooling, the discipline underneath everything else I build.",
+    points: [
+      { k: "STORM research method", v: "five-phase grounded pipeline: perspective discovery, expert interviews, outline, writing, red-team." },
+      { k: "FireCrawl", v: "automated content and site extraction." },
+      { k: "Perplexity API", v: "research agent queries." },
+      { k: "Real-time intelligence", v: "custom social and market tooling across Reddit, X, YouTube, HN, Polymarket, and GitHub." },
+      { k: "Customer research", v: "competitor profiling and VOC/JTBD systems." },
+    ],
+    chips: ["STORM", "FireCrawl", "Perplexity API", "VOC / JTBD"],
+  },
+  {
+    title: "Web Development",
+    lede: "Sites I design, build, and maintain myself, including this one.",
+    points: [
+      { k: "Astro", v: "live personal site (amyyoung.me)." },
+      { k: "WordPress", v: "Ollie child theme build for the NACC site rebuild." },
+      { k: "Tailwind CSS", v: "styling layer across builds." },
+      { k: "Architecture", v: "site IA, SEO, and AI answer-engine optimization." },
+    ],
+    chips: ["Astro", "WordPress", "Tailwind", "SEO / AEO"],
+  },
+  {
+    title: "Communications",
+    lede: "Two decades of marketing and institutional writing, now packaged as skills the agents can run.",
+    points: [
+      { k: "Marketing stack", v: "20 skills covering copywriting, CRO, email sequences, pricing, offers, PR, and launch." },
+      { k: "Content engine", v: "16 skills spanning blog, social, and website drafting, repurposing, and AI-pattern removal." },
+      { k: "Institutional writing", v: "NACC brand-compliant technical communications." },
+    ],
+    chips: ["Copywriting", "CRO", "Email", "Technical writing"],
+  },
+  {
+    title: "Infrastructure",
+    lede: "A self-managed VPS that hosts the automation stack, with no managed platform in between.",
+    points: [
+      { k: "Hostinger KVM 2 VPS", v: "Ubuntu 24.04 with Docker, self-managed." },
+      { k: "Docker Compose", v: "multi-app stack: n8n, KaraKeep, Firecrawl, Watchtower, Vikunja." },
+      { k: "Caddy", v: "reverse proxy, TLS, basic auth, security headers." },
+      { k: "Tailscale", v: "private tailnet access, no exposed SSH." },
+      { k: "Watchtower", v: "automated container updates, with a documented VPS hardening audit process." },
+    ],
+    chips: ["Docker", "Caddy", "Tailscale", "Ubuntu", "Watchtower"],
+  },
+];
+
+// Education, recognition, and community in one list now, in Amy's export order:
+// credentials first, community last.
+const BACKGROUND: Entry[] = [
   {
     name: "Master of Science in Information Management",
-    org: "University of Washington. Data analytics and business intelligence, program and product management",
+    org: "University of Washington. Data analytics and business intelligence, program and product management.",
     yr: "2024",
   },
   {
-    name: "Bachelor of Arts, Sociology and Statistics",
-    org: "University of Minnesota. Quantitative methods, social research, and behavioral analysis",
-    yr: "1991",
-  },
-];
-
-const RECOGNITION: Entry[] = [
-  {
     name: "Certificate of Appreciation",
-    org: "NIA Division of Neuroscience, for contributions to NACC's Uniform Data Set v4",
+    org: "NIA Division of Neuroscience, for contributions to NACC's Uniform Data Set v4.",
     yr: "2021",
   },
   {
+    name: "Bachelor of Arts, Sociology and Statistics",
+    org: "University of Minnesota. Quantitative methods, social research, and behavioral analysis.",
+    yr: "1991",
+  },
+  {
     name: "Board Member",
-    org: "Delridge Neighborhood Development Association, a Seattle organization providing affordable housing and free arts, sports, and nature programming for young people",
+    org: "Delridge Neighborhood Development Association, a Seattle organization providing affordable housing and free arts, sports, and nature programming for young people.",
     yr: "2015–2026",
   },
 ];
@@ -87,12 +179,28 @@ const CAREER: Role[] = [
 
   <section class="sec">
     <div class="wrap">
-      <header class="page-head">
-        <div class="sh-label rv">About</div>
-        <h1 class="page-title rv">Hi, I'm<br><strong>Amy Young.</strong></h1>
-        <p class="page-lead rv">I'm a product manager and AI builder in Seattle. I love turning messy, complex problems into clear and useful products, and lately I've been just as focused on building the AI systems that get me there faster.</p>
-        <p class="page-lead rv">Data, design, and communication have run through every job I've had, and AI agents now tie all three together. I run Claude Code as a daily driver: 30+ custom skills, deterministic hooks, and multi-agent routing across my own research, content, and ops. I designed and self-host a knowledge graph that captures raw research and compiles it into something I can query. I build things that make sense to the people using them, and that now includes the agents doing part of the work alongside me.</p>
-      </header>
+      <div class="ab-hero">
+        <header class="page-head">
+          <div class="sh-label rv">About</div>
+          <h1 class="page-title rv">Hi, I'm<br><strong>Amy Young.</strong></h1>
+          <div class="ab-leads">
+            <p class="page-lead rv">I work at the intersection of data, product, and communications. Information specialist by title at the National Alzheimer's Coordinating Center, and in practice the person in the data, running funding program management, writing and building the web for the research community, and making the tools that speed all of it up.</p>
+            <p class="page-lead rv">One thread runs through all of it: curiosity and problem solving. Understanding how things work, why people do what they do, and what becomes possible when you ask the right questions.</p>
+            <p class="page-lead rv">AI agents now tie those threads together. Claude Code is my daily driver, and it lets me take on work I used to coordinate teams to do myself: research, design, build, ship. Underneath it is a model-agnostic system I designed and self-host, including a knowledge graph that turns raw research into something I can query. On top of that: 40+ custom skills and multi-agent routing across my research, content, and ops.</p>
+            <p class="page-lead rv">It rewards exactly the kind of curious, cross-disciplinary thinking I've practiced my whole life.</p>
+          </div>
+        </header>
+
+        <div class="ab-rail rv">
+          <img class="ab-portrait" src="/assets/images/about/amy-young-about.jpg" alt="Amy Young" width="800" height="800">
+          <div class="ab-focus">
+            <span>AI &amp; Agentic Systems</span>
+            <span>Product Strategy</span>
+            <span>Research &amp; Analytics</span>
+          </div>
+          <div class="ab-where">Based in<br>Seattle, WA</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -100,18 +208,51 @@ const CAREER: Role[] = [
 
   <section class="sec">
     <div class="wrap">
+      <div class="ab-story">
+        <div>
+          <div class="sh-label rv">My story</div>
+          <h2 class="ab-dh rv">Curiosity is<br><strong>the constant.</strong></h2>
+        </div>
+
+        <div class="ab-story-body rv">
+          <p>Understanding how things work, why people do what they do, and what becomes possible when you ask the right questions.</p>
+
+          <div class="ab-more" id="story-more" hidden>
+            <p>My dad posed math problems on long car rides, not to test me but to teach me critical thinking: that if you understand a problem deeply enough, you'll find your way to a solution. Military service reinforced it differently, trading puzzles for the kind of resilience you only build by pushing past what feels like your limit.</p>
+            <p>Sociology and Statistics gave me a lens I've never stopped using. People plus data, together. That combination led into market research, cross-functional leadership, and eventually product management, where I could combine analytical thinking with user empathy and strategic vision, across technology, healthcare, education, and beyond. Working across industries gave me a habit of finding unexpected connections, and an appreciation for how much context shapes the way we see problems.</p>
+            <p>My work at the National Alzheimer's Coordinating Center brought it all into focus. Supporting the Alzheimer's research community showed me what's at stake when the right people, data, and tools find each other, and what it costs when they don't.</p>
+            <p>I went back to UW for a Master of Science in Information Management. I expected it to sharpen the analytics and product side of the work. AI is what I found there, and it has had my full attention ever since.</p>
+            <p>Now, with AI, the work I used to coordinate teams to do, research, design, build, and ship, I'm increasingly doing myself. I spend a lot of time exploring what's possible: building apps, agents, and automated workflows, designing systems that actually work for the people using them.</p>
+            <p class="ab-kicker">What an extraordinary time to be building.</p>
+          </div>
+
+          <button class="ab-toggle" id="story-toggle" type="button" aria-expanded="false" aria-controls="story-more">Read more</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sec-rule"></div>
+
+  <section class="sec sec-soft">
+    <div class="wrap">
       <div class="sh">
         <div class="sh-label rv">Systems</div>
         <h2 class="sh-title rv">The systems I build and run.</h2>
         <p class="sh-desc rv">Every one of these is in daily use, running my own work rather than sitting in a demo.</p>
       </div>
 
-      <div class="why-grid">
-        {CAPABILITIES.map((c) => (
-          <div class="why-card rv">
-            <div class="why-n">{c.no}</div>
-            <h3 class="why-t">{c.title}</h3>
-            <p class="why-d">{c.desc}</p>
+      <div class="sys-grid">
+        {SYSTEMS.map((s) => (
+          <div class="sys-card rv">
+            <div class="sys-n">{s.n}</div>
+            <div class="sys-stat">{s.stat}</div>
+            <div class="sys-stat-l">{s.statLabel}</div>
+            <h3 class="sys-t">{s.title}</h3>
+            <p class="sys-d">{s.body}</p>
+            <div class="sys-chips">
+              {s.chips.map((c) => <span class="tag tag-accent">{c}</span>)}
+            </div>
           </div>
         ))}
       </div>
@@ -122,34 +263,67 @@ const CAREER: Role[] = [
 
   <section class="sec">
     <div class="wrap">
-      <div class="sh">
-        <div class="sh-label rv">Background</div>
-        <h2 class="sh-title rv">Education, awards, and community.</h2>
-        <p class="sh-desc rv">Two degrees, one award from the NIA, and eleven years on a neighborhood board.</p>
-      </div>
+      <div class="tk-layout">
+        <div class="tk-left">
+          <div class="sh-label rv">Toolkit</div>
+          <h2 class="ab-dh rv">What I<br><strong>actually work in.</strong></h2>
+          <p class="tk-desc rv">Six areas, all of them hands-on. Open any one for the specifics.</p>
+          <button class="ab-toggle tk-all rv" id="tk-all" type="button">Expand all</button>
+        </div>
 
-      <div class="awards-layout">
-        <div>
-          {EDUCATION.map((e) => (
-            <div class="award rv">
-              <span class="award-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"></path><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"></path></svg>
-              </span>
-              <div>
-                <div class="award-name">{e.name}</div>
-                <div class="award-org">{e.org}</div>
+        <div class="tk-list rv" id="tk-list">
+          {TOOLKIT.map((t, i) => (
+            <div class={`tk-item${i === 0 ? " open" : ""}`}>
+              <button
+                class="tk-btn"
+                type="button"
+                aria-expanded={i === 0 ? "true" : "false"}
+                aria-controls={`tk-panel-${i}`}
+              >
+                <span class="tk-n">{String(i + 1).padStart(2, "0")}</span>
+                <span class="tk-t">{t.title}</span>
+                <span class="tk-sign" aria-hidden="true">+</span>
+              </button>
+
+              <div class="tk-panel" id={`tk-panel-${i}`} hidden={i !== 0}>
+                <p class="tk-lede">{t.lede}</p>
+                <ul class="tk-points">
+                  {t.points.map((p) => (
+                    <li class="tk-point"><span><strong>{p.k}:</strong> {p.v}</span></li>
+                  ))}
+                </ul>
+                <div class="tk-chips">
+                  {t.chips.map((c) => <span class="tag tag-accent">{c}</span>)}
+                </div>
               </div>
-              <span class="award-yr">{e.yr}</span>
             </div>
           ))}
         </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sec-rule"></div>
+
+  <section class="sec sec-soft">
+    <div class="wrap">
+      <div class="sh">
+        <div class="sh-label rv">Background</div>
+        <h2 class="sh-title rv">Education, awards, and community.</h2>
+      </div>
+
+      <div class="bg-layout">
+        <figure class="bg-figure rv">
+          <img
+            src="/assets/images/about/amy-young-msim-commencement.jpg"
+            alt="Amy Young at her University of Washington MSIM commencement"
+            width="900" height="1455" loading="lazy">
+          <figcaption class="bg-cap">MSIM commencement, University of Washington Information School, 2024.</figcaption>
+        </figure>
 
         <div>
-          {RECOGNITION.map((e) => (
+          {BACKGROUND.map((e) => (
             <div class="award rv">
-              <span class="award-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M8.5 12.5L7 22l5-2.5L17 22l-1.5-9.5"></path></svg>
-              </span>
               <div>
                 <div class="award-name">{e.name}</div>
                 <div class="award-org">{e.org}</div>
@@ -187,3 +361,60 @@ const CAREER: Role[] = [
   </section>
 
 </Layout>
+
+<script>
+  // My Story expander. Astro types HTMLElement.hidden as string | boolean, so the read
+  // side is coerced with !! — the same pattern the layout's contact panel uses.
+  const storyToggle = document.getElementById("story-toggle");
+  const storyMore = document.getElementById("story-more");
+
+  if (storyToggle && storyMore) {
+    storyToggle.addEventListener("click", () => {
+      const open = !!storyMore.hidden;
+      storyMore.hidden = !open;
+      storyToggle.setAttribute("aria-expanded", String(open));
+      storyToggle.textContent = open ? "Read less" : "Read more";
+    });
+  }
+
+  // Toolkit accordion. Multiple panels may be open at once (unlike the homepage's
+  // .hero-svc rail, which is one-at-a-time) because these are reference lists a reader
+  // compares side by side, not a hero teaser.
+  const tkList = document.getElementById("tk-list");
+  const tkAll = document.getElementById("tk-all");
+
+  if (tkList) {
+    const items = Array.from(tkList.querySelectorAll(".tk-item"));
+
+    const setItem = (item: Element, open: boolean) => {
+      const btn = item.querySelector(".tk-btn");
+      const panel = item.querySelector(".tk-panel");
+      if (!(panel instanceof HTMLElement)) return;
+      item.classList.toggle("open", open);
+      panel.hidden = !open;
+      btn?.setAttribute("aria-expanded", String(open));
+    };
+
+    const syncAllLabel = () => {
+      if (!tkAll) return;
+      const allOpen = items.every((i) => i.classList.contains("open"));
+      tkAll.textContent = allOpen ? "Collapse all" : "Expand all";
+    };
+
+    items.forEach((item) => {
+      const btn = item.querySelector(".tk-btn");
+      btn?.addEventListener("click", () => {
+        setItem(item, !item.classList.contains("open"));
+        syncAllLabel();
+      });
+    });
+
+    tkAll?.addEventListener("click", () => {
+      const allOpen = items.every((i) => i.classList.contains("open"));
+      items.forEach((item) => setItem(item, !allOpen));
+      syncAllLabel();
+    });
+
+    syncAllLabel();
+  }
+</script>
