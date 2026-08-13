@@ -1,6 +1,36 @@
 ---
 import "../assets/css/home.css";
 const { title = "Amy Young — Researcher, Designer, Builder · Seattle" } = Astro.props;
+
+// Nav active state, derived from the URL. It used to be hardcoded onto Home in both the
+// desktop and mobile lists, so the underline never left Home no matter what page you were
+// on (fixed 2026-08-13).
+//
+// `prefixes` exists because a section's landing route and its detail route differ:
+// /projects lists, /project/<slug> details. Matching on the link href alone would leave
+// the nav blank on every detail page.
+//
+// /posts and /post are listed for when Articles moves onto this layout — it currently
+// renders main.astro (the Aria theme), whose header has no active state at all. Harmless
+// until then, correct the moment it lands.
+interface NavItem { href: string; label: string; prefixes: string[]; }
+
+const NAV: NavItem[] = [
+  { href: "/",         label: "Home",     prefixes: [] },
+  { href: "/projects", label: "Projects", prefixes: ["/projects", "/project"] },
+  { href: "/about",    label: "About",    prefixes: ["/about"] },
+  { href: "/posts",    label: "Articles", prefixes: ["/posts", "/post"] },
+];
+
+// trailingSlash is unset, so Astro's default serves both /about and /about/. Normalize
+// before comparing or the match silently fails on whichever form the visitor lands on.
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+
+// Home is exact-match only; every other route would otherwise match its "/" prefix.
+const isActive = (item: NavItem) =>
+  item.href === "/"
+    ? path === "/"
+    : item.prefixes.some((p) => path === p || path.startsWith(p + "/"));
 ---
 
 <!doctype html>
@@ -17,10 +47,13 @@ const { title = "Amy Young — Researcher, Designer, Builder · Seattle" } = Ast
     <div class="nav-inner">
       <div class="nav-logo">Amy Young</div>
       <div class="nav-links">
-        <a href="/" class="active">Home</a>
-        <a href="/projects">Projects</a>
-        <a href="/about">About</a>
-        <a href="/posts">Articles</a>
+        {NAV.map((item) => (
+          <a
+            href={item.href}
+            class={isActive(item) ? "active" : undefined}
+            aria-current={isActive(item) ? "page" : undefined}
+          >{item.label}</a>
+        ))}
       </div>
       <a class="nav-contact" href="#contact">Contact</a>
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
@@ -30,10 +63,13 @@ const { title = "Amy Young — Researcher, Designer, Builder · Seattle" } = Ast
       </button>
     </div>
     <div class="nav-panel" id="nav-panel">
-      <a href="/" class="active">Home</a>
-      <a href="/projects">Projects</a>
-      <a href="/about">About</a>
-      <a href="/posts">Articles</a>
+      {NAV.map((item) => (
+        <a
+          href={item.href}
+          class={isActive(item) ? "active" : undefined}
+          aria-current={isActive(item) ? "page" : undefined}
+        >{item.label}</a>
+      ))}
     </div>
   </nav>
 
