@@ -25,6 +25,7 @@ const NAV: NavItem[] = [
   { href: "/projects", label: "Projects", prefixes: ["/projects", "/project"] },
   { href: "/about",    label: "About",    prefixes: ["/about"] },
   { href: "/posts",    label: "Writing",  prefixes: ["/posts", "/post"] },
+  { href: "/resume",   label: "Resume",   prefixes: ["/resume"] },
 ];
 
 // trailingSlash is unset, so Astro's default serves both /about and /about/. Normalize
@@ -123,11 +124,12 @@ const isActive = (item: NavItem) =>
         <a href="/projects">Projects</a>
         <a href="/posts">Articles</a>
         <a href="/about">About</a>
-        {/* !! /resume DOES NOT EXIST and this link 404s. Added at Amy's request
-             2026-08-06. Amy ruled 2026-08-07 that the link STAYS while the page is built
-             with her, so do not remove it. Still a gate on merging to main: build the
-             page first, or drop the link at merge time. */}
+        {/* /resume was built 2026-08-13 and rebuilt 2026-08-14, so this link resolves
+             and the merge-to-main gate it used to represent is closed. The PDF beneath it
+             is a separate document, not a print view of the page — see the note at the
+             top of pages/resume.astro. */}
         <a href="/resume">Resume</a>
+        <a href="/Amy-Young-Resume.pdf" download>Download Resume (PDF)</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
