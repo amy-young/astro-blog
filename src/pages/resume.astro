@@ -1,0 +1,358 @@
+---
+import Layout from "../layouts/home.astro";
+
+// Rebuilt 2026-08-14 from the claude.ai/design export
+// (Portfolio website_about/Amy Young - Resume_20260814.html), unpacked with
+// tools/unpack_bundler_export.py rather than re-pasted from the design tool.
+//
+// The PDF at /Amy-Young-Resume.pdf is a SEPARATE document, not a print stylesheet on
+// this page. Their layouts conflict: this page is a two-column hero with expanders,
+// the PDF is single-column because ATS parsers read multi-column layouts across the
+// gutter and interleave unrelated lines. Source for the PDF lives in the PKA repo at
+// handoff/resume-redesign/Amy-Young-Resume.html. Re-export it there, then copy the
+// PDF into public/ — do not regenerate it from this page.
+//
+// Amy's rulings 2026-08-14 (do not silently revert):
+//  - Accent stays --accent #4D3A9A. The export's #221193 is the design tool's
+//    `accentColor` prop default, not a rebrand.
+//  - The export replaced the ZenCloud bullets with a "Detail to come" placeholder.
+//    The real bullets are restored here from the prior version.
+//  - The export's Communication group dropped copywriting, brand design and
+//    development, email marketing, and CRM development. All four restored.
+//
+// The nav and the contact footer come from the home.astro layout, so the export's
+// own nav/footer are deliberately not reproduced.
+
+interface Role {
+  id: string;
+  title: string;
+  org: string;
+  dates: string;
+  points: [string, string][];
+}
+
+const ROLES: Role[] = [
+  {
+    id: "nacc",
+    title: "Public Information Specialist",
+    org: "National Alzheimer's Coordinating Center, University of Washington",
+    dates: "March 2021 to present",
+    points: [
+      ["Program management", "Direct the New Investigator Award Program and the NACC Directory for a national research community spanning 37 Alzheimer's Disease Research Centers."],
+      ["Stakeholder engagement", "Maintain relationships across NACC, the ADRC network, the National Institute on Aging, and the wider AD/ADRD research community."],
+      ["Database management", "Design and manage NACC's researcher database, a 1,500+ variable system that powers communications, data platform access, surveys, funding programs, publications, and ADRC leadership opportunities."],
+      ["Communications", "Lead content development for the New Investigator Award Program, the ADRC Research Education Component, development of NACC's new website, naccdata.org, and instructional and support content for the ADRC researcher database and NACC Data Platform onboarding. Previously led communications for the hybrid bi-annual ADRC Meetings from 2021 to 2026, growing attendance from 320 to 1,379 and setting a record at every meeting, then trained my successor into the role."],
+      ["Research and dissemination", "Run research studies for the New Investigator Award Program and NACC's research education work, and present the findings to a national audience. Most recently a report on trends in Alzheimer's disease and related dementias among new and early-career investigators, delivered at the 2025 Fall ADRC Meeting."],
+      ["AI integration", "Apply AI across the role: content, web development, design, publishing, funding research, workflow automation, and presentations, tuned to a research community where the domain detail has to be right."],
+    ],
+  },
+  {
+    id: "zencloud",
+    title: "Digital Marketing and Research Manager",
+    org: "ZenCloud Consulting",
+    dates: "October 2012 to March 2021",
+    points: [
+      ["Team leadership", "Led researchers, web developers, writers, and designers through product development and marketing campaigns."],
+      ["Higher education", "Directed digital products and communications for the University of Washington and Cornell University."],
+      ["Market research", "Built the strategic marketing plan for UW's BRiTE Center on executive interviews at Google and Fortune 500 technology and healthcare organizations."],
+      ["Brand strategy", "Developed brand and market strategy for Cornell's Yang-Tan Institute, drawing on HR and diversity directors at multinational corporations."],
+    ],
+  },
+];
+
+interface Work { name: string; stat: string; body: string; }
+
+const WORK: Work[] = [
+  {
+    name: "New Investigator Awards Program",
+    stat: "359% growth",
+    body: "Grew the program from 2 to 13 annual awards over three years, running RFA development, eligibility verification, the platform transition, and the Scientific Review Committee panels. The mentorship program alongside it started at zero and now runs on 111 recruited AD/ADRD mentors, with the evaluation and tracking framework built to match.",
+  },
+  {
+    name: "Research Education Landscape Study",
+    stat: "37 centers",
+    body: "A study I designed to look across the whole 37-center ADRC ecosystem and find the training and funding programs that work best. It gives NACC an evidence base for how it supports new and early-career investigators nationally, instead of a set of assumptions about it.",
+  },
+  {
+    name: "NACC Directory",
+    stat: "1,500+ variables",
+    body: "A REDCap-backed directory for the ADRC network. I lead the technical updates, the UX work, and the training, and drove contact data to 100 percent validation across 1,500+ variables for all 37 research centers, which is what makes it usable as the network's collaboration hub.",
+  },
+  {
+    name: "ADRC Meetings",
+    stat: "320 → 1,379",
+    body: "Attendance went from 320 to 1,379 research professionals between 2021 and 2026 through targeted outreach inside a niche scientific community, setting a record at every bi-annual meeting since 2021. I trained my successor into the role.",
+  },
+  {
+    name: "amyyoung.me",
+    stat: "Ships itself",
+    body: "The site you're reading. Astro and Tailwind on the surface, and underneath it the delivery path itself encoded as agent skills: Claude Code skills that carry the design system, gate every change on a type check and a production build, and run the staging-to-production deploy loop. Both versions of this resume ship through it.",
+  },
+];
+
+// core = the daily drivers, shown as chips. rest = the rest of the group, as prose.
+interface SkillGroup { name: string; core: string[]; rest: string[]; }
+
+const SKILLS: SkillGroup[] = [
+  {
+    name: "AI and Agentic Systems",
+    core: ["Agent harness design", "Knowledge graph engineering", "Custom MCP server"],
+    rest: ["Claude Code hooks and permissions", "Tool allowlisting", "Postgres + PostgREST", "LLM entity extraction", "n8n workflow automation", "Deterministic retrieval", "Anthropic Claude API"],
+  },
+  {
+    name: "Developer Tooling",
+    core: ["Claude Code", "VS Code", "Docker"],
+    rest: ["Python API clients", "GitHub CLI", "Cursor", "OpenAI Codex"],
+  },
+  {
+    name: "Market Research",
+    core: ["Quantitative methods", "Qualitative methods", "Competitor profiling"],
+    rest: ["Web and marketing platform analysis", "Voice of customer research", "Social and market intelligence tooling", "FireCrawl", "Perplexity API"],
+  },
+  {
+    name: "Data and Analytics",
+    core: ["REDCap", "SQL and PostgreSQL", "R and RStudio"],
+    rest: ["Qualtrics", "SPSS", "Tableau", "Power BI"],
+  },
+  {
+    name: "Web Development",
+    core: ["Astro", "WordPress", "Tailwind CSS"],
+    rest: ["Claude Design", "Lovable", "Replit", "Information architecture", "SEO and answer-engine optimization"],
+  },
+  {
+    name: "Infrastructure",
+    core: ["Self-managed VPS", "Docker Compose", "Caddy reverse proxy"],
+    rest: ["Ubuntu", "Tailscale", "Security hardening"],
+  },
+  {
+    name: "Communication and Design",
+    core: ["Copywriting", "Brand design and development", "Institutional technical communications"],
+    rest: ["Email marketing", "CRM development and management", "Report and presentation design", "UX/UI", "Training and educational content"],
+  },
+];
+
+interface RecordItem { year: string; title: string; body: string; }
+interface RecordGroup { label: string; items: RecordItem[]; list?: string[]; }
+
+const RECORD: RecordGroup[] = [
+  {
+    label: "Education",
+    items: [
+      { year: "2024", title: "Master of Science, Information Management", body: "University of Washington. Data Analytics and Business Intelligence; Program and Product Management." },
+      { year: "1991", title: "Bachelor of Arts, Sociology and Statistics", body: "University of Minnesota." },
+    ],
+  },
+  {
+    label: "Recognition",
+    items: [
+      { year: "2021", title: "Certificate of Appreciation", body: "National Institute on Aging, Division of Neuroscience, for contributions to NACC's Uniform Data Set v4." },
+    ],
+  },
+  {
+    label: "Service",
+    items: [
+      { year: "2015–26", title: "Board Member", body: "Delridge Neighborhood Development Association, a Seattle organization providing affordable housing and free arts, sports, and nature programming for young people." },
+    ],
+  },
+  {
+    label: "Memberships",
+    items: [],
+    list: [
+      "University of Washington AI Community of Practice",
+      "HITLAB Center for AI Testing and Evidence",
+      "American Health Information Management Association",
+      "International Association of Privacy Professionals",
+      "Data Management Association",
+    ],
+  },
+];
+---
+
+<Layout title="Resume — Amy Young">
+  <section class="sec">
+    <div class="wrap">
+
+      <div class="rs-hero">
+        <header class="page-head">
+          <div class="sh-label rv">Resume</div>
+          <h1 class="page-title rv">Research operations,<br>data systems,<br><strong>and the AI layer on top.</strong></h1>
+          <p class="page-lead rv">At the National Alzheimer's Coordinating Center, University of Washington, I manage national programs for the Alzheimer's research community, and I build the systems underneath them. An award program, a researcher directory covering 37 centers, an ADRD funding tracker, and a self-hosted AI stack I designed and run myself. Research analyst, presenter, scientific writer, and instructor along the way.</p>
+
+          <div class="rs-actions rv">
+            <a class="btn btn-primary" href="/Amy-Young-Resume.pdf" download>
+              Download the PDF
+              <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 12l6 6 6-6M4 20h16"></path></svg>
+            </a>
+            <a class="btn btn-outline" href="/projects">See the work</a>
+          </div>
+
+          <dl class="xn-stats page-stats rv">
+            <div class="xn-stat"><dt class="xn-stat-n">359%</dt><dd class="xn-stat-l">award program growth</dd></div>
+            <div class="xn-stat"><dt class="xn-stat-n">1,379</dt><dd class="xn-stat-l">meeting attendance, up from 320</dd></div>
+            <div class="xn-stat"><dt class="xn-stat-n">111</dt><dd class="xn-stat-l">mentors recruited</dd></div>
+            <div class="xn-stat"><dt class="xn-stat-n">37</dt><dd class="xn-stat-l">research centers served</dd></div>
+          </dl>
+        </header>
+
+        <figure class="rs-portrait rv">
+          <img src="/assets/images/home/amy-young-portrait.jpg" alt="Amy Young" width="1024" height="1024" loading="eager" decoding="async" />
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec sec-rule sec-soft">
+    <div class="wrap">
+      <div class="sh">
+        <div class="sh-label rv">Experience</div>
+        <h2 class="sh-title rv">Where I've done it.</h2>
+        <p class="sh-desc rv">Open a role for the detail.</p>
+      </div>
+
+      <div class="rs-roles">
+        {ROLES.map((role, i) => (
+          <article class="rs-role rv">
+            <button
+              class="rs-role-head"
+              type="button"
+              aria-expanded={i === 0 ? "true" : "false"}
+              aria-controls={`rs-panel-${role.id}`}
+            >
+              <span class="rs-role-main">
+                <span class="rs-role-title">{role.title}</span>
+                <span class="rs-role-org">{role.org}</span>
+                <span class="rs-role-dates">{role.dates}</span>
+              </span>
+              <span class="rs-role-toggle" aria-hidden="true">{i === 0 ? "−" : "+"}</span>
+            </button>
+            <div class="rs-role-body" id={`rs-panel-${role.id}`} hidden={i !== 0}>
+              {role.points.map(([label, text]) => (
+                <p class="rs-point">
+                  <span class="rs-point-mark" aria-hidden="true">■</span>
+                  <span class="rs-point-text"><strong>{label}.</strong> {text}</span>
+                </p>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-rule">
+    <div class="wrap">
+      <div class="sh">
+        <div class="sh-label rv">Selected work</div>
+        <h2 class="sh-title rv">Five that moved the number.</h2>
+      </div>
+
+      <div class="rs-work">
+        {WORK.map((w) => (
+          <article class="rs-work-row rv">
+            <div>
+              <h3 class="rs-work-name">{w.name}</h3>
+              <p class="rs-work-stat">{w.stat}</p>
+            </div>
+            <p class="rs-work-body">{w.body}</p>
+          </article>
+        ))}
+      </div>
+
+      <a class="sec-more rv" href="/projects">
+        See the full project list
+        <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="sec sec-rule sec-soft">
+    <div class="wrap">
+      <div class="rs-skills-layout">
+        <div class="rs-skills-aside">
+          <div class="sh-label rv">Skills</div>
+          <h2 class="sh-title sh-title-display rv">What I<br><strong>build with.</strong></h2>
+          <p class="sh-desc rv">Everything listed here comes off a system I have actually built and still run. The first line of each group is what I reach for daily.</p>
+        </div>
+
+        <div>
+          {SKILLS.map((g) => (
+            <div class="rs-skill-row rv">
+              <div>
+                <h3 class="rs-skill-name">{g.name}</h3>
+                <p class="rs-skill-count">{g.core.length + g.rest.length} tools and methods</p>
+              </div>
+              <div class="rs-skill-stack">
+                <ul class="rs-core">
+                  {g.core.map((c) => <li class="rs-core-item">{c}</li>)}
+                </ul>
+                <p class="rs-rest">{g.rest.join(" · ")}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-rule">
+    <div class="wrap">
+      <div class="sh">
+        <div class="sh-label rv">Education and recognition</div>
+        <h2 class="sh-title rv">Degrees, awards, and service.</h2>
+      </div>
+
+      <div class="rs-record">
+        {RECORD.map((g) => (
+          <div class="rs-record-group rv">
+            <h3 class="rs-record-label">{g.label}</h3>
+            <div>
+              {g.items.map((it) => (
+                <div class="rs-record-item">
+                  <p class="rs-record-year">{it.year}</p>
+                  <div>
+                    <p class="rs-record-title">{it.title}</p>
+                    <p class="rs-record-body">{it.body}</p>
+                  </div>
+                </div>
+              ))}
+              {g.list && (
+                <ul class="rs-memberships">
+                  {g.list.map((m) => (
+                    <li class="rs-membership">
+                      <span class="rs-membership-mark" aria-hidden="true">■</span>
+                      <span>{m}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Expandable roles. HTMLElement.hidden is string | boolean in Astro's DOM types,
+  // so narrow with instanceof rather than casting; a type error fails the deploy.
+  const heads = document.querySelectorAll('.rs-role-head');
+
+  heads.forEach((head) => {
+    head.addEventListener('click', () => {
+      if (!(head instanceof HTMLElement)) return;
+      const id = head.getAttribute('aria-controls');
+      if (!id) return;
+      const panel = document.getElementById(id);
+      if (!(panel instanceof HTMLElement)) return;
+
+      const open = head.getAttribute('aria-expanded') === 'true';
+      head.setAttribute('aria-expanded', String(!open));
+      panel.hidden = open;
+
+      const toggle = head.querySelector('.rs-role-toggle');
+      if (toggle instanceof HTMLElement) toggle.textContent = open ? '+' : '−';
+    });
+  });
+</script>

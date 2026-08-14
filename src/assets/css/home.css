@@ -987,6 +987,109 @@
     .bg-figure img { width: 100%; border-radius: 14px; }
     .bg-cap { font-size: .78rem; line-height: 1.55; color: var(--ink-3); }
 
+    /* =============================================
+       RESUME PAGE — rebuilt 2026-08-14 from the claude.ai/design export
+       (Portfolio website_about/Amy Young - Resume_20260814.html, unpacked with
+       tools/unpack_bundler_export.py).
+
+       Palette note: the export ships accent #221193, but that is the design
+       tool's `accentColor` prop default, not a rebrand. Amy ruled 2026-08-14 to
+       keep --accent #4D3A9A so the resume matches every other page. The export's
+       greys map onto the existing ink ramp; no new color tokens were added.
+    ============================================= */
+
+    /* Static form of the chip idiom, for lists that label rather than filter.
+       Same shape as .pj-chip on purpose: one chip on the site, not two. */
+    .pj-chip-static { cursor: default; }
+    .pj-chip-static:hover { border-color: var(--border-str); color: var(--ink-2); }
+
+    /* Light-300 setup / heavy-800 payoff on a section heading. .page-title already
+       does this for page titles; .sh-title had no display variant until now. */
+    .sh-title-display { font-weight: 300; color: var(--ink-3); }
+    .sh-title-display strong { font-weight: 800; color: var(--ink); }
+
+    /* --- Hero: copy left, square portrait right --- */
+    .rs-hero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, .6fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
+    @media (max-width: 860px) { .rs-hero { grid-template-columns: 1fr; } }
+    /* .page-head is shared with /projects; the hero grid owns the spacing here. */
+    .rs-hero .page-head { margin-bottom: 0; }
+    .rs-portrait { margin: 0; justify-self: end; width: 100%; max-width: 220px; }
+    .rs-portrait img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; }
+    @media (max-width: 860px) { .rs-portrait { justify-self: start; max-width: 180px; } }
+
+    .rs-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 32px; }
+
+    /* --- Experience: expandable roles --- */
+    .rs-roles { display: grid; gap: 14px; }
+    .rs-role { border: 1px solid var(--border); border-radius: 14px; background: var(--bg-white); overflow: hidden; transition: border-color .2s ease, box-shadow .2s ease; }
+    .rs-role:hover { border-color: var(--accent-bdr); box-shadow: var(--sh-sm); }
+    .rs-role-head {
+      width: 100%; display: grid; grid-template-columns: 1fr 34px; gap: 16px; align-items: start;
+      padding: 24px 26px; background: transparent; border: 0; text-align: left; color: inherit;
+    }
+    .rs-role-head:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+    /* The role header is a <button>, so its inner labels are spans, not headings.
+       They need display: block to stack. */
+    .rs-role-main { min-width: 0; display: block; }
+    .rs-role-title { display: block; font-size: 1.125rem; font-weight: 700; letter-spacing: -.015em; line-height: 1.25; color: var(--ink); }
+    .rs-role-org { display: block; margin-top: 5px; font-size: .906rem; line-height: 1.5; color: var(--ink-3); }
+    .rs-role-dates { display: block; margin-top: 9px; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+    /* A +/- sign rather than a chevron: the export's affordance, and it reads as
+       "more detail" more plainly than a rotating arrow. */
+    .rs-role-toggle {
+      justify-self: end; width: 30px; height: 30px; border-radius: 8px;
+      background: var(--accent-wash); color: var(--accent);
+      display: grid; place-items: center; font-size: .875rem; font-weight: 700; line-height: 1;
+      transition: background .2s ease, color .2s ease;
+    }
+    .rs-role-head[aria-expanded="true"] .rs-role-toggle { background: var(--accent); color: #fff; }
+    .rs-role-body { padding: 0 26px 26px; display: grid; gap: 13px; }
+    .rs-role-body[hidden] { display: none; }
+    .rs-point { display: grid; grid-template-columns: 14px 1fr; gap: 12px; align-items: start; }
+    .rs-point-mark { color: var(--accent-bdr); font-size: .8rem; line-height: 1.65; }
+    .rs-point-text { font-size: .906rem; line-height: 1.65; color: var(--ink-3); }
+    .rs-point-text strong { color: var(--ink); font-weight: 700; }
+
+    /* --- Selected work: a stat rail beside the prose --- */
+    .rs-work { display: grid; }
+    .rs-work-row { display: grid; grid-template-columns: 220px 1fr; gap: 36px; padding: 26px 0; border-top: 1px solid var(--border); align-items: start; }
+    @media (max-width: 760px) { .rs-work-row { grid-template-columns: 1fr; gap: 10px; } }
+    .rs-work-name { font-size: 1.031rem; font-weight: 700; letter-spacing: -.015em; color: var(--ink); }
+    .rs-work-stat { margin-top: 8px; font-size: 1.375rem; font-weight: 800; letter-spacing: -.03em; color: var(--accent); }
+    .rs-work-body { margin: 0; font-size: .938rem; line-height: 1.7; color: var(--ink-3); max-width: 720px; text-wrap: pretty; }
+
+    /* --- Skills: sticky intro, group rows with a core/rest split --- */
+    .rs-skills-layout { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 2fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
+    @media (max-width: 900px) { .rs-skills-layout { grid-template-columns: 1fr; } }
+    .rs-skills-aside { position: sticky; top: 88px; }
+    @media (max-width: 900px) { .rs-skills-aside { position: static; } }
+    .rs-skills-aside .sh-desc { margin-top: 20px; }
+    .rs-skill-row { display: grid; grid-template-columns: 210px 1fr; gap: 32px; padding: 24px 0; border-top: 1px solid var(--border); align-items: start; }
+    @media (max-width: 700px) { .rs-skill-row { grid-template-columns: 1fr; gap: 12px; } }
+    .rs-skill-name { font-size: .969rem; font-weight: 700; letter-spacing: -.01em; color: var(--ink); }
+    .rs-skill-count { margin-top: 6px; font-size: .75rem; font-weight: 600; letter-spacing: .03em; color: var(--ink-4); }
+    .rs-skill-stack { display: grid; gap: 12px; }
+    .rs-core { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    /* The daily-driver tools, called out against the rest of the group. */
+    .rs-core-item { display: inline-block; font-size: .875rem; font-weight: 700; color: var(--accent); background: var(--accent-wash-2); padding: 5px 12px; border-radius: 7px; }
+    .rs-rest { font-size: .906rem; line-height: 1.85; color: var(--ink-3); margin: 0; }
+
+    /* --- Education and recognition: label rail, year rail, body --- */
+    .rs-record { display: grid; gap: 52px; }
+    .rs-record-group { display: grid; grid-template-columns: 200px 1fr; gap: 40px; align-items: start; }
+    @media (max-width: 760px) { .rs-record-group { grid-template-columns: 1fr; gap: 14px; } }
+    .rs-record-label { font-size: .805rem; font-weight: 700; letter-spacing: .16em; color: var(--ink-4); padding-top: 22px; }
+    @media (max-width: 760px) { .rs-record-label { padding-top: 0; } }
+    .rs-record-item { display: grid; grid-template-columns: 110px 1fr; gap: 32px; align-items: baseline; padding: 22px 0; border-top: 1px solid var(--border); }
+    @media (max-width: 560px) { .rs-record-item { grid-template-columns: 1fr; gap: 6px; } }
+    .rs-record-year { font-size: 1.188rem; font-weight: 800; letter-spacing: -.02em; color: var(--accent); font-variant-numeric: tabular-nums; }
+    .rs-record-title { font-size: 1.031rem; font-weight: 700; letter-spacing: -.012em; color: var(--ink); }
+    .rs-record-body { margin-top: 6px; font-size: .906rem; line-height: 1.65; color: var(--ink-3); max-width: 640px; text-wrap: pretty; }
+    .rs-memberships { border-top: 1px solid var(--border); padding-top: 22px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; margin: 0; padding-left: 0; list-style: none; }
+    @media (max-width: 620px) { .rs-memberships { grid-template-columns: 1fr; } }
+    .rs-membership { display: grid; grid-template-columns: 16px 1fr; gap: 10px; align-items: baseline; font-size: .906rem; line-height: 1.6; color: var(--ink-3); }
+    .rs-membership-mark { color: var(--accent-bdr); font-size: .688rem; }
+
     /* Reveal */
     .rv { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
     .rv.in { opacity: 1; transform: none; }
