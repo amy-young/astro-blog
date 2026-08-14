@@ -1009,13 +1009,30 @@
     .sh-title-display strong { font-weight: 800; color: var(--ink); }
 
     /* --- Hero: copy left, square portrait right --- */
-    .rs-hero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, .6fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
-    @media (max-width: 860px) { .rs-hero { grid-template-columns: 1fr; } }
+    /* Fixed 220px photo column, not a fractional one. A .6fr column is far wider than
+       the image at desktop widths, so justify-self: end parked the photo ~100px off the
+       text and it read as floating. The text column takes the remainder. */
+    .rs-hero { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: clamp(28px, 4vw, 64px); align-items: start; }
     /* .page-head is shared with /projects; the hero grid owns the spacing here. */
     .rs-hero .page-head { margin-bottom: 0; }
-    .rs-portrait { margin: 0; justify-self: end; width: 100%; max-width: 220px; }
+    /* Dropped so the photo sits level with the headline rather than the eyebrow above it. */
+    .rs-portrait { margin: clamp(28px, 3.2vw, 44px) 0 0; width: 100%; max-width: 220px; }
     .rs-portrait img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; }
-    @media (max-width: 860px) { .rs-portrait { justify-self: start; max-width: 180px; } }
+
+    @media (max-width: 860px) {
+      .rs-hero { grid-template-columns: 1fr; }
+      /* The photo is a sibling of .page-head, so `order` alone cannot interleave it with
+         .page-head's own children. Flattening the wrapper at this breakpoint makes every
+         block a direct grid item, which is what lets the photo sit between the lead
+         paragraph and the buttons instead of falling to the bottom of the hero. */
+      .rs-hero > .page-head { display: contents; }
+      .rs-hero > .page-head > .sh-label   { order: 1; }
+      .rs-hero > .page-head > .page-title { order: 2; }
+      .rs-hero > .page-head > .page-lead  { order: 3; }
+      .rs-hero > .rs-portrait             { order: 4; margin: 2px 0 30px; max-width: 180px; }
+      .rs-hero > .page-head > .rs-actions { order: 5; }
+      .rs-hero > .page-head > .page-stats { order: 6; }
+    }
 
     .rs-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 32px; }
 
