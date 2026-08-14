@@ -10,16 +10,21 @@ const { title = "Amy Young — Researcher, Designer, Builder · Seattle" } = Ast
 // /projects lists, /project/<slug> details. Matching on the link href alone would leave
 // the nav blank on every detail page.
 //
-// /posts and /post are listed for when Articles moves onto this layout — it currently
+// /posts and /post are listed for when Writing moves onto this layout — it currently
 // renders main.astro (the Aria theme), whose header has no active state at all. Harmless
 // until then, correct the moment it lands.
+//
+// The label is "Writing" (settled 2026-08-13, was "Articles"). It matches the homepage
+// section eyebrow, which already said "Writing" — the nav was the odd one out. Nav labels
+// on this site stay plain and the h1 carries the voice ("About" -> "Hi, I'm Amy Young."),
+// so the page's own title is "Field notes from the build." and does NOT belong here.
 interface NavItem { href: string; label: string; prefixes: string[]; }
 
 const NAV: NavItem[] = [
   { href: "/",         label: "Home",     prefixes: [] },
   { href: "/projects", label: "Projects", prefixes: ["/projects", "/project"] },
   { href: "/about",    label: "About",    prefixes: ["/about"] },
-  { href: "/posts",    label: "Articles", prefixes: ["/posts", "/post"] },
+  { href: "/posts",    label: "Writing",  prefixes: ["/posts", "/post"] },
 ];
 
 // trailingSlash is unset, so Astro's default serves both /about and /about/. Normalize
