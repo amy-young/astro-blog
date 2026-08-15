@@ -94,6 +94,10 @@
       --dark-2:       #1A1630;
       --f:            'Plus Jakarta Sans', system-ui, sans-serif;
       --tweak-font:   'Plus Jakarta Sans', system-ui, sans-serif;
+      /* Code only, added 2026-08-14 for .article-body. Deliberately a system stack — no
+         webfont is loaded for it, so it costs nothing and never blocks render. Plus
+         Jakarta Sans has no monospace cut. */
+      --f-mono:       ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
       --photo-size:   28.8vw;
       --big-text:     3.685vw;
       --sh-sm:        0 1px 3px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.04);
@@ -1106,6 +1110,156 @@
     @media (max-width: 620px) { .rs-memberships { grid-template-columns: 1fr; } }
     .rs-membership { display: grid; grid-template-columns: 16px 1fr; gap: 10px; align-items: baseline; font-size: .906rem; line-height: 1.6; color: var(--ink-3); }
     .rs-membership-mark { color: var(--accent-bdr); font-size: .688rem; }
+
+    /* =============================================
+       ARTICLE BODY (2026-08-14)
+       The long-form typographic scale. home.css had none before this: every page on the
+       design system is composed of cards and section headers, never prose. Tailwind's
+       `prose` did this job on the old Aria theme and does not come along.
+
+       Used by /post/<slug> and /project/<slug>. Build it once, style markdown output only
+       -- these are bare element selectors scoped to .article-body because the content is
+       markdown and cannot carry classes.
+    ============================================= */
+    /* Article header block. Shares the page's 68ch measure so the title, meta and body
+       all hang off the same left edge and wrap at the same right one. */
+    .post-head { max-width: 68ch; margin-bottom: clamp(28px, 4vw, 44px); }
+    .post-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: .805rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+      transition: gap .18s ease;
+    }
+    .post-back:hover { gap: 12px; }
+    .post-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+    .post-title {
+      font-family: var(--f);
+      font-size: clamp(2rem, 4.2vw, 3.1rem);
+      font-weight: 800; color: var(--ink);
+      letter-spacing: -.035em; line-height: 1.08;
+      margin: 0 0 16px; text-wrap: balance;
+    }
+    .post-desc { font-size: clamp(1rem, 1.4vw, 1.12rem); line-height: 1.65; color: var(--ink-3); margin: 0 0 22px; }
+    .post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding-top: 18px; border-top: 1px solid var(--border); }
+    .post-date { font-size: .82rem; font-weight: 600; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+    .post-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+    .article-body {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      /* --ink-2 not --ink-3: long-form is read continuously, so it wants more contrast
+         than a card description. #333 on white is 12.6:1. */
+      color: var(--ink-2);
+      max-width: 68ch;
+      text-wrap: pretty;
+    }
+    .article-body > * + * { margin-top: 1.15em; }
+
+    /* Headings. The scale steps down clearly enough that h2 and h3 are never confused,
+       and each carries more space above than below so it binds to the text it introduces. */
+    .article-body h2, .article-body h3, .article-body h4 {
+      font-family: var(--f); color: var(--ink);
+      letter-spacing: -.025em; line-height: 1.2;
+      /* Clears the sticky nav when a heading is jumped to by anchor. */
+      scroll-margin-top: 100px;
+    }
+    .article-body h2 { font-size: clamp(1.5rem, 2.6vw, 1.85rem); font-weight: 800; margin-top: 2.2em; margin-bottom: .55em; }
+    .article-body h3 { font-size: clamp(1.2rem, 2vw, 1.35rem); font-weight: 700; margin-top: 1.9em; margin-bottom: .5em; }
+    .article-body h4 { font-size: 1.05rem; font-weight: 700; margin-top: 1.6em; margin-bottom: .45em; }
+    .article-body h2:first-child, .article-body h3:first-child { margin-top: 0; }
+
+    /* Links. The global `a { color: inherit; text-decoration: none }` reset means prose
+       links MUST be restyled here or they vanish into the body text. */
+    .article-body a {
+      color: var(--accent); font-weight: 600;
+      text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;
+      text-decoration-color: var(--accent-bdr);
+      transition: text-decoration-color .18s ease, color .18s ease;
+    }
+    .article-body a:hover { color: var(--accent-h); text-decoration-color: var(--accent); }
+    .article-body a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+    .article-body strong { font-weight: 700; color: var(--ink); }
+    .article-body em { font-style: italic; }
+
+    /* Lists. Markdown nests these, so the indent and marker have to survive one level down. */
+    .article-body ul, .article-body ol { padding-left: 1.4em; }
+    .article-body li { margin-top: .5em; }
+    .article-body li::marker { color: var(--accent); }
+    .article-body ol > li::marker { font-weight: 700; font-size: .95em; }
+    .article-body li > ul, .article-body li > ol { margin-top: .5em; }
+    .article-body li > p { margin: 0; }
+
+    .article-body blockquote {
+      margin-left: 0; margin-right: 0;
+      padding: 4px 0 4px 22px;
+      border-left: 3px solid var(--accent-bdr);
+      color: var(--ink-3); font-style: italic;
+    }
+    .article-body blockquote > * + * { margin-top: .8em; }
+
+    /* Inline code. Light treatment on purpose -- it sits inside a sentence and a dark chip
+       would strobe through a paragraph. */
+    .article-body :not(pre) > code {
+      font-family: var(--f-mono);
+      font-size: .875em;
+      padding: .15em .4em;
+      border-radius: 5px;
+      background: var(--accent-tint);
+      border: 1px solid var(--accent-bdr);
+      color: var(--accent-h);
+      word-break: break-word;
+    }
+
+    /* Fenced blocks. Dark ground, matching --dark used by the contact band and
+       .feat-body-dark, so code reads as a distinct surface rather than a tinted paragraph.
+       overflow-x is the load-bearing part: a long line must scroll inside the block and
+       never widen the page. */
+    .article-body pre {
+      background: var(--dark);
+      color: #E6E3F2;
+      border-radius: 12px;
+      padding: 18px 20px;
+      overflow-x: auto;
+      font-size: .855rem;
+      line-height: 1.6;
+      -webkit-overflow-scrolling: touch;
+    }
+    .article-body pre code {
+      font-family: var(--f-mono);
+      background: none; border: 0; padding: 0;
+      color: inherit; font-size: inherit;
+      white-space: pre;
+    }
+
+    .article-body img { border-radius: 12px; width: 100%; height: auto; }
+    .article-body figure { margin: 0; }
+    .article-body figcaption { margin-top: 10px; font-size: .8rem; line-height: 1.55; color: var(--ink-3); }
+
+    .article-body hr { border: 0; border-top: 1px solid var(--border); margin-block: 2.4em; }
+
+    /* Tables. Markdown emits a bare <table> with no wrapper, so the scroll container has
+       to BE the table -- display:block is what makes overflow-x work here. Without it a
+       wide table pushes the whole page sideways. */
+    .article-body table {
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+      font-size: .92rem;
+    }
+    .article-body th, .article-body td {
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .article-body th { background: var(--bg-soft); font-weight: 700; color: var(--ink); white-space: nowrap; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .article-body a { transition: none; }
+    }
 
     /* Reveal */
     .rv { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
