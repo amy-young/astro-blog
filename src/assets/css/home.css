@@ -1122,7 +1122,10 @@
        markdown and cannot carry classes.
     ============================================= */
     /* Article header block. Shares the page's 68ch measure so the title, meta and body
-       all hang off the same left edge and wrap at the same right one. */
+       all hang off the same left edge and wrap at the same right one.
+       NOT post-only despite the name: /project/<slug> uses this same block. Both are
+       long-form templates and duplicating it under a second prefix would give the site
+       two header idioms for one job. */
     .post-head { max-width: 68ch; margin-bottom: clamp(28px, 4vw, 44px); }
     .post-back {
       display: inline-flex; align-items: center; gap: 7px;
@@ -1143,6 +1146,19 @@
     .post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding-top: 18px; border-top: 1px solid var(--border); }
     .post-date { font-size: .82rem; font-weight: 600; color: var(--ink-3); font-variant-numeric: tabular-nums; }
     .post-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+    /* Project detail additions. Status reuses .pj-status / .pj-dot from /projects so the
+       site has ONE status idiom -- only the auto-margin is cancelled, because on the index
+       the status is pushed to the right of a card row and here it leads a badge row. */
+    .prj-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .prj-badges .pj-status { margin-left: 0; }
+    .prj-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    /* The detail page's buttons sit inline in a header rather than as a page CTA, so they
+       run one step smaller than the .btn default. */
+    .prj-actions .btn { font-size: .82rem; padding: 10px 20px; }
+    .prj-hero { margin: 0 0 clamp(28px, 4vw, 40px); }
+    .prj-hero img { width: 100%; border-radius: 14px; border: 1px solid var(--border); }
+    .prj-hero figcaption { margin-top: 10px; font-size: .78rem; line-height: 1.55; color: var(--ink-3); }
 
     .article-body {
       font-size: 1.05rem;

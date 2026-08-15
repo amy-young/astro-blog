@@ -1,5 +1,31 @@
 ---
-import Layout from "./main.astro";
+import Layout from "./home.astro";
+
+// Moved off the Aria theme onto the home.astro design system 2026-08-14, per
+// handoff/posts-redesign/README.md in the PKA repo. Shares .article-body and the
+// .post-head block with layouts/post.astro -- both are long-form templates.
+//
+// Reached via each markdown file's `layout:` frontmatter key, not by a route file --
+// pages/project/[slug].astro just renders <Content />.
+//
+// Three things from the old layout are deliberately NOT carried over:
+//
+// 1. The generated hero panel. When a project had no heroImage the old layout drew a
+//    gradient-and-dashed-border placeholder with the title inside it. The site settled on
+//    2026-08-06 that text-forward beats fabricated imagery (same call that made /projects
+//    text cards and removed the invented stat bar). heroImage renders when present;
+//    nothing is invented when it is absent.
+// 2. The emerald/amber/blue status palette. --accent #4D3A9A is the only hue on the site.
+//    Status now reuses .pj-status/.pj-dot from /projects, which is the existing idiom.
+// 3. Dark mode. The design system is light-only by Amy's ruling 2026-08-14.
+//
+// !! VOCABULARY MISMATCH, unresolved -- flagged to Amy 2026-08-14.
+// This collection's schema allows status: active | building | shipped.
+// /projects uses a different set: shipped | building | concept.
+// They are also fed by different data: the index is a HARDCODED array in projects.astro,
+// not this collection. Personal Knowledge System is "shipped" on the index and "active"
+// in its own frontmatter, so the same project reports two states on two pages. Mapping
+// below is a stopgap; the real fix is one vocabulary and one source.
 
 interface Frontmatter {
   title: string;
@@ -15,144 +41,97 @@ interface Frontmatter {
 }
 
 const { frontmatter } = Astro.props as { frontmatter: Frontmatter };
+const {
+  title, description, status, category,
+  tags = [], startDate, liveUrl, githubUrl, downloadUrl, heroImage,
+} = frontmatter;
 
-const statusLabel = {
+const STATUS_LABEL: Record<Frontmatter["status"], string> = {
   active: "Active",
   building: "Building",
   shipped: "Shipped",
 };
 
-const statusColor = {
-  active: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
-  building: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-  shipped: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
+// Maps this schema's vocabulary onto the dot colours /projects already defines.
+// "active" borrows the in-progress accent dot; see the mismatch note above.
+const STATUS_DOT: Record<Frontmatter["status"], string> = {
+  active: "building",
+  building: "building",
+  shipped: "shipped",
 };
 
-const categoryColor = {
-  work: "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
-  personal: "bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400",
+const CATEGORY_LABEL: Record<Frontmatter["category"], string> = {
+  work: "Work project",
+  personal: "Personal project",
 };
+
+const hasActions = Boolean(liveUrl || githubUrl || downloadUrl);
 ---
 
-<Layout title={frontmatter.title}>
-  <main class="relative z-30 max-w-4xl pb-1 mx-auto mt-10 bg-white dark:bg-neutral-950 md:rounded-t-md text-neutral-900">
+<Layout title={`${title} — Amy Young`}>
+  <article class="sec">
+    <div class="wrap">
 
-    <!-- Side border decorations -->
-    <div class="relative flex flex-col px-5 pt-6 border-t border-b-0 md:border-r md:border-l md:pt-16 lg:px-0 justify-stretch md:rounded-t-2xl border-neutral-200 dark:border-neutral-800">
-      <div class="absolute top-0 left-0 hidden w-px h-full mt-1 -translate-x-px md:block bg-gradient-to-b from-transparent to-white dark:to-neutral-950"></div>
-      <div class="absolute top-0 right-0 hidden w-px h-full mt-1 translate-x-px md:block bg-gradient-to-b from-transparent to-white dark:to-neutral-950"></div>
-
-      <!-- Back link -->
-      <div class="w-full max-w-2xl mx-auto mb-8">
-        <a href="/projects" class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors duration-200">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 12H5M12 5l-7 7 7 7"/>
-          </svg>
-          All projects
+      <header class="post-head">
+        <a class="post-back rv" href="/projects">
+          <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>
+          Projects
         </a>
-      </div>
 
-      <!-- Badges -->
-      <div class="w-full max-w-2xl mx-auto flex flex-wrap items-center gap-2 mb-5">
-        <span class={`px-2.5 py-1 text-[10px] font-semibold tracking-widest uppercase rounded-full ${statusColor[frontmatter.status]}`}>
-          {statusLabel[frontmatter.status]}
-        </span>
-        <span class={`px-2.5 py-1 text-[10px] font-semibold tracking-widest uppercase rounded-full ${categoryColor[frontmatter.category]}`}>
-          {frontmatter.category}
-        </span>
-      </div>
+        <div class="prj-badges rv">
+          <span class="pj-status" data-s={STATUS_DOT[status]}>
+            <span class="pj-dot"></span>{STATUS_LABEL[status]}
+          </span>
+          <span class="pj-cat">{CATEGORY_LABEL[category]}</span>
+        </div>
 
-      <!-- Title -->
-      <h1 class="w-full max-w-2xl mx-auto text-3xl font-bold leading-tight tracking-tighter text-left md:text-4xl dark:text-neutral-100 lg:text-5xl md:leading-none mb-4">
-        {frontmatter.title}
-      </h1>
+        <h1 class="post-title rv">{title}</h1>
 
-      <!-- Description -->
-      <p class="w-full max-w-2xl mx-auto text-lg text-neutral-500 dark:text-neutral-400 leading-relaxed mb-8">
-        {frontmatter.description}
-      </p>
+        <p class="post-desc rv">{description}</p>
 
-      <!-- Meta row -->
-      <div class="w-full max-w-2xl mx-auto flex flex-wrap items-center gap-6 pb-8 border-b border-dashed border-neutral-200 dark:border-neutral-800">
-        {frontmatter.startDate && (
-          <div class="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-            </svg>
-            Started {frontmatter.startDate}
-          </div>
-        )}
-        {frontmatter.tags && frontmatter.tags.length > 0 && (
-          <div class="flex flex-wrap gap-2">
-            {frontmatter.tags.map((tag) => (
-              <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-        {(frontmatter.liveUrl || frontmatter.githubUrl || frontmatter.downloadUrl) && (
-          <div class="flex gap-3 ml-auto flex-wrap">
-            {frontmatter.liveUrl && (
-              <a href={frontmatter.liveUrl} target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors duration-200">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-                </svg>
-                View live
-              </a>
-            )}
-            {frontmatter.githubUrl && (
-              <a href={frontmatter.githubUrl} target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-full border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors duration-200">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                  <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
-                </svg>
-                GitHub
-              </a>
-            )}
-            {frontmatter.downloadUrl && (
-              <a href={frontmatter.downloadUrl} class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-full border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors duration-200">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
-                </svg>
-                Download
-              </a>
-            )}
-          </div>
-        )}
-      </div>
-    </div>
-
-    <!-- Hero -->
-    <div class="w-full max-w-2xl mx-auto px-7 lg:px-0 pt-10">
-      {frontmatter.heroImage ? (
-        <img
-          src={frontmatter.heroImage}
-          alt={frontmatter.title}
-          class="w-full rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm mb-10"
-        />
-      ) : (
-        <div class="relative w-full rounded-2xl overflow-hidden border border-dashed border-violet-200 dark:border-violet-900 bg-gradient-to-br from-violet-50 via-white to-amber-50 dark:from-violet-950/30 dark:via-neutral-950 dark:to-amber-950/20 mb-10 p-8 min-h-[180px] flex flex-col justify-between">
-          <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(rgba(109,40,217,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(109,40,217,0.15) 1px, transparent 1px); background-size: 28px 28px;" />
-          <div class="relative">
-            <div class="text-[10px] font-semibold tracking-[0.2em] uppercase text-violet-500 dark:text-violet-400 mb-3">{frontmatter.category} project · {frontmatter.status}</div>
-            <div class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 leading-tight max-w-sm">{frontmatter.title}</div>
-          </div>
-          {frontmatter.tags && frontmatter.tags.length > 0 && (
-            <div class="relative flex flex-wrap gap-2 mt-6">
-              {frontmatter.tags.map((tag: string) => (
-                <span class="px-2.5 py-1 text-[11px] font-medium rounded-full bg-white/70 dark:bg-neutral-900/70 border border-violet-100 dark:border-violet-900 text-violet-700 dark:text-violet-300 backdrop-blur-sm">
-                  {tag}
-                </span>
-              ))}
+        <div class="post-meta rv">
+          {startDate && <span class="post-date">Started {startDate}</span>}
+          {tags.length > 0 && (
+            <div class="post-tags">
+              {tags.map((t) => <span class="tag tag-accent">{t}</span>)}
             </div>
           )}
         </div>
-      )}
-    </div>
 
-    <!-- Content -->
-    <article class="w-full max-w-2xl mx-auto mb-20 prose-sm prose px-7 lg:px-0 lg:prose-lg dark:prose-invert">
-      <slot />
-    </article>
-  </main>
+        {hasActions && (
+          <div class="prj-actions rv">
+            {liveUrl && (
+              <a class="btn btn-primary" href={liveUrl} target="_blank" rel="noopener">
+                View live
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>
+              </a>
+            )}
+            {githubUrl && (
+              <a class="btn btn-outline" href={githubUrl} target="_blank" rel="noopener">
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"></path></svg>
+                GitHub
+              </a>
+            )}
+            {downloadUrl && (
+              <a class="btn btn-outline" href={downloadUrl} download>
+                Download
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 12l6 6 6-6M4 20h16"></path></svg>
+              </a>
+            )}
+          </div>
+        )}
+      </header>
+
+      {heroImage && (
+        <figure class="prj-hero rv">
+          <img src={heroImage} alt={`${title} — project hero`} loading="eager" decoding="async" />
+        </figure>
+      )}
+
+      <div class="article-body rv">
+        <slot />
+      </div>
+
+    </div>
+  </article>
 </Layout>
