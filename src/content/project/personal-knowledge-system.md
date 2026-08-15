@@ -8,9 +8,9 @@ startDate: "2024"
 tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
 ---
 
-<figure class="not-prose my-10">
-  <img src="/assets/images/pka-system-architecture.png" loading="lazy" width="2000" height="1414" class="w-full h-auto" alt="Full architecture map of the PKA system, running left to right through five stages. Capture: Granola, Drive _INBOX, YouTube playlists, the Telegram bot, /venture-research, scratch-today.md and capture_thought. Process: the n8n pipeline, digest mining, /ingest, /panning-for-gold and vault import. Store: three knowledge folders over a Postgres brain running OpenBrain and pgvector. Synthesize: entity extraction, the wiki compiler, content briefs and compiled entity pages. Retrieve: pka_retrieve.py manifest search, MEMORY.md, semantic search and hot.md. A feedback loop runs from retrieval back to the brain.">
-  <figcaption class="mt-3 text-[13px] leading-relaxed text-neutral-500 dark:text-neutral-400">
+<figure>
+  <img src="/assets/images/pka-system-architecture.webp" loading="lazy" width="1536" height="1024" alt="Architecture map of the PKA system, running left to right through five numbered stages. Capture: Granola meeting notes, Drive _INBOX drops, YouTube playlists, the Telegram bot Kip, /venture-research, scratch-today.md and capture_thought. Process: the n8n pipeline, digest mining, /ingest, /panning-for-gold and vault import. Store: three knowledge folders (work, ventures, life) over a Postgres brain running OpenBrain and pgvector, holding facts and entities, relationships, embeddings, full text and metadata. Synthesize: entity extraction, the wiki compiler, content briefs and 122 compiled entity pages. Retrieve: pka_retrieve.py manifest search at zero tokens, MEMORY.md, semantic search via MCP, and hot.md. Below, an infrastructure strip covers the local Windows workstation, the Hostinger VPS running Docker and Caddy, and a retrieval ladder that escalates from hot.md through manifest search to semantic search and entity pages. A feedback loop runs from retrieval back to the brain.">
+  <figcaption>
     The whole system on one page. Source of truth is <code>PKA-ARCHITECTURE.md</code>; the map is re-verified whenever the architecture changes.
   </figcaption>
 </figure>
