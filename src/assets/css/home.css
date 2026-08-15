@@ -1248,6 +1248,22 @@
       white-space: pre;
     }
 
+    /* Phones wrap instead of scrolling (Amy, 2026-08-15: code "gets truncated" on
+       mobile). Nothing was actually clipped -- the block does scroll -- but a nested
+       horizontal scroll region is hard to discover and awkward to drive with a thumb, so
+       a long command reads as cut off at the edge.
+
+       The fidelity cost is real: a wrapped shell command can look like two commands, and
+       that is exactly why this is mobile-only. Desktop keeps exact line breaks, where the
+       block is 68ch wide and scrolling is cheap.
+
+       overflow-x stays on the <pre> deliberately -- pre-wrap still cannot break an
+       unbreakable token (a long URL or hash), so the scroll remains the fallback. */
+    @media (max-width: 620px) {
+      .article-body pre { font-size: .8rem; }
+      .article-body pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+    }
+
     .article-body img { border-radius: 12px; width: 100%; height: auto; }
     .article-body figure { margin: 0; }
     .article-body figcaption { margin-top: 10px; font-size: .8rem; line-height: 1.55; color: var(--ink-3); }
