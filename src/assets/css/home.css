@@ -1293,6 +1293,165 @@
       .article-body a { transition: none; }
     }
 
+    /* PKA architecture diagram (/project/personal-knowledge-system). Rebuilt 2026-08-16
+       as real markup -- the previous version was a 1536x1024 image, five columns and
+       ~100 text elements baked into one composition, unreadable below ~800px because SVG
+       fixes sharpness, not reflow. Same call made on the homepage 2026-08-06 (memory:
+       feedback_dense_diagrams_are_markup). Icons are inline <symbol> defs reused per row,
+       so the row markup is one component repeated rather than one-off art. --accent is
+       the only hue; --ink-3 is the floor on every tinted row so nothing here regresses
+       the AA finding that took --ink-4 off --bg-soft. */
+    .pkd { margin: 0; }
+    .pkd-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+    /* Flex, not grid -- .pkd-stages' children alternate stage / connector / stage, nine
+       items in all. A 5-column grid counts every child as a track, so the connectors
+       shifted two stages onto a second row. Flex with stages at flex:1 and connectors at
+       a fixed width has no track count to get wrong. */
+    .pkd-stages {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding: clamp(22px, 3vw, 32px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--bg-white);
+    }
+    @media (min-width: 980px) {
+      .pkd-stages { flex-direction: row; align-items: flex-start; gap: 0; }
+    }
+
+    .pkd-stage { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+    @media (min-width: 980px) { .pkd-stage { flex: 1 1 0; padding-inline: 14px; } }
+
+    .pkd-stage-head { display: flex; align-items: flex-start; gap: 10px; }
+    .pkd-num {
+      display: flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px; border-radius: 7px; flex-shrink: 0;
+      background: var(--accent); color: #fff;
+      font-size: .74rem; font-weight: 800; font-variant-numeric: tabular-nums;
+    }
+    .pkd-stage-title { font-size: 1rem; font-weight: 800; letter-spacing: -.01em; color: var(--ink); line-height: 1.25; }
+    .pkd-stage-sub { display: block; margin-top: 2px; font-size: .78rem; font-weight: 500; color: var(--ink-3); line-height: 1.4; }
+
+    /* Connector between stages. Horizontal chevron row on desktop; the same element
+       rotates to a vertical down-arrow once stages stack, so one component covers both
+       layouts instead of two markup paths. */
+    .pkd-connector { display: flex; align-items: center; justify-content: center; color: var(--border-str); }
+    .pkd-connector svg { width: 16px; height: 16px; }
+    @media (min-width: 980px) {
+      .pkd-connector { flex: 0 0 auto; align-self: center; margin-top: 34px; }
+      .pkd-connector svg { transform: none; }
+    }
+    @media (max-width: 979px) {
+      .pkd-connector svg { transform: rotate(90deg); }
+    }
+
+    .pkd-rows { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+    .pkd-row {
+      display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: flex-start;
+      padding: 10px; border-radius: 10px; background: var(--bg-soft);
+    }
+    .pkd-row-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+      background: var(--bg-white); border: 1px solid var(--border); color: var(--accent);
+    }
+    .pkd-row-icon svg { width: 16px; height: 16px; }
+    .pkd-row-label { display: block; font-size: .84rem; font-weight: 700; color: var(--ink); line-height: 1.35; }
+    .pkd-row-detail { display: block; margin-top: 2px; font-size: .755rem; color: var(--ink-3); line-height: 1.45; }
+
+    /* Store stage: three folder chips plus the Postgres brain panel, instead of the
+       plain row list every other stage uses -- the folders are peers, the brain is the
+       thing they all write into, and a flat row list would flatten that relationship. */
+    .pkd-folders { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pkd-folder {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 11px; border-radius: 999px; border: 1px solid var(--border);
+      background: var(--bg-soft); font-size: .78rem; font-weight: 700; color: var(--ink-2);
+    }
+    .pkd-folder svg { width: 13px; height: 13px; color: var(--accent); }
+    .pkd-brain {
+      padding: 14px; border-radius: 12px; border: 1px dashed var(--accent-bdr); background: var(--accent-tint);
+    }
+    .pkd-brain-head { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+    .pkd-brain-head svg { width: 18px; height: 18px; color: var(--accent); }
+    .pkd-brain-name { font-size: .86rem; font-weight: 800; color: var(--ink); }
+    .pkd-brain-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .pkd-brain-list li {
+      font-size: .715rem; font-weight: 600; color: var(--accent);
+      background: var(--bg-white); border: 1px solid var(--accent-bdr);
+      padding: 3px 8px; border-radius: 999px;
+    }
+
+    /* Retrieve stage tagline. */
+    .pkd-tagline {
+      margin-top: 2px; padding: 10px 12px; border-radius: 10px;
+      background: var(--dark); color: #fff;
+      font-size: .82rem; font-weight: 800; letter-spacing: -.005em;
+    }
+
+    /* Feedback loop. A dashed rule spans every layout width; the label sits over it so
+       the concept ("retrieval feeds the next capture") survives even where a true
+       curved connector back to column 3 would have nowhere sane to land at 375px. */
+    .pkd-loop {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 6px; padding-top: 22px;
+    }
+    .pkd-loop::before {
+      content: ""; position: absolute; top: 0; left: 4%; right: 4%; height: 1px;
+      background-image: linear-gradient(to right, var(--border-str) 0 6px, transparent 6px 12px);
+      background-size: 12px 1px; background-repeat: repeat-x;
+    }
+    .pkd-loop-label {
+      position: relative; display: inline-flex; align-items: center; gap: 7px;
+      padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border-str);
+      background: var(--bg-white); font-size: .74rem; font-weight: 700; color: var(--ink-3);
+    }
+    .pkd-loop-label svg { width: 14px; height: 14px; color: var(--accent); animation: pkd-loop-spin 3s linear infinite; }
+    @keyframes pkd-loop-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .pkd-loop-label svg { animation: none; }
+    }
+
+    /* Infrastructure strip. */
+    .pkd-strip {
+      margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr; gap: 20px;
+    }
+    @media (min-width: 780px) { .pkd-strip { grid-template-columns: 1fr 1fr 1.3fr; gap: 28px; } }
+    .pkd-strip-lbl {
+      display: block; font-size: .74rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 6px;
+    }
+    .pkd-strip p { font-size: .84rem; color: var(--ink-3); line-height: 1.55; margin: 0; }
+    .pkd-ladder ol { list-style: none; padding: 0; margin: 0; counter-reset: pkd-ladder; }
+    .pkd-ladder li {
+      counter-increment: pkd-ladder;
+      display: flex; gap: 9px; padding: 6px 0;
+      font-size: .8rem; color: var(--ink-3); line-height: 1.4;
+    }
+    .pkd-ladder li::before {
+      content: counter(pkd-ladder);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      width: 18px; height: 18px; border-radius: 50%; margin-top: 1px;
+      background: var(--accent-wash); color: var(--accent); font-size: .68rem; font-weight: 800;
+    }
+    .pkd-ladder strong { color: var(--ink); font-weight: 700; }
+
+    .pkd-foot {
+      margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border);
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
+      font-size: .76rem; color: var(--ink-3);
+    }
+    .pkd-foot code {
+      font-family: var(--f-mono); font-size: .78rem;
+      background: var(--bg-soft); padding: 2px 6px; border-radius: 5px;
+    }
+    .pkd-foot a { display: inline-flex; align-items: center; gap: 5px; font-weight: 700; color: var(--accent); transition: gap .18s; }
+    .pkd-foot a:hover { gap: 9px; }
+
     /* Reveal */
     .rv { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
     .rv.in { opacity: 1; transform: none; }
