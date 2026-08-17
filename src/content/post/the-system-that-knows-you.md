@@ -90,6 +90,7 @@ tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
     <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Asana</span>
     <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Google Workspace</span>
     <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Wispr Flow</span>
+    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Kip (Telegram)</span>
   </div>
 
   <!-- Context detail panel -->
@@ -226,6 +227,7 @@ The AI never loads everything, just what's relevant to the current task.
 |------|------|
 | Claude Code | Primary orchestration layer |
 | Wispr Flow | Voice-first daily input |
+| Kip (Telegram bot) | Voice-note capture on the go. A quick message to Kip gets transcribed and dropped into a daily scratch file, which the morning brief and end-of-day routine both pick up and route from. |
 | Obsidian | Meeting notes, daily notes, and a visual mirror of the PKA system. The graph view makes connections across your knowledge visible in a way nothing else does. |
 | OpenBrain (Postgres) | Persistent storage for everything worth remembering: the knowledge base that grows with every session. |
 | Wiki layer | Synthesizes captured knowledge into interconnected reference pages, turning raw inputs into something you can actually navigate and read, like a personal encyclopedia that builds itself. |
