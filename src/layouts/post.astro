@@ -21,10 +21,11 @@ interface Frontmatter {
   description?: string;
   dateFormatted?: string;
   tags?: string[];
+  heroImage?: string;
 }
 
 const { frontmatter } = Astro.props as { frontmatter: Frontmatter };
-const { title, description, dateFormatted, tags = [] } = frontmatter;
+const { title, description, dateFormatted, tags = [], heroImage } = frontmatter;
 ---
 
 <Layout title={`${title} — Amy Young`}>
@@ -50,6 +51,12 @@ const { title, description, dateFormatted, tags = [] } = frontmatter;
           )}
         </div>
       </header>
+
+      {heroImage && (
+        <figure class="prj-hero rv">
+          <img src={heroImage} alt={`${title} — featured image`} loading="eager" decoding="async" />
+        </figure>
+      )}
 
       <div class="article-body rv">
         <slot />
