@@ -1266,6 +1266,9 @@
 
     .article-body img { border-radius: 12px; width: 100%; height: auto; }
     .article-body figure { margin: 0; }
+    /* Scoped to the PKA architecture hero only -- the shared reset above stays 0 for
+       other figures (e.g. the-system-that-knows-you.md) so this doesn't shift their spacing. */
+    .article-body figure.pka-hero-figure { margin-top: 2rem; }
     .article-body figcaption { margin-top: 10px; font-size: .8rem; line-height: 1.55; color: var(--ink-3); }
 
     .article-body hr { border: 0; border-top: 1px solid var(--border); margin-block: 2.4em; }

@@ -10,7 +10,7 @@ tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
 
 This is the system I built to replace the team I used to assemble by hand. It spans three contexts, work, ventures, and life, and it runs on one architecture: capture everything, process it, store it in one place, synthesize it into something readable, and retrieve it at the lowest cost that answers the question. The map below is that architecture, current as of the last verified date at the bottom.
 
-<figure>
+<figure class="pka-hero-figure">
   <img src="/assets/images/pka-system-architecture.webp" loading="lazy" width="1536" height="1024" alt="Architecture map of the PKA system, running left to right through five numbered stages. Capture: Granola meeting notes, Drive _INBOX drops, YouTube playlists, the Telegram bot Kip, /venture-research, scratch-today.md and capture_thought. Process: the n8n pipeline, digest mining, /ingest, /panning-for-gold and vault import. Store: three knowledge folders (work, ventures, life) over a Postgres brain running OpenBrain and pgvector, holding facts and entities, relationships, embeddings, full text and metadata. Synthesize: entity extraction, the wiki compiler, content briefs and 122 compiled entity pages. Retrieve: pka_retrieve.py manifest search at zero tokens, MEMORY.md, semantic search via MCP, and hot.md. Below, an infrastructure strip covers the local Windows workstation, the Hostinger VPS running Docker and Caddy, and a retrieval ladder that escalates from hot.md through manifest search to semantic search and entity pages. A feedback loop runs from retrieval back to the brain.">
   <figcaption>
     The whole system on one page. Source of truth is <code>PKA-ARCHITECTURE.md</code>; the map is re-verified whenever the architecture changes.
@@ -94,6 +94,7 @@ This is the system I built to replace the team I used to assemble by hand. It sp
     <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Asana</span>
     <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Google Workspace</span>
     <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Wispr Flow</span>
+    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Kip (Telegram)</span>
   </div>
 
   <!-- Context detail panel -->
@@ -162,6 +163,7 @@ The AI never loads everything, just what's relevant to the current task.
 |------|------|
 | Claude Code | Primary orchestration layer |
 | Wispr Flow | Voice-first daily input |
+| Kip (Telegram bot) | Voice-note capture on the go. A quick message to Kip gets transcribed and dropped into a daily scratch file, which the morning brief and end-of-day routine both pick up and route from. |
 | Obsidian | Meeting notes, daily notes, and a visual mirror of the PKA system. The graph view makes connections across your knowledge visible in a way nothing else does. |
 | OpenBrain (Postgres) | Persistent storage for everything worth remembering: the knowledge base that grows with every session. |
 | Wiki layer | Synthesizes captured knowledge into interconnected reference pages, turning raw inputs into something you can actually navigate and read, like a personal encyclopedia that builds itself. |
