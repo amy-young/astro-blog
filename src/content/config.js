@@ -8,6 +8,10 @@ const postCollection = defineCollection({
 		dateFormatted: z.string(),
 		tags: z.array(z.string()).optional(),
 		heroImage: z.string().optional(),
+		// Opt-out for posts whose article body already carries an equivalent image
+		// (e.g. an in-body architecture diagram) — heroImage still drives the /posts
+		// and homepage cards, just not layouts/post.astro's .prj-hero.
+		showHeroInArticle: z.boolean().optional(),
 	}),
 });
 

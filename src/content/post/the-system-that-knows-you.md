@@ -5,6 +5,7 @@ description: How a system built to replace a team of contractors turned into som
 dateFormatted: Aug 3, 2026
 tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
 heroImage: /assets/images/posts/pka-system-pipeline.webp
+showHeroInArticle: false
 ---
 
 <figure>
