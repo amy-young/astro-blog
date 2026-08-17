@@ -53,18 +53,25 @@ const rest = sorted.filter((p) => p.slug !== featured?.slug);
       </header>
 
       {featured && (
-        <a href={featured.link} class="wr-feat rv">
-          <div class="sh-label">Featured</div>
-          <h2 class="feat-title">{featured.data.title}</h2>
-          <p class="wr-feat-desc">{featured.data.description}</p>
-          <div class="post-meta">
-            <time class="post-date">{featured.data.dateFormatted}</time>
-            {featured.data.tags && featured.data.tags.length > 0 && (
-              <div class="post-tags">
-                {featured.data.tags.slice(0, 3).map((t) => <span class="tag tag-accent">{t}</span>)}
-              </div>
-            )}
-            <span class="pj-go">Read article <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+        <a href={featured.link} class={`wr-feat rv${featured.data.heroImage ? " wr-feat-media" : ""}`}>
+          {featured.data.heroImage && (
+            <div class="wr-feat-img-wrap">
+              <img src={featured.data.heroImage} alt="" loading="lazy" decoding="async" width="640" height="480" />
+            </div>
+          )}
+          <div class="wr-feat-body">
+            <div class="sh-label">Featured</div>
+            <h2 class="feat-title">{featured.data.title}</h2>
+            <p class="wr-feat-desc">{featured.data.description}</p>
+            <div class="post-meta">
+              <time class="post-date">{featured.data.dateFormatted}</time>
+              {featured.data.tags && featured.data.tags.length > 0 && (
+                <div class="post-tags">
+                  {featured.data.tags.slice(0, 3).map((t) => <span class="tag tag-accent">{t}</span>)}
+                </div>
+              )}
+              <span class="pj-go">Read article <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+            </div>
           </div>
         </a>
       )}

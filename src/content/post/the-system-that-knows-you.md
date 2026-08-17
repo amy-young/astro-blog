@@ -4,6 +4,7 @@ title: The system that knows you
 description: How a system built to replace a team of contractors turned into something closer to a colleague, the architecture behind it, and what it takes to build your own.
 dateFormatted: Aug 3, 2026
 tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
+heroImage: /assets/images/posts/pka-system-pipeline.webp
 ---
 
 <figure>

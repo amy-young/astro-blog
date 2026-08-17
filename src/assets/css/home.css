@@ -1139,21 +1139,40 @@
        Replaces the Aria/Tailwind build. .page-head, .blog-grid and .blog-card are reused
        verbatim (already shared with the homepage Writing section). The featured post has
        no equivalent component: .feat-card forces a two-column image grid and every real
-       post here is currently text-only, so this is a new full-width, text-forward card.
-       Its footer row reuses .post-date / .post-tags / .tag from the article header block
-       below and .pj-go from /projects, rather than inventing three more one-off classes.
+       post here was text-only at the time, so this started as a full-width, text-forward
+       card. Its footer row reuses .post-date / .post-tags / .tag from the article header
+       block below and .pj-go from /projects, rather than inventing three more one-off
+       classes.
+
+       .wr-feat-media added 2026-08-17 (handoff/featured-images): when the featured post
+       has a heroImage, the card switches to .feat-card's split layout (image one side,
+       text the other) instead of the plain padded block. No heroImage yet on any post
+       carrying the "featured" slot, so this is currently dormant — set heroImage on
+       the-system-that-knows-you.md to see it render.
     ============================================= */
     .wr-feat {
       display: block; border: 1px solid var(--border); border-radius: 20px;
-      padding: clamp(28px, 4vw, 48px); background: var(--bg-white);
+      overflow: hidden; background: var(--bg-white);
       transition: border-color .18s ease, box-shadow .18s ease;
     }
     a.wr-feat:hover { border-color: var(--accent-bdr); box-shadow: var(--sh-md); }
     a.wr-feat:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
     a.wr-feat:hover .pj-go { gap: 11px; }
-    /* .feat-desc's 36ch measure assumes a half-width column beside an image; this card
-       is full width, so it gets its own wider measure rather than reusing that class. */
+    .wr-feat-body { padding: clamp(28px, 4vw, 48px); }
+    .wr-feat.wr-feat-media { display: grid; grid-template-columns: 1fr 1fr; min-height: 360px; }
+    @media (max-width: 760px) { .wr-feat.wr-feat-media { grid-template-columns: 1fr; } }
+    .wr-feat-media .wr-feat-body { display: flex; flex-direction: column; justify-content: center; }
+    /* aspect-ratio (not min-height) so the box tracks the image's actual ratio rather than
+       stretching to match whatever height the text column needs — a mismatch there is what
+       was cropping a true-16:9 source image on both viewports before this was added. */
+    .wr-feat-img-wrap { overflow: hidden; aspect-ratio: 16/9; align-self: center; }
+    .wr-feat-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    a.wr-feat:hover .wr-feat-img-wrap img { transform: scale(1.05); }
+    /* .feat-desc's 36ch measure assumes a half-width column beside an image; the
+       text-only card is full width so it needs a wider measure, but once .wr-feat-media
+       narrows the text column back to half-width, tighten to match .feat-desc's intent. */
     .wr-feat-desc { font-size: .95rem; color: var(--ink-3); line-height: 1.65; max-width: 62ch; margin: 0 0 24px; }
+    .wr-feat-media .wr-feat-desc { max-width: 40ch; }
 
     /* =============================================
        ARTICLE BODY (2026-08-14)
