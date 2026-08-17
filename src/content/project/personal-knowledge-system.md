@@ -18,46 +18,73 @@ This is the system I built to replace the team I used to assemble by hand. It sp
 </figure>
 
 <style>
-  .pka-diagram { font-family: "Roboto", sans-serif; }
+  /* Rewritten 2026-08-17 off Tailwind utility classes onto plain CSS -- same diagram and
+     same fix as src/content/post/the-system-that-knows-you.md; see that file's comment
+     for the full explanation. No dark: variants reintroduced -- the site is light-only. */
+  .pka-diagram { font-family: "Roboto", sans-serif; margin: 40px 0; }
+  .pka-diagram .hidden { display: none; }
+  .pka-context-label {
+    font-size: .625rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+    color: #a3a3a3; text-align: center; margin-bottom: 16px;
+  }
+  .pka-context-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 8px; }
   .pka-node {
-    cursor: pointer;
+    cursor: pointer; flex: 1; max-width: 168px; padding: 16px; border-radius: 12px;
+    border: 1px solid #ddd6fe; background: #fff; text-align: left; font: inherit;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
+  .pka-node[data-context="ventures"] { border-color: #fde68a; }
+  .pka-node[data-context="life"] { border-color: #a7f3d0; }
   .pka-node:hover { transform: translateY(-2px); }
-  .pka-node.selected {
-    box-shadow: 0 0 0 2px rgb(139 92 246);
-    transform: translateY(-2px);
-  }
-  .pka-detail { transition: opacity 0.2s ease, max-height 0.3s ease; }
+  .pka-node.selected { box-shadow: 0 0 0 2px rgb(139 92 246); transform: translateY(-2px); }
+  .pka-node-eyebrow { font-size: .625rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgb(167 139 250); margin-bottom: 4px; }
+  .pka-node[data-context="ventures"] .pka-node-eyebrow { color: rgb(251 191 36); }
+  .pka-node[data-context="life"] .pka-node-eyebrow { color: rgb(52 211 153); }
+  .pka-node-title { font-size: .875rem; font-weight: 600; color: #262626; }
+  .pka-node-sub { font-size: .6875rem; color: #737373; margin-top: 4px; }
+  .pka-connector-wrap { display: flex; justify-content: center; }
+  .pka-connector { width: 100%; max-width: 540px; height: 32px; overflow: visible; }
   .pka-connector line { stroke-dasharray: 4 3; animation: dash 20s linear infinite; }
   @keyframes dash { to { stroke-dashoffset: -100; } }
+  .pka-orch-row { display: flex; justify-content: center; }
+  .pka-orch-node { padding: 16px 28px; border-radius: 12px; background: #171717; border: 1px solid #262626; text-align: center; }
+  .pka-orch-eyebrow { font-size: .625rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #a3a3a3; margin-bottom: 4px; }
+  .pka-orch-title { font-size: 1rem; font-weight: 700; color: #fff; }
+  .pka-orch-sub { font-size: .6875rem; color: #a3a3a3; margin-top: 2px; }
+  .pka-tool-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .pka-tool-pill { padding: 6px 12px; font-size: .6875rem; font-weight: 500; border-radius: 999px; border: 1px solid #e5e5e5; background: #fff; color: #525252; }
+  .pka-detail {
+    margin-top: 24px; border-radius: 12px; border: 1px dashed #e5e5e5; background: #fafafa;
+    padding: 16px; font-size: .875rem; color: #525252; transition: opacity 0.2s ease, max-height 0.3s ease;
+  }
+  .pka-detail-label { font-weight: 600; color: #262626; }
 </style>
 
-<div class="not-prose pka-diagram my-10">
+<div class="pka-diagram">
 
   <!-- Context row -->
-  <p class="text-[10px] font-semibold tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-500 text-center mb-4">Three contexts, one orchestration layer</p>
-  <div class="flex gap-3 justify-center mb-2">
-    <button class="pka-node flex-1 max-w-[168px] p-4 rounded-xl border border-violet-200 dark:border-violet-800 bg-white dark:bg-neutral-900 text-left" data-context="work" onclick="selectContext(this)">
-      <div class="text-[10px] font-semibold tracking-widest uppercase text-violet-500 dark:text-violet-400 mb-1">Work</div>
-      <div class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">NACC · UW</div>
-      <div class="text-[11px] text-neutral-500 mt-1">Research, comms, directory</div>
+  <p class="pka-context-label">Three contexts, one orchestration layer</p>
+  <div class="pka-context-row">
+    <button class="pka-node" data-context="work" onclick="selectContext(this)">
+      <div class="pka-node-eyebrow">Work</div>
+      <div class="pka-node-title">NACC · UW</div>
+      <div class="pka-node-sub">Research, comms, directory</div>
     </button>
-    <button class="pka-node flex-1 max-w-[168px] p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-white dark:bg-neutral-900 text-left" data-context="ventures" onclick="selectContext(this)">
-      <div class="text-[10px] font-semibold tracking-widest uppercase text-amber-500 dark:text-amber-400 mb-1">Ventures</div>
-      <div class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">9 Projects</div>
-      <div class="text-[11px] text-neutral-500 mt-1">Apps, sites, content engine</div>
+    <button class="pka-node" data-context="ventures" onclick="selectContext(this)">
+      <div class="pka-node-eyebrow">Ventures</div>
+      <div class="pka-node-title">9 Projects</div>
+      <div class="pka-node-sub">Apps, sites, content engine</div>
     </button>
-    <button class="pka-node flex-1 max-w-[168px] p-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-neutral-900 text-left" data-context="life" onclick="selectContext(this)">
-      <div class="text-[10px] font-semibold tracking-widest uppercase text-emerald-500 dark:text-emerald-400 mb-1">Life</div>
-      <div class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">Personal</div>
-      <div class="text-[11px] text-neutral-500 mt-1">Family, finances, health</div>
+    <button class="pka-node" data-context="life" onclick="selectContext(this)">
+      <div class="pka-node-eyebrow">Life</div>
+      <div class="pka-node-title">Personal</div>
+      <div class="pka-node-sub">Family, finances, health</div>
     </button>
   </div>
 
   <!-- Connectors down to center -->
-  <div class="flex justify-center">
-    <svg class="pka-connector w-full max-w-[540px] h-8 overflow-visible" viewBox="0 0 540 32" fill="none">
+  <div class="pka-connector-wrap">
+    <svg class="pka-connector" viewBox="0 0 540 32" fill="none">
       <line x1="90" y1="0" x2="270" y2="32" stroke="rgb(167 139 250)" stroke-width="1.5"/>
       <line x1="270" y1="0" x2="270" y2="32" stroke="rgb(251 191 36)" stroke-width="1.5"/>
       <line x1="450" y1="0" x2="270" y2="32" stroke="rgb(52 211 153)" stroke-width="1.5"/>
@@ -65,17 +92,17 @@ This is the system I built to replace the team I used to assemble by hand. It sp
   </div>
 
   <!-- Central orchestration node -->
-  <div class="flex justify-center mb-0">
-    <div class="px-7 py-4 rounded-xl bg-neutral-900 dark:bg-white border border-neutral-800 dark:border-neutral-200 text-center">
-      <div class="text-[10px] font-semibold tracking-widest uppercase text-neutral-400 dark:text-neutral-500 mb-1">Orchestration layer</div>
-      <div class="text-base font-bold text-white dark:text-neutral-900">Claude Code + PKA System</div>
-      <div class="text-[11px] text-neutral-400 dark:text-neutral-600 mt-0.5">SOUL.md · MEMORY.md · hot.md · thread files · skills</div>
+  <div class="pka-orch-row">
+    <div class="pka-orch-node">
+      <div class="pka-orch-eyebrow">Orchestration layer</div>
+      <div class="pka-orch-title">Claude Code + PKA System</div>
+      <div class="pka-orch-sub">SOUL.md · MEMORY.md · hot.md · thread files · skills</div>
     </div>
   </div>
 
   <!-- Connectors down to tools -->
-  <div class="flex justify-center">
-    <svg class="pka-connector w-full max-w-[540px] h-8 overflow-visible" viewBox="0 0 540 32" fill="none">
+  <div class="pka-connector-wrap">
+    <svg class="pka-connector" viewBox="0 0 540 32" fill="none">
       <line x1="270" y1="0" x2="90" y2="32" stroke="rgb(163 163 163)" stroke-width="1.5"/>
       <line x1="270" y1="0" x2="190" y2="32" stroke="rgb(163 163 163)" stroke-width="1.5"/>
       <line x1="270" y1="0" x2="270" y2="32" stroke="rgb(163 163 163)" stroke-width="1.5"/>
@@ -85,20 +112,20 @@ This is the system I built to replace the team I used to assemble by hand. It sp
   </div>
 
   <!-- Tool row -->
-  <div class="flex flex-wrap gap-2 justify-center">
-    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">OpenBrain (Postgres)</span>
-    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">n8n Automation</span>
-    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Vikunja Tasks</span>
-    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Granola</span>
-    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Obsidian</span>
-    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Asana</span>
-    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Google Workspace</span>
-    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Wispr Flow</span>
-    <span class="px-3 py-1.5 text-[11px] font-medium rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400">Kip (Telegram)</span>
+  <div class="pka-tool-row">
+    <span class="pka-tool-pill">OpenBrain (Postgres)</span>
+    <span class="pka-tool-pill">n8n Automation</span>
+    <span class="pka-tool-pill">Vikunja Tasks</span>
+    <span class="pka-tool-pill">Granola</span>
+    <span class="pka-tool-pill">Obsidian</span>
+    <span class="pka-tool-pill">Asana</span>
+    <span class="pka-tool-pill">Google Workspace</span>
+    <span class="pka-tool-pill">Wispr Flow</span>
+    <span class="pka-tool-pill">Kip (Telegram)</span>
   </div>
 
   <!-- Context detail panel -->
-  <div id="pka-detail" class="pka-detail mt-6 rounded-xl border border-dashed border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50 p-4 text-sm text-neutral-600 dark:text-neutral-400 hidden">
+  <div id="pka-detail" class="pka-detail hidden">
     <div id="pka-detail-content"></div>
   </div>
 
@@ -127,7 +154,7 @@ function selectContext(el) {
   const detail = contextDetails[ctx];
   const panel = document.getElementById('pka-detail');
   const content = document.getElementById('pka-detail-content');
-  content.innerHTML = '<span class="font-semibold text-neutral-800 dark:text-neutral-200">' + detail.label + '</span><br/>' + detail.detail;
+  content.innerHTML = '<span class="pka-detail-label">' + detail.label + '</span><br/>' + detail.detail;
   panel.classList.remove('hidden');
 }
 </script>

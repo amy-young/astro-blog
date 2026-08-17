@@ -844,7 +844,16 @@
       overflow: hidden; background: var(--accent-tint);
       border-bottom: 1px solid var(--border);
     }
-    .pj-media img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center top; }
+    /* height: auto is load-bearing -- same HTML-attribute-vs-aspect-ratio conflict as
+       .ab-portrait. Each <img> here carries width/height attributes (e.g. 640x360), which
+       pins height at that literal value unless CSS height is explicitly auto; aspect-ratio
+       never got a chance to compute it, so object-fit: cover was cropping into whatever box
+       the attribute produced instead of a true 16:9 one -- on the travel/package-tracker
+       hero images (both wider than 16:9) that cut off most of the mockup's width.
+       object-fit switched cover -> contain on the same fix: a fixed 16:9 crop can't fit
+       both a 2.1:1 and a 1.7:1 source without cropping one of them regardless of the height
+       bug, so this shows the whole image letterboxed on --accent-tint (Amy, 2026-08-17). */
+    .pj-media img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; }
     /* Concept work is labelled on the image itself. The mockups are built as live product
        marketing (signup CTAs, beta badges), so the frame has to say what it actually is. */
     .pj-media-cap {
@@ -912,7 +921,12 @@
 
     .ab-rail { display: grid; gap: clamp(20px, 2.6vw, 30px); justify-items: end; text-align: right; padding-bottom: 8px; }
     @media (max-width: 860px) { .ab-rail { justify-items: start; text-align: left; padding-bottom: 0; } }
-    .ab-portrait { width: 100%; max-width: 320px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; }
+    /* height: auto is load-bearing, not decorative. The <img> carries HTML width/height
+       attributes (800x800); without an explicit CSS height, that attribute pins height at
+       800px and aspect-ratio never gets a chance to compute it, since aspect-ratio only
+       fills in a dimension that's truly auto. object-fit: cover then crops the mismatched
+       box into a tall sliver instead of a square. */
+    .ab-portrait { width: 100%; max-width: 320px; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; }
     .ab-focus { display: grid; gap: 7px; font-size: .845rem; font-weight: 700; color: var(--ink); }
     .ab-focus span::before { content: "+"; color: var(--accent); margin-right: 7px; }
     .ab-where { font-size: clamp(1.5rem, 2.4vw, 2.1rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
@@ -988,7 +1002,13 @@
     .bg-layout { display: grid; grid-template-columns: minmax(0, .62fr) minmax(0, 1.5fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
     @media (max-width: 760px) { .bg-layout { grid-template-columns: 1fr; } }
     .bg-figure { margin: 0; display: grid; gap: 12px; }
-    .bg-figure img { width: 100%; border-radius: 14px; }
+    /* height: auto is load-bearing -- same HTML-attribute-vs-aspect-ratio conflict as
+       .ab-portrait, but worse here: this rule has no object-fit at all, and object-fit's
+       initial value is fill. With height pinned at the img's height="1455" attribute and
+       width scaled down to the column's ~340px, the image was being stretched to fill a
+       340x1455 box instead of keeping its native 900:1455 ratio -- an actual squash, not
+       just an oversized crop. */
+    .bg-figure img { width: 100%; height: auto; border-radius: 14px; }
     .bg-cap { font-size: .78rem; line-height: 1.55; color: var(--ink-3); }
 
     /* =============================================
@@ -1021,7 +1041,10 @@
     .rs-hero .page-head { margin-bottom: 0; }
     /* Dropped so the photo sits level with the headline rather than the eyebrow above it. */
     .rs-portrait { margin: clamp(28px, 3.2vw, 44px) 0 0; width: 100%; max-width: 220px; }
-    .rs-portrait img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; }
+    /* height: auto is load-bearing -- same HTML-attribute-vs-aspect-ratio conflict as
+       .ab-portrait (see that comment). The <img> carries width/height="1024", which pins
+       height at 1024px unless CSS height is explicitly auto. */
+    .rs-portrait img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; }
 
     @media (max-width: 860px) {
       .rs-hero { grid-template-columns: 1fr; }
