@@ -2,7 +2,7 @@
 layout: ../../layouts/post.astro
 title: What Does It Take to Build an Agentic System, and Where Are Teams Getting Stuck?
 description: The AI agent stack has a five-layer reference architecture now, and most teams only build the first two. Where the other three layers go missing, and what it costs when they do.
-dateFormatted: Aug 16, 2026
+dateFormatted: Jul 20, 2026
 tags: ["AI Agents", "Agent Architecture", "AI Training", "Evaluation"]
 heroImage: /assets/images/posts/5-agentic-layers.webp
 ---

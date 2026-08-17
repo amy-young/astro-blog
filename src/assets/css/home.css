@@ -1112,6 +1112,27 @@
     .rs-membership-mark { color: var(--accent-bdr); font-size: .688rem; }
 
     /* =============================================
+       WRITING INDEX (/posts) — rebuilt 2026-08-16
+       Replaces the Aria/Tailwind build. .page-head, .blog-grid and .blog-card are reused
+       verbatim (already shared with the homepage Writing section). The featured post has
+       no equivalent component: .feat-card forces a two-column image grid and every real
+       post here is currently text-only, so this is a new full-width, text-forward card.
+       Its footer row reuses .post-date / .post-tags / .tag from the article header block
+       below and .pj-go from /projects, rather than inventing three more one-off classes.
+    ============================================= */
+    .wr-feat {
+      display: block; border: 1px solid var(--border); border-radius: 20px;
+      padding: clamp(28px, 4vw, 48px); background: var(--bg-white);
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+    a.wr-feat:hover { border-color: var(--accent-bdr); box-shadow: var(--sh-md); }
+    a.wr-feat:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    a.wr-feat:hover .pj-go { gap: 11px; }
+    /* .feat-desc's 36ch measure assumes a half-width column beside an image; this card
+       is full width, so it gets its own wider measure rather than reusing that class. */
+    .wr-feat-desc { font-size: .95rem; color: var(--ink-3); line-height: 1.65; max-width: 62ch; margin: 0 0 24px; }
+
+    /* =============================================
        ARTICLE BODY (2026-08-14)
        The long-form typographic scale. home.css had none before this: every page on the
        design system is composed of cards and section headers, never prose. Tailwind's

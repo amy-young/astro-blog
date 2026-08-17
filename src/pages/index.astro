@@ -1,5 +1,16 @@
 ---
 import Layout from "../layouts/home.astro";
+import { getCollection } from "astro:content";
+
+function parseDate(dateStr: string) {
+  const [month, day, year] = dateStr.split(" ");
+  return new Date(`${month} ${parseInt(day)}, ${year}`);
+}
+
+const homeWriting = (await getCollection("post"))
+  .map((post) => ({ ...post, date: parseDate(post.data.dateFormatted) }))
+  .sort((a, b) => b.date.getTime() - a.date.getTime())
+  .slice(0, 3);
 ---
 
 <Layout>
@@ -197,9 +208,10 @@ import Layout from "../layouts/home.astro";
        Real data recovered from the 2026-07-14 export: M.S. Information Management, UW (2024);
        B.A. Sociology & Statistics, University of Minnesota (1991); NIA Certificate of
        Appreciation, UDS v4 (2021); Board Member, Delridge Neighborhood Development Assn (2015-2026). */}
-  {/* WRITING — rebuilt 2026-08-04 at three posts per Amy's reduction from six.
-       !! THE THREE CARDS BELOW ARE PLACEHOLDERS. No real posts exist yet: the Astro repo
-       has one post and it is the Aria theme's demo. DO NOT SHIP until these are written. */}
+  {/* WRITING — rebuilt 2026-08-16 with real posts, replacing the DO NOT SHIP placeholder
+       cards. Renders whatever's real (three, currently) and nothing else -- same call as
+       /projects: a short row of genuine work reads as early-stage, a fake card reads as
+       padding. */}
   <section class="sec sec-rule">
     <div class="wrap">
       {/* The "All Articles" pill moved below the grid as a text link 2026-08-06: it was
@@ -210,9 +222,18 @@ import Layout from "../layouts/home.astro";
         <div class="sh-title">What I'm reading, building, and thinking about.</div>
       </div>
       <div class="blog-grid">
-        <div class="blog-card rv"><div class="blog-img"><img src="/assets/images/home/24bf0b3f-47ce-4cd3-8770-1e435c3bb477.jpg" alt=""></div><div class="blog-body"><div class="blog-cat">Placeholder</div><div class="blog-title">Post one — to be written</div><div class="blog-meta">Draft in progress</div></div></div>
-        <div class="blog-card rv"><div class="blog-img"><img src="/assets/images/home/43cd1f62-278a-457f-8924-c5763c2daa3b.png" alt=""></div><div class="blog-body"><div class="blog-cat">Placeholder</div><div class="blog-title">Post two — to be written</div><div class="blog-meta">Draft in progress</div></div></div>
-        <div class="blog-card rv"><div class="blog-img"><img src="/assets/images/home/7b30060b-3a44-4f13-a886-9404eb6da98a.jpg" alt=""></div><div class="blog-body"><div class="blog-cat">Placeholder</div><div class="blog-title">Post three — to be written</div><div class="blog-meta">Draft in progress</div></div></div>
+        {homeWriting.map((post) => (
+          <a href={`/post/${post.slug}`} class="blog-card rv">
+            {post.data.heroImage && (
+              <div class="blog-img"><img src={post.data.heroImage} alt="" loading="lazy" decoding="async" width="640" height="360" /></div>
+            )}
+            <div class="blog-body">
+              {post.data.tags && post.data.tags[0] && <div class="blog-cat">{post.data.tags[0]}</div>}
+              <div class="blog-title">{post.data.title}</div>
+              <div class="blog-meta">{post.data.dateFormatted}</div>
+            </div>
+          </a>
+        ))}
       </div>
       <a class="sec-more rv" href="/posts">See all articles <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
