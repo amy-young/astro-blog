@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/post.astro
 title: The system that knows you
-description: A system I built to keep up with AI has turned into something that works less like software and more like a colleague. Here's the architecture, and what it takes to build one yourself.
+description: A system I built to keep up with AI has turned into something that works less like software and more like a colleague. Here's the architecture, and ideas for building one yourself.
 dateFormatted: Aug 3, 2026
 tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
 heroImage: /assets/images/posts/pka-system-pipeline.webp
