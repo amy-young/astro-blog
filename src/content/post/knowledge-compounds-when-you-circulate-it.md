@@ -18,4 +18,4 @@ And while AI is a big part of what I write about, it's not the whole picture. I'
 
 If something here is useful to you, that's the point. If it sparks a conversation, even better.
 
-If you want to talk about any of this, reach me at [amy@amyyoung.me](mailto:amy@amyyoung.me).
+If you want to talk about any of this, [contact me](#contact).
