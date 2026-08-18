@@ -4,6 +4,7 @@ title: Put a VPS in your stack. Here's what mine looks like.
 description: Project management, automation, and memory don't have to live in five different companies' databases. Renting one small server and running the open-source version of each tool yourself is less work than it sounds, and here's the stack I actually run.
 dateFormatted: Aug 17, 2026
 tags: ["Self-Hosted Infrastructure", "VPS", "PKA System", "AI Agents", "Docker"]
+heroImage: /assets/images/projects/vps-lab-hero.webp
 ---
 
 A personal AI operating system needs a handful of things running all the time: somewhere to track tasks, somewhere automations fire on a schedule, somewhere a knowledge base lives that's more than a folder of notes, somewhere an agent like Claude Code can keep working when the laptop is closed. The easy path is a subscription for each: a task app, an automation platform, a bookmarking tool, a notes app. It's convenient, and it adds up to your workflows and your history scattered across five companies' databases, none of which talk to each other, all billing monthly.
@@ -40,10 +41,12 @@ The maintenance is real, but it's more mundane than dramatic. Caddy's own config
 
 Security took less work than I expected, mostly because the same instinct that makes a system easy to reason about also makes it hard to break into. Caddy is the only thing that ever answers on port 80 or 443. Every internal service is bound to localhost behind it. The one exception, direct database access, is restricted by firewall rule to my home IP specifically. A weekly cron job runs a security audit and emails me the result. For remote access, I use Tailscale instead of exposing SSH to the open internet, which puts my VPS, my desktop, and my laptop on one private network, so managing the server while traveling never means opening a port for it.
 
-Backups are the one place I'm still behind, and I'd rather say so than round it up. I have Docker Compose files that reproduce every service, and version control on everything that isn't the data itself. I do not have a tested restore path if that database volume disappeared tomorrow. That's the next thing to build, not a thing already solved, and it's the honest answer to anyone asking whether this is a finished project.
-
 ## If you're thinking about adding one
 
-Start with whichever tool you're already paying for and resent the most. For me it was task management sitting inside a work account I didn't control. Pick the open-source equivalent, a small VPS, and a reverse proxy, and you have a working stack in a weekend, not a platform engineering project.
+Start with whichever tool you're already paying for and resent the most.
 
-The point isn't to run everything yourself. It's to own the parts of your system that matter enough to outlast whichever company happens to be hosting them this year.
+Mine was project management, tied to a work account I didn't control, another app I didn't want to pay for.
+
+One small VPS and a reverse proxy later, it's gone. That same server hosts my websites and runs n8n, the workflow layer behind my AI operating system.
+
+A weekend of setup, not a platform engineering project.

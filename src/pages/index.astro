@@ -175,7 +175,10 @@ const homeWriting = (await getCollection("post"))
            2026-08-17: the hero image is dark on its own, so the text side went light (tint
            gradient) as a counterweight instead of doubling down on dark. Card-level background
            (.feat-card-dark, below) stays dark regardless — that's tuned to blend with the dark
-           image's own letterbox slack, independent of the text box's theme. */}
+           image's own letterbox slack, independent of the text box's theme.
+           VPS Lab got the same treatment 2026-08-18 once its own image became a dark hero
+           graphic too — both cards now use the same "dark image, light text" formula rather
+           than being a contrasting light/dark pair. */}
       <div class="feat-card feat-card-dark rv">
         <div class="feat-img-wrap"><img src="/assets/images/projects/pka-system-hero.webp" alt="Personal Knowledge System"></div>
         <div class="feat-body feat-body-tint">
@@ -185,22 +188,24 @@ const homeWriting = (await getCollection("post"))
           <a href="/project/personal-knowledge-system" class="feat-link">Take it apart <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
         </div>
       </div>
-      <div class="feat-card rv">
+      <div class="feat-card feat-card-dark rv">
         {/* Was "ADRD Researcher Community" until 2026-08-06. That label was wrong twice
              over: it implied a Discourse-style community platform Amy never ran, and it
              was conflating the NACC Directory with the ADRD funding platform. Amy's call
-             was to feature the VPS lab here instead. Image is the one the old Portfolio
-             grid had already chosen for this project.
-             Text-box theme flipped 2026-08-17 to dark, alongside PKA's flip to light —
-             the two cards now read as a light/dark pair rather than both being light.
-             Card-level background stays default (light) since the photo itself is light-toned. */}
-        <div class="feat-body feat-body-dark">
+             was to feature the VPS lab here instead.
+             Image replaced 2026-08-18 (was a light stock photo, now a dark-navy hero
+             graphic matching PKA's style) — text-box theme flipped from dark back to
+             .feat-body-tint (light) to match, same "dark image needs a light counterweight"
+             call as PKA. .feat-card-dark added so the card-level background (behind the
+             image's letterbox slack) matches the new dark image instead of the old default
+             light background, which was tuned for the light photo. */}
+        <div class="feat-body feat-body-tint">
           <div class="feat-cat">Infrastructure · Shipped</div>
           <div class="feat-title">Self-Hosted VPS Lab</div>
           <div class="feat-desc">Docker and Caddy on a personal VPS: Postgres with pgvector, n8n automation, Vikunja, KaraKeep, and both of my sites, behind Tailscale.</div>
           <a href="/projects" class="feat-link">See the stack <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
         </div>
-        <div class="feat-img-wrap"><img src="/assets/images/home/2a46598f-e89b-4439-84a3-61d8d9a5c803.jpg" alt="Self-Hosted VPS Lab"></div>
+        <div class="feat-img-wrap"><img src="/assets/images/projects/vps-lab-hero.webp" alt="Self-Hosted VPS Lab"></div>
       </div>
     </div>
   </section>
