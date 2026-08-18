@@ -171,12 +171,14 @@ const homeWriting = (await getCollection("post"))
       <a class="btn btn-outline" href="/projects">View All Projects</a>
     </div>
     <div class="feat-stack">
-      {/* PKA leads (Amy's call 2026-08-06), image left / copy right, on the dark body.
-           Layout order settled after trying both: image-left reads better than the
-           original copy-left, and the dark treatment stays on PKA. */}
+      {/* PKA leads (Amy's call 2026-08-06), image left / copy right. Text-box theme flipped
+           2026-08-17: the hero image is dark on its own, so the text side went light (tint
+           gradient) as a counterweight instead of doubling down on dark. Card-level background
+           (.feat-card-dark, below) stays dark regardless — that's tuned to blend with the dark
+           image's own letterbox slack, independent of the text box's theme. */}
       <div class="feat-card feat-card-dark rv">
         <div class="feat-img-wrap"><img src="/assets/images/projects/pka-system-hero.webp" alt="Personal Knowledge System"></div>
-        <div class="feat-body feat-body-dark">
+        <div class="feat-body feat-body-tint">
           <div class="feat-cat">Knowledge · Building</div>
           <div class="feat-title">Personal Knowledge System</div>
           <div class="feat-desc">A system for capturing, organizing, and surfacing knowledge across research, projects, and interests.</div>
@@ -188,8 +190,11 @@ const homeWriting = (await getCollection("post"))
              over: it implied a Discourse-style community platform Amy never ran, and it
              was conflating the NACC Directory with the ADRD funding platform. Amy's call
              was to feature the VPS lab here instead. Image is the one the old Portfolio
-             grid had already chosen for this project. */}
-        <div class="feat-body">
+             grid had already chosen for this project.
+             Text-box theme flipped 2026-08-17 to dark, alongside PKA's flip to light —
+             the two cards now read as a light/dark pair rather than both being light.
+             Card-level background stays default (light) since the photo itself is light-toned. */}
+        <div class="feat-body feat-body-dark">
           <div class="feat-cat">Infrastructure · Shipped</div>
           <div class="feat-title">Self-Hosted VPS Lab</div>
           <div class="feat-desc">Docker and Caddy on a personal VPS: Postgres with pgvector, n8n automation, Vikunja, KaraKeep, and both of my sites, behind Tailscale.</div>

@@ -438,6 +438,11 @@
     .feat-card:hover .feat-img-wrap img { transform: scale(1.05); }
     .feat-body { padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; justify-content: center; background: var(--bg-white); }
     .feat-body-dark { background: var(--dark); }
+    /* Near-white with a faint purple gradient — for a card whose image is already dark,
+       so the text side reads as a deliberate light counterweight rather than plain white.
+       Default .feat-cat/.feat-title/.feat-desc colors already have the contrast for this
+       (same family as --accent-tint/--accent-wash used elsewhere), no overrides needed. */
+    .feat-body-tint { background: linear-gradient(135deg, var(--bg-white), var(--accent-tint)); }
     .feat-cat { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
     .feat-body-dark .feat-cat { color: var(--accent-bdr); }
     .feat-title { font-size: clamp(1.3rem, 2vw, 1.75rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; margin-bottom: 12px; }
