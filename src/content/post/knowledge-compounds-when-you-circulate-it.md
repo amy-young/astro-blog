@@ -3,6 +3,7 @@ layout: ../../layouts/post.astro
 title: Knowledge compounds when you circulate it.
 description: Why writing is how I process ideas, who I hope to connect with, and the case for putting knowledge into circulation instead of letting it sit still.
 dateFormatted: Jul 6, 2026
+heroImage: /assets/images/posts/knowledge-compounds-hero.webp
 ---
 
 To share what I'm thinking about, find others who are wrestling with the same questions, and learn together. If something here resonates with you, I'd love to hear from you.
