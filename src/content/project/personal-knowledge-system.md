@@ -6,6 +6,7 @@ status: active
 category: personal
 startDate: "2024"
 tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
+heroImage: /assets/images/projects/pka-system-hero.webp
 ---
 
 This is the system I built to replace the team I used to assemble by hand. It spans three contexts, work, ventures, and life, and it runs on one architecture: capture everything, process it, store it in one place, synthesize it into something readable, and retrieve it at the lowest cost that answers the question. The map below is that architecture, current as of the last verified date at the bottom.
