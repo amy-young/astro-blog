@@ -100,15 +100,21 @@ const isActive = (item: NavItem) =>
 
         <div class="ct-panel" id="ct-panel" hidden>
           <div class="ct-to"><span class="ct-to-k">To</span><span class="ct-to-v">amy@amyyoung.me</span></div>
-          <label class="ct-sr" for="ct-subject">Subject</label>
-          <input class="ct-input" id="ct-subject" type="text" placeholder="Subject">
+          <label class="ct-sr" for="ct-name">Name</label>
+          <input class="ct-input" id="ct-name" type="text" placeholder="Your name" required minlength="2" autocomplete="name">
+          <label class="ct-sr" for="ct-email">Email</label>
+          <input class="ct-input" id="ct-email" type="email" placeholder="Your email" required autocomplete="email">
           <label class="ct-sr" for="ct-body">Message</label>
-          <textarea class="ct-textarea" id="ct-body" rows="5" placeholder="Your message..."></textarea>
+          <textarea class="ct-textarea" id="ct-body" rows="5" placeholder="Your message..." required minlength="20"></textarea>
+          {/* Honeypot — off-screen, not display:none, so bots that skip hidden fields
+               still fill it in; aria-hidden/tabindex keep it out of AT and keyboard flow.
+               The server drops anything submitted with this field non-empty. */}
+          <input class="ct-hp" id="ct-company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="ct-panel-foot">
             <button class="ct-send" id="ct-send" type="button">Send <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
             <button class="ct-cancel" id="ct-cancel" type="button">Cancel</button>
           </div>
-          <p class="ct-note">This opens the message in your own email app. Nothing is sent from this page.</p>
+          <p class="ct-note" id="ct-status">I'll reply from amy@amyyoung.me.</p>
         </div>
       </div>
 
@@ -177,21 +183,23 @@ const nav = document.getElementById('nav');
       window.addEventListener('resize', () => { if (window.innerWidth > 760) setMenu(false); }, { passive: true });
     }
 
-    // Contact compose panel. Hands the message to the visitor's own mail client via a
-    // mailto: — the same approach the About page uses, so no form backend is involved
-    // and nothing is submitted from this page.
+    // Contact compose panel. Posts directly to the contact-api service behind Caddy
+    // (same-origin at /api/contact, so no CORS handling is needed here).
     const ctToggle = document.getElementById('ct-toggle');
     const ctPanel = document.getElementById('ct-panel');
     const ctSend = document.getElementById('ct-send');
     const ctCancel = document.getElementById('ct-cancel');
-    const ctSubject = document.getElementById('ct-subject');
+    const ctName = document.getElementById('ct-name');
+    const ctEmail = document.getElementById('ct-email');
     const ctBody = document.getElementById('ct-body');
+    const ctCompany = document.getElementById('ct-company');
+    const ctStatus = document.getElementById('ct-status');
 
     if (ctToggle && ctPanel) {
       const setCompose = (open: boolean) => {
         ctPanel.hidden = !open;
         ctToggle.setAttribute('aria-expanded', String(open));
-        if (open && ctSubject instanceof HTMLInputElement) ctSubject.focus();
+        if (open && ctName instanceof HTMLInputElement) ctName.focus();
       };
       // !! because Astro types HTMLElement.hidden as string | boolean, not boolean.
       ctToggle.addEventListener('click', () => setCompose(!!ctPanel.hidden));
@@ -199,12 +207,38 @@ const nav = document.getElementById('nav');
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !ctPanel.hidden) { setCompose(false); ctToggle.focus(); }
       });
-      ctSend?.addEventListener('click', () => {
-        const subject = ctSubject instanceof HTMLInputElement ? ctSubject.value : '';
-        const body = ctBody instanceof HTMLTextAreaElement ? ctBody.value : '';
-        window.location.href =
-          'mailto:amy@amyyoung.me?subject=' + encodeURIComponent(subject) +
-          '&body=' + encodeURIComponent(body);
+      ctSend?.addEventListener('click', async () => {
+        if (!(ctName instanceof HTMLInputElement) || !(ctEmail instanceof HTMLInputElement) ||
+            !(ctBody instanceof HTMLTextAreaElement) || !(ctSend instanceof HTMLButtonElement)) return;
+        if (!ctName.reportValidity() || !ctEmail.reportValidity() || !ctBody.reportValidity()) return;
+
+        ctSend.disabled = true;
+        if (ctStatus) ctStatus.textContent = 'Sending…';
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: ctName.value,
+              email: ctEmail.value,
+              message: ctBody.value,
+              company: ctCompany instanceof HTMLInputElement ? ctCompany.value : '',
+            }),
+          });
+          const data = await res.json();
+          if (res.ok && data.ok) {
+            if (ctStatus) ctStatus.textContent = "Sent — I'll reply from amy@amyyoung.me.";
+            ctName.value = ''; ctEmail.value = ''; ctBody.value = '';
+          } else if (res.status === 429) {
+            if (ctStatus) ctStatus.textContent = 'Too many messages sent — try again in a few minutes.';
+          } else {
+            if (ctStatus) ctStatus.textContent = "Something went wrong — try again, or email amy@amyyoung.me directly.";
+          }
+        } catch {
+          if (ctStatus) ctStatus.textContent = "Something went wrong — try again, or email amy@amyyoung.me directly.";
+        } finally {
+          ctSend.disabled = false;
+        }
       });
     }
 
