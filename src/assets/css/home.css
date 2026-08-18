@@ -421,20 +421,19 @@
        FEATURED SHOWCASE
     ============================================= */
     .feat-stack { display: flex; flex-direction: column; gap: 20px; }
-    .feat-card { display: grid; grid-template-columns: 1fr 1fr; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); min-height: 360px; }
+    .feat-card { display: grid; grid-template-columns: 1fr 1fr; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); min-height: 360px; background: var(--bg-white); }
     @media (max-width: 760px) { .feat-card { grid-template-columns: 1fr; } }
-    /* aspect-ratio (not min-height) so the box tracks the image's actual ratio instead of
-       stretching to match the text column's height — the same crop bug found and fixed on
-       .wr-feat-img-wrap 2026-08-17 (see ventures/intelligence/decisions in the PKA repo). */
-    /* aspect-ratio (not min-height) so the box tracks the image's actual ratio instead of
-       stretching to match the text column's height — the same crop bug found and fixed on
-       .wr-feat-img-wrap 2026-08-17. Locking the ratio means a text column taller than the
-       image's 16:9 height leaves slack space above/below (align-self: center) rather than
-       cropping — background matches the card's own theme so that slack reads as intentional
-       framing, not a stray white gap (default: page white, matches the light card as-is;
-       .feat-img-wrap-dark overrides for cards paired with .feat-body-dark). */
-    .feat-img-wrap { overflow: hidden; aspect-ratio: 16/9; align-self: center; background: var(--bg-white); }
-    .feat-img-wrap-dark { background: var(--dark); }
+    /* .feat-card-dark: for cards paired with .feat-body-dark. aspect-ratio (below, not
+       min-height) keeps .feat-img-wrap from cropping the image, but align-self: center means
+       the wrap's own box only covers its aspect-ratio height (~301px) — when the text column
+       needs more height than that (it always does, ~358-401px here), the leftover space is
+       outside the wrap's box entirely. Painting that background ON .feat-img-wrap (tried first)
+       never reached it: the slack is .feat-card's own background showing through, not the
+       wrap's, because align-self: center doesn't stretch the item to fill the cell. Fix is on
+       .feat-card itself, confirmed via getComputedStyle — it was rgba(0,0,0,0) (transparent),
+       falling through to the white page behind a dark-themed card. */
+    .feat-card-dark { background: var(--dark); }
+    .feat-img-wrap { overflow: hidden; aspect-ratio: 16/9; align-self: center; }
     .feat-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
     .feat-card:hover .feat-img-wrap img { transform: scale(1.05); }
     .feat-body { padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; justify-content: center; background: var(--bg-white); }
