@@ -4,7 +4,7 @@ title: Put a VPS in your stack. Here's what mine looks like.
 description: Project management, automation, and memory don't have to live in five different companies' databases. Renting one small server and running the open-source version of each tool yourself is less work than it sounds, and here's the stack I actually run.
 dateFormatted: Aug 17, 2026
 tags: ["Self-Hosted Infrastructure", "VPS", "PKA System", "AI Agents", "Docker"]
-heroImage: /assets/images/projects/vps-lab-hero.png
+heroImage: /assets/images/projects/vps-lab-hero.webp
 ---
 
 A personal AI operating system needs a handful of things running all the time: somewhere to track tasks, somewhere automations fire on a schedule, somewhere a knowledge base lives that's more than a folder of notes, somewhere an agent like Claude Code can keep working when the laptop is closed. The easy path is a subscription for each: a task app, an automation platform, a bookmarking tool, a notes app. It's convenient, and it adds up to your workflows and your history scattered across five companies' databases, none of which talk to each other, all billing monthly.

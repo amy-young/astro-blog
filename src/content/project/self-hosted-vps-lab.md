@@ -6,7 +6,7 @@ status: shipped
 category: personal
 startDate: "2026"
 tags: ["Docker", "Caddy", "Self-Hosted", "n8n", "PostgreSQL"]
-heroImage: /assets/images/projects/vps-lab-hero.png
+heroImage: /assets/images/projects/vps-lab-hero.webp
 ---
 
 ## What it actually is
