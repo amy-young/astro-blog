@@ -99,7 +99,7 @@ const isActive = (item: NavItem) =>
         </button>
 
         <div class="ct-panel" id="ct-panel" hidden>
-          <div class="ct-to"><span class="ct-to-k">To</span><span class="ct-to-v">amy@amyyoung.me</span></div>
+          <div class="ct-to"><span class="ct-to-k">To</span><span class="ct-to-v">contact@amyyoung.me</span></div>
           <label class="ct-sr" for="ct-name">Name</label>
           <input class="ct-input" id="ct-name" type="text" placeholder="Your name" required minlength="2" autocomplete="name">
           <label class="ct-sr" for="ct-email">Email</label>
@@ -114,7 +114,7 @@ const isActive = (item: NavItem) =>
             <button class="ct-send" id="ct-send" type="button">Send <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
             <button class="ct-cancel" id="ct-cancel" type="button">Cancel</button>
           </div>
-          <p class="ct-note" id="ct-status">I'll reply from amy@amyyoung.me.</p>
+          <p class="ct-note" id="ct-status">I'll reply from contact@amyyoung.me.</p>
         </div>
       </div>
 
@@ -235,7 +235,7 @@ const nav = document.getElementById('nav');
           });
           const data = await res.json();
           if (res.ok && data.ok) {
-            if (ctStatus) ctStatus.textContent = "Sent — I'll reply from amy@amyyoung.me.";
+            if (ctStatus) ctStatus.textContent = "Sent — I'll reply from contact@amyyoung.me.";
             ctName.value = ''; ctEmail.value = ''; ctBody.value = '';
           } else if (res.status === 429) {
             if (ctStatus) ctStatus.textContent = 'Too many messages sent — try again in a few minutes.';
