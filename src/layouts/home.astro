@@ -105,7 +105,7 @@ const isActive = (item: NavItem) =>
           <label class="ct-sr" for="ct-email">Email</label>
           <input class="ct-input" id="ct-email" type="email" placeholder="Your email" required autocomplete="email">
           <label class="ct-sr" for="ct-body">Message</label>
-          <textarea class="ct-textarea" id="ct-body" rows="5" placeholder="Your message..." required minlength="20"></textarea>
+          <textarea class="ct-textarea" id="ct-body" rows="5" placeholder="Your message..." required minlength="10"></textarea>
           {/* Honeypot — off-screen, not display:none, so bots that skip hidden fields
                still fill it in; aria-hidden/tabindex keep it out of AT and keyboard flow.
                The server drops anything submitted with this field non-empty. */}
@@ -210,7 +210,15 @@ const nav = document.getElementById('nav');
       ctSend?.addEventListener('click', async () => {
         if (!(ctName instanceof HTMLInputElement) || !(ctEmail instanceof HTMLInputElement) ||
             !(ctBody instanceof HTMLTextAreaElement) || !(ctSend instanceof HTMLButtonElement)) return;
-        if (!ctName.reportValidity() || !ctEmail.reportValidity() || !ctBody.reportValidity()) return;
+        // reportValidity() shows the browser's native tooltip, but that's easy to miss inside
+        // this blurred/glassmorphic panel — always update the status line too so a blocked
+        // submit is never silent (see 2026-08-18: a short test message failed this way with
+        // no visible sign anything had gone wrong).
+        const valid = ctName.reportValidity() && ctEmail.reportValidity() && ctBody.reportValidity();
+        if (!valid) {
+          if (ctStatus) ctStatus.textContent = 'Please check the highlighted field above.';
+          return;
+        }
 
         ctSend.disabled = true;
         if (ctStatus) ctStatus.textContent = 'Sending…';
