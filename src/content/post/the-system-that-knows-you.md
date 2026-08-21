@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/post.astro
 title: The system that knows you
-description: I started building this because I was intrigued by what AI made possible, and inspired by the builders and creators building with it. That interest turned into a system that works less like software and more like a colleague. Here's the architecture, and ideas for building one yourself.
+description: I started building this because I was intrigued by what AI made possible, and inspired by the builders and creators pushing it forward. That interest turned into a system that works less like software and more like a colleague. Here's the architecture, and ideas for building one yourself.
 dateFormatted: Aug 3, 2026
 tags: ["Claude Code", "AI Agents", "Obsidian", "n8n", "Postgres", "Self-hosted"]
 heroImage: /assets/images/posts/pka-system-pipeline.webp
