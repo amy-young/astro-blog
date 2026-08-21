@@ -43,10 +43,10 @@ Security took less work than I expected, mostly because the same instinct that m
 
 ## If you're thinking about adding one
 
-Start with whichever tool you're already paying for and resent the most.
+Start with whichever tool is already costing you the most, whether in money or friction.
 
-Mine was project management, tied to a work account I didn't control, another app I didn't want to pay for.
+For me, that was n8n and Firecrawl, hosting my own websites, and Karakeep, that's what got the system going. From there I added OpenBrain, and eventually a personal project management app that's free to self-host.
 
-One small VPS and a reverse proxy later, it's gone. That same server hosts my websites and runs n8n, the workflow layer behind my AI operating system.
+One small VPS and a reverse proxy later, it all runs in one place, the same server that hosts my websites and runs n8n, the workflow layer behind my AI operating system.
 
-A weekend of setup, not a platform engineering project.
+It ended up being more than a weekend of setup, but I got started over a weekend, and within a few weeks I could already see the value.

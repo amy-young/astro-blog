@@ -24,6 +24,12 @@ import Layout from "../layouts/home.astro";
 //  - YouTube Capture Pipeline ADDED. Link it once github.com/amy-young/youtube-capture-pipeline
 //    is flipped public; it is private as of this writing.
 //
+// Amy's ruling 2026-08-20: Publications Intelligence REMOVED (was card 06). Set aside until
+// Amy has time to work through the development plan — same "not public until ready" rule as
+// the 08-07 removals. The detail page (src/content/project/publications-intelligence.md) and
+// the handoff (handoff/publications-intelligence-project-page/README.md) are left in place,
+// just unlinked — don't delete that work, don't silently re-add the card either.
+//
 // Ordered shipped -> building -> concept, so the page opens on what actually exists.
 
 type Status = "shipped" | "building" | "concept";
@@ -70,11 +76,6 @@ const PROJECTS: Project[] = [
   {
     no: "05", cat: "Education", status: "building", name: "AI Learning Platform", meta: "Concept to MVP",
     desc: "A curriculum and delivery repo for teaching colleagues practical AI agent and automation skills, built from what actually worked in my own practice.",
-  },
-  {
-    no: "06", cat: "Data", status: "building", name: "Publications Intelligence", meta: "Product + Design",
-    desc: "A queryable database of research published using NACC data, with a companion for handling data requests. Postgres and pgvector, with separate public and internal data planes.",
-    url: "/project/publications-intelligence",
   },
   {
     no: "07", cat: "Discovery", status: "concept", name: "ADRD Research Funding Platform", meta: "Product Design",
@@ -163,7 +164,7 @@ const FILTERS: [string, string][] = [
                 <div class="pj-foot">
                   <span class="pj-meta">{p.meta}</span>
                   {p.url && (
-                    <span class="pj-go">Take it apart <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+                    <span class="pj-go">Walk through the build <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
                   )}
                 </div>
               </Tag>
