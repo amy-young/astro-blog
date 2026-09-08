@@ -76,7 +76,7 @@ Two changes, both the same day. The routine now scans before it asks: which proj
 
 Then I re-ran the whole thing against that same Sunday to see whether it actually worked. It surfaced something I would have lost: a drive migration where I'd verified more than 140,000 files, written up in a project file, with no log entry and nothing captured anywhere else.
 
-Noticed, fixed, and tested inside one day. Neither change came from a design session. Both came from one evening where the routine annoyed me enough to go look at why.
+Noticed, fixed, and tested the same day. Neither change came from a design session. Both came from one evening where the routine annoyed me enough to go look at why.
 
 ## A loop running unattended is a loop failing unattended
 
@@ -102,7 +102,7 @@ If you're weighing whether any of this is worth it for one person: I'm always im
 
 Plenty of that work is substantial. I go through other people's repositories regularly and take in whole workflows, or sometimes just the one piece worth having, and standing up a new capability is a different kind of session than fixing a broken one. Both are worth the time. The system isn't small, and it was never meant to be.
 
-What keeps it sustainable is that the pieces are. The useful measure isn't how long a piece took to build, it's how long it takes to fix once you find out it's wrong. The repair I walked through above took one day to notice, fix, and test. Something I'd have to set aside a weekend to diagnose is a different kind of thing to own, however good it looked going in.
+What keeps it sustainable is that the pieces are. The useful measure isn't how long a piece took to build, it's how long it takes to fix once you find out it's wrong. The repair I walked through above fit into the gaps of a day I was already spending on other things. It never became a project, and it never needed to be scheduled. Something I'd have to set aside a weekend to diagnose is a different kind of thing to own, however good it looked going in.
 
 Keep the individual pieces that small and you can keep adding to the system for years without the upkeep ever catching up with you. The improving compounds instead of piling up, which is the difference between a system you maintain and one that gets better every time you touch it.
 
