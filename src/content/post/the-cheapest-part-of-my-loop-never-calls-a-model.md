@@ -8,11 +8,13 @@ tags: ["Loop Engineering", "AI Agents", "PKA System", "Claude Code", "Automation
 
 Loop engineering got its name in June. Boris Cherny, who leads Claude Code at Anthropic, put it plainly: "I don't prompt Claude anymore. I have loops running that prompt Claude and figuring out what to do. My job is to write loops." Addy Osmani, an engineering lead at Google Chrome, wrote [the essay that named the practice](https://addyosmani.com/blog/loop-engineering/) a few days later. The lineage people settled on runs prompt engineering, then context engineering, then harness engineering, then loops: the harness on a timer, spawning helpers, feeding itself.
 
+What's actually in one? Osmani names five building blocks. Automations, which trigger a run and set its pace. Worktrees, isolated copies of a project so parallel runs don't collide. Skills, written-down capabilities an agent can reuse. Plugins and connectors, the hookups to outside tools and data. And sub-agents, helpers that take on subtasks and check each other's work. Underneath all five sits a sixth thing: memory, kept as external state. A markdown file or a board, something that lives outside any single conversation and holds what's done and what's next. The model forgets everything between runs, so that record has to be on disk rather than in the context window. Without it, a loop loses the thread between iterations.
+
 The bill arrived about two months later.
 
 Stanford's Digital Economy Lab ran the first systematic study of what agentic coding actually consumes, and the numbers are not subtle: agentic tasks burn roughly a thousand times as many tokens (the unit everything gets billed in) as ordinary code chat, runs on the identical task vary by up to 30x, and input tokens rather than output tokens drive the cost, because every step re-reads everything that came before it ([Stanford Digital Economy Lab, arXiv 2604.22750](https://arxiv.org/abs/2604.22750)). The finding that should change how people build: accuracy peaks at intermediate cost and then saturates. Spending more on the loop stops buying you results well before it stops buying you tokens.
 
-The engineering critique landed in the same window and it's sharper than the cost one. A loop repeats, so a loop amplifies whatever the harness underneath it got wrong, and as codecentric put it, a loop running unattended is also a loop making mistakes unattended.
+The engineering critique landed in the same window and it's sharper than the cost one. A loop repeats, so a loop amplifies whatever the harness underneath it got wrong, and codecentric makes the point that a loop running unattended is also a loop making mistakes unattended.
 
 I think both critiques are correct. I also think they're an argument for building loops differently, not for skipping them, because the expensive part of a loop and the useful part of a loop are not the same part.
 
