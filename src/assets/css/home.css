@@ -1277,6 +1277,23 @@
     .article-body strong { font-weight: 700; color: var(--ink); }
     .article-body em { font-style: italic; }
 
+    /* The thesis line: a standalone italic paragraph sitting directly under a section
+       header, voicing the reader's question before the section answers it (Blog
+       Architecture, writing/style-guide.md). It was rendering at body size, body weight,
+       body colour AND equal space above and below, so it dissolved into the answer that
+       follows instead of reading as its own tier. Sized and weighted to sit between h2
+       and body, then bound to the header by cutting the space above and opening it up
+       below. Used by 3 posts / 10 instances as of 2026-09-08. */
+    .article-body p:has(> em:only-child) {
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--ink);
+      margin-top: .35em;
+      margin-bottom: 1.55em;
+      max-width: 58ch;
+    }
+
     /* Lists. Markdown nests these, so the indent and marker have to survive one level down. */
     .article-body ul, .article-body ol { padding-left: 1.4em; }
     .article-body li { margin-top: .5em; }
