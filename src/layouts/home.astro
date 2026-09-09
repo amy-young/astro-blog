@@ -1,6 +1,33 @@
 ---
 import "../assets/css/home.css";
-const { title = "Amy Young — Researcher, Designer, Builder · Seattle" } = Astro.props;
+
+const SITE_NAME = "Amy Young";
+const DEFAULT_DESC =
+  "Amy Young works at the intersection of data, product, and communications. Field notes on building AI systems, plus the projects behind them.";
+
+const {
+  title = "Amy Young — Researcher, Designer, Builder · Seattle",
+  // Social/SEO metadata. Added 2026-09-09: before this the <head> carried only charset,
+  // viewport and <title>, so pasting any URL into LinkedIn or Slack produced a bare link
+  // with no image and no blurb, and Google had no snippet to work with. Every consumer
+  // of this layout already had `description` and `heroImage` in frontmatter; nothing was
+  // being passed through.
+  description = DEFAULT_DESC,
+  // og:title is the card headline. It defaults to the document title, but callers should
+  // pass the bare headline instead: og:site_name already says "Amy Young", so the
+  // " — Amy Young" suffix reads as duplication inside a card.
+  ogTitle,
+  // Site-relative path, e.g. /assets/images/posts/foo-hero.webp
+  image,
+  ogType = "website",
+} = Astro.props;
+
+// Crawlers do not resolve relative paths, so a relative og:image yields no card at all.
+// Astro.site is https://amyyoung.me from astro.config.mjs, overridden to the staging host
+// by deploy-staging.yml's `--site` flag. That means staging previews point at staging and
+// never leak a production URL into a staging card.
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = image ? new URL(image, Astro.site).href : undefined;
 
 // Nav active state, derived from the URL. It used to be hardcoded onto Home in both the
 // desktop and mobile lists, so the underline never left Home no matter what page you were
@@ -45,6 +72,22 @@ const isActive = (item: NavItem) =>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={ogTitle ?? title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta property="og:image:alt" content={ogTitle ?? title} />}
+
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={ogTitle ?? title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
     <link rel="icon" type="image/png" href="/assets/images/ZenCloud-logo-dk-trans.png" />
     <Fragment set:html={import.meta.env.HEADER_INJECT} />
   </head>

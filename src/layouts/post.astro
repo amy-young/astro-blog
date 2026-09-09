@@ -29,7 +29,13 @@ const { frontmatter } = Astro.props as { frontmatter: Frontmatter };
 const { title, description, dateFormatted, tags = [], heroImage, showHeroInArticle = true } = frontmatter;
 ---
 
-<Layout title={`${title} — Amy Young`}>
+<Layout
+  title={`${title} — Amy Young`}
+  ogTitle={title}
+  description={description}
+  image={heroImage}
+  ogType="article"
+>
   <article class="sec">
     <div class="wrap">
 
