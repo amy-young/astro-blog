@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/post.astro
 title: The cheapest part of my loop never calls a model
-description: Loop engineering got named in June, and the bill arrived two months later. Here is one person's daily loop, and the case that the fix for expensive loops is moving the work that never needed a decision out of the model entirely.
+description: "Loop engineering got named in June, and the bill arrived two months later. Here's the loop I actually run every day, and my fix for what makes loops expensive: get everything that never needed a decision off the model."
 dateFormatted: Sep 8, 2026
 tags: ["Loop Engineering", "AI Agents", "PKA System", "Claude Code", "Automation"]
 heroImage: /assets/images/posts/the-cheapest-part-of-my-loop-never-calls-a-model-hero.webp
