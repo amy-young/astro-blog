@@ -29,6 +29,17 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = image ? new URL(image, Astro.site).href : undefined;
 
+// Build-time nudge, not a build failure. `description` does double duty: it is the
+// visible lead paragraph on post and project pages, where length is fine, AND the meta
+// description, where Google cuts the snippet around 155-160 characters. Those two jobs
+// pull in opposite directions, so this is a judgment call and belongs in the build log
+// rather than in the schema. Four of the five posts exceeded 160 when this was added.
+if (description.length > 160) {
+  console.warn(
+    `[meta] description is ${description.length} chars on ${Astro.url.pathname} — search snippets truncate near 160. Front-load the first sentence so the cut still reads.`
+  );
+}
+
 // Nav active state, derived from the URL. It used to be hardcoded onto Home in both the
 // desktop and mobile lists, so the underline never left Home no matter what page you were
 // on (fixed 2026-08-13).
