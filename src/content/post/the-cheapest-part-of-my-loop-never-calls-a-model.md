@@ -4,6 +4,7 @@ title: The cheapest part of my loop never calls a model
 description: Loop engineering got named in June, and the bill arrived two months later. Here is one person's daily loop, and the case that the fix for expensive loops is moving the work that never needed a decision out of the model entirely.
 dateFormatted: Sep 8, 2026
 tags: ["Loop Engineering", "AI Agents", "PKA System", "Claude Code", "Automation"]
+heroImage: /assets/images/posts/the-cheapest-part-of-my-loop-never-calls-a-model-hero.webp
 ---
 
 Loop engineering got its name in June. Boris Cherny, who leads Claude Code at Anthropic, put it plainly: "I don't prompt Claude anymore. I have loops running that prompt Claude and figuring out what to do. My job is to write loops." Addy Osmani, an engineering lead at Google Chrome, wrote [the essay that named the practice](https://addyosmani.com/blog/loop-engineering/) a few days later. The lineage people settled on runs prompt engineering, then context engineering, then harness engineering, then loops: the harness on a timer, spawning helpers, feeding itself.
