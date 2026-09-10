@@ -185,6 +185,69 @@ The AI never loads everything, just what's relevant to the current task.
 
 ---
 
+## Explore the architecture
+
+The map above is the whole system on one page. These three go deeper, and unlike the map they are generated from typed source and machine-checked before they ship, not drawn by hand. Each opens as its own page: press <kbd>?</kbd> for a guide to what you are looking at, <kbd>/</kbd> to find a component, <kbd>P</kbd> to play a short guided tour, and <kbd>F</kbd> for full screen.
+
+<div class="sysmap-grid">
+  <a class="sysmap-card" href="/system-map/01-knowledge-flow.html?theme=light" target="_blank" rel="noopener">
+    <span class="sysmap-num">01</span>
+    <strong>Knowledge flow</strong>
+    <span>Capture through synthesis to retrieval. How a voice note, a dropped PDF, or a meeting ends up as something answerable at zero tokens.</span>
+  </a>
+  <a class="sysmap-card" href="/system-map/02-infrastructure.html?theme=light" target="_blank" rel="noopener">
+    <span class="sysmap-num">02</span>
+    <strong>What runs where</strong>
+    <span>One laptop, one VPS, and the work that happens unattended. Includes what is deliberately kept off the network.</span>
+  </a>
+  <a class="sysmap-card" href="/system-map/03-session-lifecycle.html?theme=light" target="_blank" rel="noopener">
+    <span class="sysmap-num">03</span>
+    <strong>Anatomy of a session</strong>
+    <span>What is already loaded before the first prompt is typed, and the single lane that actually needs a model.</span>
+  </a>
+</div>
+
+<style>
+  /* Cards linking out to the generated Archify diagrams in /public/system-map/.
+     Plain CSS and no dark: variants, same as the .pka-diagram block above -- the site
+     is light-only, and the diagrams are linked with ?theme=light so they match it
+     rather than following the visitor's OS preference. Palette borrowed from
+     .pka-node (violet #ddd6fe border, rgb(139 92 246) accent). */
+  .sysmap-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin: 32px 0;
+  }
+  /* Scoped under .article-body: the prose link rule (home.css ~1268) is 0,2,0 and would
+     otherwise paint these cards accent-coloured, bold AND underlined, since text-decoration
+     inherits from the anchor down into the strong and span. */
+  .article-body .sysmap-card {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 20px; border: 1px solid #ddd6fe; border-radius: 12px;
+    background: #fff; text-decoration: none; color: inherit; font-weight: 400;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .article-body .sysmap-card:hover {
+    transform: translateY(-2px); border-color: rgb(139 92 246); color: inherit;
+    box-shadow: 0 6px 20px rgb(139 92 246 / .12);
+  }
+  .article-body .sysmap-card strong,
+  .article-body .sysmap-card span { text-decoration: none; }
+  .sysmap-num {
+    font-size: .625rem; font-weight: 600; letter-spacing: .18em;
+    text-transform: uppercase; color: rgb(139 92 246);
+  }
+  .article-body .sysmap-card strong { font-size: 1.05rem; line-height: 1.3; font-weight: 700; }
+  .article-body .sysmap-card span:last-child { font-size: .9rem; line-height: 1.5; color: #525252; }
+  /* No kbd styling existed site-wide; these were rendering as bare characters mid-sentence. */
+  .article-body kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8em;
+    padding: 1px 6px; border: 1px solid #ddd6fe; border-bottom-width: 2px;
+    border-radius: 5px; background: #faf9ff; color: #4c1d95; white-space: nowrap;
+  }
+</style>
+
+---
+
 ## The tooling
 
 | Tool | Role |
