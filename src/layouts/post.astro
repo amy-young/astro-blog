@@ -20,13 +20,14 @@ interface Frontmatter {
   title: string;
   description?: string;
   dateFormatted?: string;
+  updatedFormatted?: string;
   tags?: string[];
   heroImage?: string;
   showHeroInArticle?: boolean;
 }
 
 const { frontmatter } = Astro.props as { frontmatter: Frontmatter };
-const { title, description, dateFormatted, tags = [], heroImage, showHeroInArticle = true } = frontmatter;
+const { title, description, dateFormatted, updatedFormatted, tags = [], heroImage, showHeroInArticle = true } = frontmatter;
 ---
 
 <Layout
@@ -50,7 +51,12 @@ const { title, description, dateFormatted, tags = [], heroImage, showHeroInArtic
         {description && <p class="post-desc rv">{description}</p>}
 
         <div class="post-meta rv">
-          {dateFormatted && <time class="post-date">{dateFormatted}</time>}
+          {dateFormatted && (
+            <span class="post-date">
+              <time>{dateFormatted}</time>
+              {updatedFormatted && <> · Updated <time>{updatedFormatted}</time></>}
+            </span>
+          )}
           {tags.length > 0 && (
             <div class="post-tags">
               {tags.map((t) => <span class="tag tag-accent">{t}</span>)}

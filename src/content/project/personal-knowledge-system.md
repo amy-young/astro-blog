@@ -14,7 +14,7 @@ This is the system I built to replace the team I used to assemble by hand. It sp
 <figure class="pka-hero-figure">
   <img src="/assets/images/pka-system-architecture.webp" loading="lazy" width="1536" height="1024" alt="Architecture map of the PKA system, running left to right through five numbered stages. Capture: Granola meeting notes, Drive _INBOX drops, YouTube playlists, the Telegram bot Kip, /venture-research, scratch-today.md and capture_thought. Process: the n8n pipeline, digest mining, /ingest, /panning-for-gold and vault import. Store: three knowledge folders (work, ventures, life) over a Postgres brain running OpenBrain and pgvector, holding facts and entities, relationships, embeddings, full text and metadata. Synthesize: entity extraction, the wiki compiler, content briefs and 122 compiled entity pages. Retrieve: pka_retrieve.py manifest search at zero tokens, MEMORY.md, semantic search via MCP, and hot.md. Below, an infrastructure strip covers the local Windows workstation, the Hostinger VPS running Docker and Caddy, and a retrieval ladder that escalates from hot.md through manifest search to semantic search and entity pages. A feedback loop runs from retrieval back to the brain.">
   <figcaption>
-    The whole system on one page. Source of truth is <code>PKA-ARCHITECTURE.md</code>; the map is re-verified whenever the architecture changes.
+    The whole system on one page, last verified Aug 5, 2026. Source of truth is <code>PKA-ARCHITECTURE.md</code>. The biggest change since: meeting notes now come from Wispr Flow, not Granola.
   </figcaption>
 </figure>
 
@@ -73,7 +73,7 @@ This is the system I built to replace the team I used to assemble by hand. It sp
     </button>
     <button class="pka-node" data-context="ventures" onclick="selectContext(this)">
       <div class="pka-node-eyebrow">Ventures</div>
-      <div class="pka-node-title">9 Projects</div>
+      <div class="pka-node-title">Side projects</div>
       <div class="pka-node-sub">Apps, sites, content engine</div>
     </button>
     <button class="pka-node" data-context="life" onclick="selectContext(this)">
@@ -117,7 +117,6 @@ This is the system I built to replace the team I used to assemble by hand. It sp
     <span class="pka-tool-pill">OpenBrain (Postgres)</span>
     <span class="pka-tool-pill">n8n Automation</span>
     <span class="pka-tool-pill">Vikunja Tasks</span>
-    <span class="pka-tool-pill">Granola</span>
     <span class="pka-tool-pill">Obsidian</span>
     <span class="pka-tool-pill">Asana</span>
     <span class="pka-tool-pill">Google Workspace</span>
@@ -136,11 +135,11 @@ This is the system I built to replace the team I used to assemble by hand. It sp
 const contextDetails = {
   work: {
     label: "Work — NACC / University of Washington",
-    detail: "Day job context: NACC directory, REDCap, NEXT platform, website redesign, communications. Asana tracks tasks; thread files track every active project. Morning brief pulls calendar and due tasks each day."
+    detail: "Day job context: NACC directory, REDCap, NEXT platform, website redesign, communications. It runs from its own repo on my work account, and it never reads personal material. Asana tracks tasks; thread files track every active project. Morning brief pulls calendar and due tasks each day."
   },
   ventures: {
-    label: "Ventures — 9 Active Projects",
-    detail: "Alz researcher site, memory care directory, travel app, booking app, women's sports blog, portfolio, and more. Each gets its own thread file. The content engine and marketing skills stack live here."
+    label: "Ventures — Side Projects",
+    detail: "Alz researcher site, memory care directory, women's sports blog, an AI training program, this portfolio, and more. Each gets its own thread file. The content engine and marketing skills stack live here."
   },
   life: {
     label: "Life — Personal",
@@ -164,7 +163,7 @@ function selectContext(el) {
 
 ## What it actually is
 
-My PKA (Personal Knowledge Assistant) system is a model-agnostic AI orchestration layer that spans three contexts: my day job at the University of Washington, nine personal ventures I'm actively building, and my personal life. It's not a note-taking app or a task manager. It's a system that knows who I am, what I'm working on, and what I need, and acts on that knowledge across every session.
+My PKA (Personal Knowledge Assistant) system is a model-agnostic AI orchestration layer that spans three contexts: my day job at the University of Washington, the personal ventures I'm actively building, and my personal life. It's not a note-taking app or a task manager. It's a system that knows who I am, what I'm working on, and what I need, and acts on that knowledge across every session.
 
 I think of it as a **life operating system**: not a product you finish, but infrastructure you build over time. It is, by design, never complete. The longer I invest in it, the better it gets.
 
@@ -172,14 +171,14 @@ I think of it as a **life operating system**: not a product you finish, but infr
 
 ## How it's structured
 
-The system lives in a single folder with three sub-contexts, `work/`, `ventures/`, and `life/`, each with its own routing file, index, and thread files for active projects. A master routing layer at the root directs each session to the right context.
+The system has three contexts, work, ventures, and life, each with its own routing file, index, and thread files for active projects. Ventures and life share one repo, and a master routing layer at its root directs each session to the right context. Work has its own repo: the personal side can read it for cross-context routines like the morning brief, and it never reads back.
 
 Key files loaded at the start of every session:
 
 - `SOUL.md`: my personality, working style, and rules for how the AI should show up
 - `USER.md`: who I am, my background, how I work best
 - `hot.md`: what's most urgent right now
-- `MEMORY.md`: a curated index of key decisions and lessons across all past sessions
+- `MEMORY.md`: a curated index of key decisions and lessons across all past sessions. A startup check flags entries that are due for review, so a stale one doesn't get treated as current
 
 The AI never loads everything, just what's relevant to the current task.
 
@@ -253,18 +252,17 @@ The map above is the whole system on one page. These three go deeper, and unlike
 | Tool | Role |
 |------|------|
 | Claude Code | Primary orchestration layer |
-| Wispr Flow | Voice-first daily input |
+| Wispr Flow | Voice-first daily input, and meeting capture. Meeting notes sync into Obsidian, where the PKA picks them up and routes them. |
 | Kip (Telegram bot) | Voice-note capture on the go. A quick message to Kip gets transcribed and dropped into a daily scratch file, which the morning brief and end-of-day routine both pick up and route from. |
 | Obsidian | Meeting notes, daily notes, and a visual mirror of the PKA system. The graph view makes connections across your knowledge visible in a way nothing else does. |
 | OpenBrain (Postgres) | Persistent storage for everything worth remembering: the knowledge base that grows with every session. |
 | Wiki layer | Synthesizes captured knowledge into interconnected reference pages, turning raw inputs into something you can actually navigate and read, like a personal encyclopedia that builds itself. |
 | Vikunja | Self-hosted task management |
 | Asana | Institutional task management |
-| Granola | Meeting transcription and structured notes using templates like 1:1s and weekly meetings, routed automatically into thread files. Integrates well with other tools in the stack. |
 | Google Workspace | Calendar, Gmail, Drive |
 | Firecrawl | Web research and content ingestion |
 | n8n | Automation workflows |
-| YouTube | A primary learning source. I organize videos into playlists by topic, and I'm building a workflow to automatically pull transcripts, draft summaries, and route anything worth keeping into my knowledge base. In progress, and one I'm genuinely excited about. |
+| YouTube | A primary learning source. I organize videos into playlists by topic, and a watcher picks up each new save, pulls the transcript, mines it into a daily digest, and files anything worth keeping into my knowledge base. |
 
 ---
 
@@ -276,7 +274,7 @@ Different LLMs have genuine strengths. I use Claude Code for the majority of my 
 
 I also manage my tokens deliberately. I maintain subscriptions to both Claude and ChatGPT, work and personal accounts for each, and I route work accordingly:
 
-- **Claude Desktop (work account)**: connected to my PKA system's `work/` folder only, so work activities run on work tokens rather than my own.
+- **Claude Desktop (work account)**: connected to a separate work repo, so work activities run on work tokens rather than my own, and work sessions never see personal material.
 - **Claude Code (personal account)**: for personal ventures, app builds, and system development.
 - **ChatGPT / Codex**: for specific workflows where those models have an edge.
 

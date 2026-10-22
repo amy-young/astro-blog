@@ -6,6 +6,9 @@ const postCollection = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		dateFormatted: z.string(),
+		// Set when a published post gets a substantive revision. dateFormatted stays the
+		// original publish date, so the post keeps its place in date-sorted lists.
+		updatedFormatted: z.string().optional(),
 		tags: z.array(z.string()).optional(),
 		// REQUIRED as of 2026-09-09, was optional. A post without a hero ships a card
 		// with no image on /posts and the homepage, and produces a link preview with
