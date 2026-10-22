@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Impeccable: per-machine hooks and the downloaded engine binary (launcher re-downloads it)
+.claude/settings.local.json
+.claude/skills/impeccable/scripts/bin/

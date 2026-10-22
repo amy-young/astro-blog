@@ -1,0 +1,2 @@
+# Keep the Impeccable sh launcher LF so hooks survive core.autocrlf checkouts.
+.claude/skills/impeccable/scripts/impeccable text eol=lf
