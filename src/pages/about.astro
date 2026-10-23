@@ -20,7 +20,7 @@ import Layout from "../layouts/home.astro";
 //    key-contacts.md), so the hero's "Information specialist by title ... and in practice"
 //    does NOT contradict the "Communications & Funding Program Manager" role below it.
 //  - Facts spot-checked against threads: Ubuntu 24.04 (ventures/context/infrastructure.md),
-//    1,834 entities / 122 wiki pages (memory: project_openbrain).
+//    4,839 entities / 122 wiki pages (live OpenBrain query 2026-10-23).
 //
 // !! "I work at the intersection of data, product, and communications." — the hero's
 // opening line. "At the intersection of" IS on the Never list in
@@ -45,7 +45,7 @@ interface Role   { yr: string; role: string; org: string; }
 
 const SYSTEMS: System[] = [
   {
-    n: "01", stat: "40+", statLabel: "custom skills authored",
+    n: "01", stat: "60+", statLabel: "custom skills authored",
     title: "Agent Environment",
     body: "Multi-agent routing across dev, content, research, and ops, model-agnostic underneath.",
     chips: ["Claude Code", "Subagents"],
@@ -57,7 +57,7 @@ const SYSTEMS: System[] = [
     chips: ["Hooks", "Permissions"],
   },
   {
-    n: "03", stat: "1,834", statLabel: "entities in the graph",
+    n: "03", stat: "4,839", statLabel: "entities in the graph",
     title: "Personal Knowledge Graph",
     body: "Self-hosted memory on Postgres, with an LLM pipeline that turns raw captures into structure.",
     chips: ["Postgres", "MCP", "122 wiki pages"],
@@ -75,8 +75,8 @@ const TOOLKIT: Tool[] = [
     title: "AI & Agentic Systems",
     lede: "Claude Code is my daily driver, but the agentic system and personal knowledge assistant underneath it are model-agnostic, wired into a memory layer and a set of specialist agents that route my own research, content, and ops work.",
     points: [
-      { k: "Claude Code", v: "40+ custom skills authored, hooks configuration, subagent orchestration, and multi-agent specialist routing across dev, content, research, and ops." },
-      { k: "MCP (Model Context Protocol)", v: "built and deployed a custom server (OpenBrain: 1,834 entities, 122 wiki pages, VPS-hosted worker on hourly cron), plus Asana, Gmail, Google Calendar/Drive, PubMed, and Postgres integrations." },
+      { k: "Claude Code", v: "60+ custom skills authored, hooks configuration, subagent orchestration, and multi-agent specialist routing across dev, content, research, and ops." },
+      { k: "MCP (Model Context Protocol)", v: "built and deployed a custom server (OpenBrain: 4,839 entities, 122 wiki pages, VPS-hosted worker on hourly cron), plus Asana, Gmail, Google Calendar/Drive, PubMed, and Postgres integrations." },
       { k: "n8n workflow automation", v: "PDF/DOCX ingestion pipeline, YouTube capture pipeline, newsletter routing." },
       { k: "Deterministic retrieval", v: "a custom retrieval index (pka_retrieve.py) with an OKF frontmatter spec, built for auditable recall over ad-hoc similarity search." },
       { k: "Anthropic Claude API / SDK", v: "direct API usage underlying all of the above." },
@@ -189,7 +189,7 @@ const CAREER: Role[] = [
           <div class="ab-leads">
             <p class="page-lead rv">I work at the intersection of data, product, and communications. Information specialist by title at the National Alzheimer's Coordinating Center, and in practice the person in the data, running funding program management, writing and building the web for the research community, and making the tools that speed all of it up.</p>
             <p class="page-lead rv">One thread runs through all of it: curiosity and problem solving. Understanding how things work, why people do what they do, and what becomes possible when you ask the right questions.</p>
-            <p class="page-lead rv">AI agents now tie those threads together. Claude Code is my daily driver, and it lets me take on work I used to coordinate teams to do myself: research, design, build, ship. Underneath it is a model-agnostic system I designed and self-host, including a knowledge graph that turns raw research into something I can query. On top of that: 40+ custom skills and multi-agent routing across my research, content, and ops.</p>
+            <p class="page-lead rv">AI agents now tie those threads together. Claude Code is my daily driver, and it lets me take on work I used to coordinate teams to do myself: research, design, build, ship. Underneath it is a model-agnostic system I designed and self-host, including a knowledge graph that turns raw research into something I can query. On top of that: 60+ custom skills and multi-agent routing across my research, content, and ops.</p>
             <p class="page-lead rv">It rewards exactly the kind of curious, cross-disciplinary thinking I've practiced my whole life.</p>
           </div>
         </header>
