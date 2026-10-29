@@ -21,8 +21,8 @@ import Layout from "../layouts/home.astro";
 //    off the status field, because the mockups are drawn as live product marketing.
 //  - NACC Website REMOVED until the redesign is complete.
 //  - The "amyyoung.me" card REMOVED as self-referential; the reader is already on it.
-//  - YouTube Capture Pipeline ADDED. Link it once github.com/amy-young/youtube-capture-pipeline
-//    is flipped public; it is private as of this writing.
+//  - YouTube Capture Pipeline ADDED. 2026-10-29: repo public, card links straight to GitHub
+//    (goLabel overrides the default link text). A detail page may replace it later.
 //
 // Amy's ruling 2026-08-20: Publications Intelligence REMOVED (was card 06). Set aside until
 // Amy has time to work through the development plan — same "not public until ready" rule as
@@ -42,6 +42,7 @@ interface Project {
   desc: string;
   meta: string;
   url?: string;
+  goLabel?: string;
   /* Card art. Amy is making images for every card before the site goes live, so this is
      optional for now and cards without it simply render text-forward as before. */
   img?: string;
@@ -71,6 +72,8 @@ const PROJECTS: Project[] = [
   },
   {
     no: "04", cat: "Automation", status: "shipped", name: "YouTube Capture Pipeline", meta: "Personal build",
+    url: "https://github.com/amy-young/youtube-capture-pipeline",
+    goLabel: "View the code on GitHub",
     desc: "Save a YouTube video from my phone and wake up to a summary, the resources it mentioned pulled out, and the good material filed into my knowledge base on its own. n8n, yt-dlp, and Gemini, running on my own VPS.",
   },
   {
@@ -150,7 +153,7 @@ const FILTERS: [string, string][] = [
           const Tag = p.url ? "a" : "div";
           return (
             <li class="pj-item rv" data-status={p.status}>
-              <Tag class="pj-card" {...(p.url ? { href: p.url } : {})}>
+              <Tag class="pj-card" {...(p.url ? { href: p.url } : {})} {...(p.url?.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}>
                 {p.img && (
                   <div class="pj-media">
                     <img src={p.img} alt={p.imgAlt ?? ""} loading="lazy" decoding="async" width="640" height="360" />
@@ -167,7 +170,7 @@ const FILTERS: [string, string][] = [
                 <div class="pj-foot">
                   <span class="pj-meta">{p.meta}</span>
                   {p.url && (
-                    <span class="pj-go">Walk through the build <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+                    <span class="pj-go">{p.goLabel ?? "Walk through the build"} <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
                   )}
                 </div>
               </Tag>
