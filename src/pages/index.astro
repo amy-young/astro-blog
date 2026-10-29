@@ -76,17 +76,18 @@ const homeWriting = (await getCollection("post"))
           <p class="xn-system-lead">Everything I capture <strong>becomes structure.</strong></p>
           <p class="xn-system-sub">Meetings, documents, research, and voice notes route through one pipeline into a Postgres brain I host myself. It extracts the entities, compiles the wiki, and hands back the right file in zero tokens.</p>
           <ol class="xn-flow">
-            <li class="xn-flow-step"><span class="xn-flow-n">01</span><span class="xn-flow-name">Capture</span><span class="xn-flow-sub">Seven surfaces. Everything in.</span></li>
+            <li class="xn-flow-step"><span class="xn-flow-n">01</span><span class="xn-flow-name">Capture</span><span class="xn-flow-sub">Seven sources. One way in.</span></li>
             <li class="xn-flow-step"><span class="xn-flow-n">02</span><span class="xn-flow-name">Process</span><span class="xn-flow-sub">Clean. Enrich. Structure.</span></li>
             <li class="xn-flow-step"><span class="xn-flow-n">03</span><span class="xn-flow-name">Store</span><span class="xn-flow-sub">Postgres and pgvector.</span></li>
             <li class="xn-flow-step"><span class="xn-flow-n">04</span><span class="xn-flow-name">Synthesize</span><span class="xn-flow-sub">Entities. Edges. Wiki.</span></li>
             <li class="xn-flow-step"><span class="xn-flow-n">05</span><span class="xn-flow-name">Retrieve</span><span class="xn-flow-sub">Deterministic. Relevant.</span></li>
           </ol>
-          {/* Real counts from the system map, verified 2026-08-05. Not the fabricated
-               stats bar that was cut on 2026-08-03. */}
+          {/* Real counts, re-verified 2026-10-29 against OpenBrain (entities 4,861, edges
+               5,865) and compiled/entities/ (122). Floored with "+" so they stay true as the
+               brain grows. Not the fabricated stats bar that was cut on 2026-08-03. */}
           <dl class="xn-stats">
-            <div class="xn-stat"><dt class="xn-stat-n">1,834</dt><dd class="xn-stat-l">entities extracted</dd></div>
-            <div class="xn-stat"><dt class="xn-stat-n">2,034</dt><dd class="xn-stat-l">typed edges</dd></div>
+            <div class="xn-stat"><dt class="xn-stat-n">4,800+</dt><dd class="xn-stat-l">entities extracted</dd></div>
+            <div class="xn-stat"><dt class="xn-stat-n">5,800+</dt><dd class="xn-stat-l">typed edges</dd></div>
             <div class="xn-stat"><dt class="xn-stat-n">122</dt><dd class="xn-stat-l">wiki pages compiled</dd></div>
             <div class="xn-stat"><dt class="xn-stat-n">0</dt><dd class="xn-stat-l">tokens to find a file</dd></div>
           </dl>
