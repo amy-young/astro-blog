@@ -263,7 +263,7 @@ The map above is the whole system on one page. These three go deeper, and unlike
 | Google Workspace | Calendar, Gmail, Drive |
 | Firecrawl | Web research and content ingestion |
 | n8n | Automation workflows |
-| YouTube | A primary learning source. I organize videos into playlists by topic, and a watcher picks up each new save, pulls the transcript, mines it into a daily digest, and files anything worth keeping into my knowledge base. |
+| YouTube | A primary learning source. I organize videos into playlists by topic, and a [watcher](/project/youtube-capture-pipeline) picks up each new save, pulls the transcript, mines it into a daily digest, and files anything worth keeping into my knowledge base. |
 
 ---
 

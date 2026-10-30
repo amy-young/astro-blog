@@ -21,8 +21,8 @@ import Layout from "../layouts/home.astro";
 //    off the status field, because the mockups are drawn as live product marketing.
 //  - NACC Website REMOVED until the redesign is complete.
 //  - The "amyyoung.me" card REMOVED as self-referential; the reader is already on it.
-//  - YouTube Capture Pipeline ADDED. 2026-10-29: repo public, card links straight to GitHub
-//    (goLabel overrides the default link text). A detail page may replace it later.
+//  - YouTube Capture Pipeline ADDED. 2026-10-29: repo public, and the card now links to its
+//    detail page (/project/youtube-capture-pipeline), which links GitHub. goLabel removed.
 //
 // Amy's ruling 2026-08-20: Publications Intelligence REMOVED (was card 06). Set aside until
 // Amy has time to work through the development plan — same "not public until ready" rule as
@@ -72,9 +72,10 @@ const PROJECTS: Project[] = [
   },
   {
     no: "04", cat: "Automation", status: "shipped", name: "YouTube Capture Pipeline", meta: "Personal build",
-    url: "https://github.com/amy-young/youtube-capture-pipeline",
-    goLabel: "View the code on GitHub",
+    url: "/project/youtube-capture-pipeline",
     desc: "Save a YouTube video from my phone and wake up to a summary, the resources it mentioned pulled out, and the good material filed into my knowledge base on its own. n8n, yt-dlp, and Gemini, running on my own VPS.",
+    img: "/assets/images/projects/youtube-capture-pipeline-hero.webp",
+    imgAlt: "A grid of video cells with one lit, beside the line 'Save it on the couch. Find it filed by morning.'",
   },
   {
     no: "05", cat: "Education", status: "building", name: "AI Learning Platform", meta: "Concept to MVP",
