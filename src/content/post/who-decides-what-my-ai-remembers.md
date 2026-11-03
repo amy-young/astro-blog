@@ -100,3 +100,13 @@ Elliot and Brent between them name eleven distinct problems with Claude Code's a
 | Vendor lock-in (Elliot) | Plain markdown and self-hosted Postgres | Partly: the data is portable, the loading behavior isn't |
 | Silent writes nobody reads (Elliot) | Was: changes visible in git after the fact. Now: a notice on every write | Was weak; now visible, still not consent |
 | Nothing expires (Elliot) | Was: manual markers and a quarterly audit. Now: a session-start check flags memories due for review | Was weak; now flagged, a person decides |
+
+## Postscript: the memory folder is small on purpose
+
+*If I log almost every session, why only 119?*
+
+I asked myself the same thing after this went up. Most of what I capture never goes into the memory folder, and it isn't supposed to. The daily logs hold about 190 session entries. Twenty-seven thread files track active projects, 24 decision records keep the reasoning behind choices, and OpenBrain holds close to a thousand thoughts from meetings, documents and saved videos. Memory is the short list that loads into every session, so the bar is higher: a lesson that should change how every future session behaves.
+
+Even then, it doesn't always become a new file. When a lesson comes up again, Claude updates the memory that already holds it instead of adding a second one, and the audit deleted eleven. The 200-line index limit sets a ceiling too. A folder of a thousand memories would mostly go unread.
+
+The count will keep moving. What I check is whether the ones that load each session are still true. (As I write this, it's 122.)
