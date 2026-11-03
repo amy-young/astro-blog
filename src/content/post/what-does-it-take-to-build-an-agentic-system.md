@@ -4,12 +4,23 @@ title: What Does It Take to Build an Agentic System, and Where Are Teams Getting
 description: The AI agent stack has a five-layer reference architecture now, and most teams only build the first two. Where the other three layers go missing, and what it costs when they do.
 dateFormatted: Jul 20, 2026
 tags: ["AI Agents", "Agent Architecture", "AI Training", "Evaluation"]
-heroImage: /assets/images/posts/5-agentic-layers.webp
+heroImage: /assets/images/posts/what-does-it-take-to-build-an-agentic-system-hero.webp
 ---
 
 What does it actually take to build a system you can trust with an AI agent, not a demo, a system? A month of AI tooling releases points to an answer. Microsoft shipped "Agent 365," an observability and trust layer that has nothing to do with generating text. Google built a "Knowledge Catalog" for the same reason. A wave of eval platforms, Langfuse, LangSmith, Arize, went from developer niche to first-class purchase line item in the same stretch of weeks. Read individually, this looks like ordinary tooling churn. Read together, it sketches a five-part answer: agent, tools, memory, evaluation, governance.
 
 And a KPMG survey of 2,145 executives points to exactly where most teams actually stop. Seven percent said they could demonstrate a return on their AI spending. The other ninety-three percent aren't running worse models than the seven percent who can. Most are running the same ChatGPT and Claude everyone else is. The difference isn't the tool. It's how many of the five layers actually got built.
+
+<figure class="layer-stack">
+<ol>
+<li><span class="n">1</span><span><strong>Agent</strong><span class="d">The model doing the reasoning and the planning.</span></span></li>
+<li><span class="n">2</span><span><strong>Tools</strong><span class="d">The connections that let the agent act on real systems.</span></span></li>
+<li><span class="n">3</span><span><strong>Memory and knowledge</strong><span class="d">Where the agent's context comes from, and how it's governed.</span></span></li>
+<li><span class="n">4</span><span><strong>Evaluation</strong><span class="d">How you know the agent is actually working.</span></span></li>
+<li><span class="n">5</span><span><strong>Governance</strong><span class="d">Who's watching the agent, and what happens when it does something it shouldn't.</span></span></li>
+</ol>
+<figcaption>The five layers of an agentic system, built from the bottom up.</figcaption>
+</figure>
 
 ## What does it actually take?
 

@@ -1367,6 +1367,22 @@
     .article-body figure.pka-hero-figure { margin-top: 2rem; }
     .article-body figcaption { margin-top: 10px; font-size: .8rem; line-height: 1.55; color: var(--ink-3); }
 
+    /* Five-layer stack in what-does-it-take-to-build-an-agentic-system.md. Replaces the
+       5-agentic-layers.webp infographic (2026-11-03). Source order runs 1-5 for screen
+       readers; column-reverse puts layer 5 on top, matching the hero's stacked planes. */
+    .article-body .layer-stack ol { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column-reverse; gap: 8px; }
+    .article-body .layer-stack li {
+      margin: 0; display: grid; grid-template-columns: 2.2rem 1fr; column-gap: 12px; align-items: baseline;
+      padding: 14px 18px; border: 1px solid var(--accent-bdr); border-radius: 12px; background: var(--accent-tint);
+    }
+    .article-body .layer-stack .n { font-size: 1.4rem; font-weight: 800; color: var(--accent); }
+    .article-body .layer-stack strong { display: block; }
+    .article-body .layer-stack .d { font-size: .92rem; line-height: 1.5; color: var(--ink-2); }
+    .article-body .layer-stack li:first-child { background: var(--accent); border-color: var(--accent); }
+    .article-body .layer-stack li:first-child .n,
+    .article-body .layer-stack li:first-child strong,
+    .article-body .layer-stack li:first-child .d { color: #FFFFFF; }
+
     .article-body hr { border: 0; border-top: 1px solid var(--border); margin-block: 2.4em; }
 
     /* Tables. Markdown emits a bare <table> with no wrapper, so the scroll container has
