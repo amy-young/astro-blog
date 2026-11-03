@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/post.astro
 title: Who decides what my AI remembers?
-description: "Two sharp critiques of Claude Code's auto-memory say the defaults pile up stale instructions that get treated as current. They're right. Here's how my system decides what gets remembered, the two places it was weakest, and what my first audit turned up."
+description: "Two recent critiques of Claude Code's auto-memory say the defaults pile up stale instructions that get treated as current. They're right. Here's how my system decides what gets remembered, the two places it was weakest, and what my first audit turned up."
 dateFormatted: Nov 2, 2026
 tags: ["Memory", "Context Engineering", "PKA System", "Claude Code"]
 heroImage: /assets/images/posts/who-decides-what-my-ai-remembers-hero.webp
@@ -9,9 +9,9 @@ heroImage: /assets/images/posts/who-decides-what-my-ai-remembers-hero.webp
 
 This article started with a simple question to my system: where did we leave off?
 
-The answer came back fast and sure of itself. A handoff note from eleven days earlier (a short brief one session writes so the next session can pick up the work cold, without the conversation that produced it) said I'd planned this piece, and that before writing it I needed to fix three stale facts on the project page for my personal knowledge system: an old meeting tool, a pipeline still marked "in progress," and a work setup that had since moved into its own repo. I said yes, let's fix them. Then Claude opened the live page. All three had been fixed nine days earlier, by a different session, in a different repo. Nobody told the handoff.
+The answer came back fast and sure of itself. A handoff note from eleven days earlier (a short summary and set of instructions, written when I move work to another session or park it for later, so the agent can pick right back up) said I'd planned this piece, and that before writing it I needed to fix three stale facts on the project page for my personal knowledge system: an old meeting tool, a pipeline still marked "in progress," and a work setup that had since moved into its own repo. I said yes, let's fix them. Then Claude opened the live page. All three had been fixed nine days earlier, by a different session, in a different repo. Nobody told the handoff.
 
-Nothing broke. But for a few minutes my system was confidently planning work that was already done, because a document it trusted described the world as it was on the day that document was written. That's the whole problem with AI memory in one small scene, and it happened in a system I built around memory on purpose.
+Nothing broke. But for a few minutes my system was confidently planning work that was already done, because a document it trusted described the world as it was on the day that document was written. That's the problem with AI memory in one small scene, and it happened in a system I built around memory on purpose.
 
 ## Both critiques are right about the defaults
 
@@ -27,21 +27,21 @@ The other two didn't land anywhere. Memory writes showed up in my git history af
 
 (The full point-by-point comparison is at the end, for anyone who wants to check the work.)
 
-## Claude nominates, I confirm
+## Claude suggests, I decide
 
 *Isn't "I decide what gets remembered" just a nicer way of saying "I do all the work"?*
 
-Here's a confession first. My CLAUDE.md, the instruction file every session reads, has a rule for when I say "remember this." I never say it. It's a sticky note: one fact, mid-session, my pick. It turns out that's not how I work.
+My CLAUDE.md, the instruction file every session reads, has a rule for when I say "remember this." I never say it. It's a sticky note: one fact, mid-session, my pick. It turns out that's not how I work.
 
-How I actually work is the meeting minutes. At the end of a session I run /log-this, and Claude reads the whole session back: what we worked on, what was decided, what changed, what's next. It writes the daily log and updates the project thread. For memory, it doesn't write anything on its own. It nominates the things it thinks should carry into future sessions, and I confirm.
+What I actually rely on is a full end-of-session review. When a session wraps up I run /log-this, and Claude reads the whole session back: what we worked on, what was decided and why, what changed, what's next. It writes the daily log and updates the project thread. For memory, it doesn't write anything on its own. It suggests the things it thinks should carry into future sessions, and I decide which ones stay.
 
 The timing matters as much as the confirming. Working with AI, you go through several iterations, adding context, until you've got what you need. I don't need every one of those steps remembered. I want the end of the session, where we arrived at something workable, whether that's writing, analysis or design: the finished product, at least for now (because you'll iterate on it again), and the process it took to get there. Capture the destination and the route, not every wrong turn.
 
-Some of what I do doesn't need to be remembered at all. A quick one-off email. A personal task. That said, I capture about 95% of what I do, because it all adds to the context. That's the part that surprised me when I said it out loud: wanting control over memory hasn't made me keep less. Control isn't about keeping less. It's about deciding.
+Some of what I do doesn't need to be remembered at all. A quick one-off email. A personal task. That said, I capture about 95% of what I do, because it all adds to the context. So wanting control over memory hasn't made me keep less. What I want is to be the one deciding.
 
 This was always part of the design. My memory runs in layers: thread files for each active project, a wiki compiled from raw notes (Andrej Karpathy's idea), and OpenBrain, a self-hosted database for searching by meaning (Nate Jones's design, which I followed when he released it). As a researcher, having access to a robust database is critical, and so is knowing the context a question is being asked in, not just the question. Context engineering is the natural evolution of that habit. And the longer I work this way, the more the collected examples and outcomes guide the next ones. The next blog post or the next design starts from the last ones that worked.
 
-So who decides what my AI remembers? Claude nominates, I confirm, and only after the work is done.
+So who decides what my AI remembers? Claude suggests the memory. I decide what stays.
 
 ## Visibility isn't attention, and nothing expired
 
@@ -49,7 +49,7 @@ So who decides what my AI remembers? Claude nominates, I confirm, and only after
 
 Two small scripts, both hooks: they run by themselves at a fixed moment, with no model involved and nothing for me to remember.
 
-The first fires every time a memory file is written and shows a one-line notice naming it. It's still visibility, not consent, but it's visibility at the moment it happens instead of in a git log I don't read.
+The first fires every time a memory file is written and shows a one-line notice naming it. It doesn't ask my permission, but I see the write when it happens instead of in a git log I don't read.
 
 The second runs at the start of every session and stays silent unless something needs attention. It flags memories due for review: a project memory untouched for 60 days, a reference memory after 120, or any memory with its own review date. Durable preferences can be marked to never expire. It also warns when the memory index nears 200 lines, the point where Claude Code quietly stops loading the rest, a truncation nothing else warns you about.
 
@@ -65,7 +65,7 @@ Doing the audit was honestly great: finding out where my system actually was, an
 
 *If the memory folder is clean now, why did the opening scene still happen?*
 
-Because the handoff that sent me to fix an already-fixed page isn't a memory file. Neither is the "remember this" rule, which led Claude to describe my habits from a line I wrote once and never used. And neither was the case that taught me this lesson the hard way: Claude read an old handoff and told me a past project "only went halfway," so I chose to finish it. It had shipped two months earlier, been compared side by side, and been reverted on purpose. The daily log said so. The handoff didn't.
+Because the handoff that sent me to fix an already-fixed page isn't a memory file. Neither is the "remember this" rule, which led Claude to describe my habits from a line I wrote once and never used. And neither was the case that first showed me this: Claude read an old handoff and told me a past project "only went halfway," so I chose to finish it. It had shipped two months earlier, been compared side by side, and been reverted on purpose. The daily log said so. The handoff didn't.
 
 Every case of stale memory I could find lived outside the memory folder. Anything an agent reads at the start of a session and believes is memory.
 
