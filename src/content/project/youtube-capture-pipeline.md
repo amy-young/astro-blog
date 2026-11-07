@@ -6,7 +6,7 @@ status: shipped
 category: personal
 startDate: "2026"
 tags: ["n8n", "yt-dlp", "Gemini", "PostgreSQL", "Automation"]
-heroImage: /assets/images/projects/youtube-capture-pipeline-hero.webp
+heroImage: /assets/images/projects/youtube-capture-pipeline-hero-v2.webp
 ---
 
 ## What it actually is
