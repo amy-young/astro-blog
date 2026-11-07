@@ -32,13 +32,19 @@ import Layout from "../layouts/home.astro";
 //
 // Amy's rulings 2026-11-06:
 //  - Card 05 renamed "Build Your Own AI Operating System" (was "AI Learning Platform") and set to
-//    the new "active" status: it's one-to-one training she is running now, not a build in progress.
+//    its own status: it's one-to-one training she is running now, not a build in progress.
+//    (Named "active" first; renamed "beta" 2026-11-07 because "active" implied the others weren't.)
 //  - Memory Care Center RE-ADDED as card 06, status "building", reversing the 08-07 removal at
 //    her explicit request.
 //
-// Ordered shipped -> active -> building -> concept, so the page opens on what actually exists.
+// Amy's rulings 2026-11-07: ADRD funding platform moves to "building"; the travel app gets the new
+// "designed" status (a finished design, not just an idea); the package tracker stays "concept".
+// Designed cards carry the same "Design concept" image caption as concept cards, because their
+// mockups are also drawn as live product marketing.
+//
+// Ordered shipped -> beta -> building -> designed -> concept, so the page opens on what actually exists.
 
-type Status = "shipped" | "active" | "building" | "concept";
+type Status = "shipped" | "beta" | "building" | "designed" | "concept";
 
 interface Project {
   no: string;
@@ -84,7 +90,7 @@ const PROJECTS: Project[] = [
     imgAlt: "A grid of video cells with one lit, beside the line 'Save it on the couch. Find it filed by morning.'",
   },
   {
-    no: "05", cat: "Education", status: "active", name: "Build Your Own AI Operating System", meta: "One-to-one training",
+    no: "05", cat: "Education", status: "beta", name: "Build Your Own AI Operating System", meta: "One-to-one training",
     desc: "I train people one to one to build their own AI operating system: plain files that tell their AI who they are, which parts of their life it covers, and what it must never touch. We start from a questionnaire, build the core together in one session, and add to it as their work grows. Works with Claude, ChatGPT, or an open-source model running on their own computer.",
     img: "/assets/images/projects/ai-operating-system-hero-v1.webp",
     imgAlt: "Folders for work, writing and home connected to a file box holding 'About me' and 'My routines' cards, with a morning brief checklist, a calendar and a locked folder, beside the line 'Your AI. Built around you.'",
@@ -96,20 +102,20 @@ const PROJECTS: Project[] = [
     imgAlt: "A map of Washington with location pins, a memory care listing card showing licensing, Medicaid and inspection history, an inspection records panel and a 'Your choice' card with a lock, beside the line 'Find care. See the full picture.'",
   },
   {
-    no: "07", cat: "Discovery", status: "concept", name: "ADRD Research Funding Platform", meta: "Product Design",
+    no: "07", cat: "Discovery", status: "building", name: "ADRD Research Funding Platform", meta: "Product Design",
     desc: "I'm designing a funding platform just for Alzheimer's and related dementias research. Opportunities from NIH, foundations and international funders arrive as a digest matched to each researcher's work, with funding trends, funder spotlights and a deadline calendar alongside. Funding information stays free for researchers.",
     img: "/assets/images/projects/adrd-research-funding-hero-v1.webp",
     imgAlt: "An open notebook linking a research profile to a highlighted research opportunity marked 'Match', with a funding trends chart and a desk calendar with deadlines marked, beside the line 'The right funding finds you.'",
   },
   {
-    no: "08", cat: "Mobile", status: "concept", name: "Travel Companion App", meta: "Product Design",
-    desc: "Trip organizer with itinerary management, fellow traveler insights, and travel loyalty points optimization.",
+    no: "08", cat: "Mobile", status: "designed", name: "Travel Companion App", meta: "Product Design",
+    desc: "I designed one workspace for a whole trip. Every flight, hotel, train, tour and reservation sits in a single itinerary, each marked confirmed, booked or still to book, so planning no longer lives across spreadsheets, browser tabs and inbox searches.",
     img: "/assets/images/projects/travel-companion-hero.png",
     imgAlt: "Landing page design for the travel companion app, showing a trip itinerary with flights, hotels, and bookings tracked by status.",
   },
   {
     no: "09", cat: "Dashboard", status: "concept", name: "Package & Delivery Tracker", meta: "Product Design",
-    desc: "Unified dashboard to track purchases from multiple vendors and coordinate deliveries across locations.",
+    desc: "I'm exploring one dashboard for every delivery, from every retailer. Forward or connect your order emails, and it pulls out the tracking numbers, follows each carrier and alerts you when something changes. Shaped with caregivers in mind, including adult children managing deliveries for a parent.",
     img: "/assets/images/projects/package-tracker-hero.png",
     imgAlt: "Landing page design for the package tracker, showing a delivery dashboard with packages grouped by in transit, out for delivery, and delivered.",
   },
@@ -117,24 +123,27 @@ const PROJECTS: Project[] = [
 
 const STATUS_LABEL: Record<Status, string> = {
   shipped: "Shipped",
-  active: "Active",
+  beta: "Beta",
   building: "Building",
+  designed: "Designed",
   concept: "Concept",
 };
 
 const counts = {
   all: PROJECTS.length,
   shipped: PROJECTS.filter((p) => p.status === "shipped").length,
-  active: PROJECTS.filter((p) => p.status === "active").length,
+  beta: PROJECTS.filter((p) => p.status === "beta").length,
   building: PROJECTS.filter((p) => p.status === "building").length,
+  designed: PROJECTS.filter((p) => p.status === "designed").length,
   concept: PROJECTS.filter((p) => p.status === "concept").length,
 };
 
 const FILTERS: [string, string][] = [
   ["all", "All"],
   ["shipped", "Shipped"],
-  ["active", "Active"],
+  ["beta", "Beta"],
   ["building", "Building"],
+  ["designed", "Designed"],
   ["concept", "Concept"],
 ];
 ---
@@ -154,8 +163,9 @@ const FILTERS: [string, string][] = [
         <dl class="xn-stats pj-stats page-stats rv">
           <div class="xn-stat"><dt class="xn-stat-n">{counts.all}</dt><dd class="xn-stat-l">projects</dd></div>
           <div class="xn-stat"><dt class="xn-stat-n">{counts.shipped}</dt><dd class="xn-stat-l">shipped</dd></div>
-          <div class="xn-stat"><dt class="xn-stat-n">{counts.active}</dt><dd class="xn-stat-l">active</dd></div>
+          <div class="xn-stat"><dt class="xn-stat-n">{counts.beta}</dt><dd class="xn-stat-l">beta</dd></div>
           <div class="xn-stat"><dt class="xn-stat-n">{counts.building}</dt><dd class="xn-stat-l">building</dd></div>
+          <div class="xn-stat"><dt class="xn-stat-n">{counts.designed}</dt><dd class="xn-stat-l">designed</dd></div>
           <div class="xn-stat"><dt class="xn-stat-n">{counts.concept}</dt><dd class="xn-stat-l">concept</dd></div>
         </dl>
       </header>
@@ -178,7 +188,7 @@ const FILTERS: [string, string][] = [
                 {p.img && (
                   <div class="pj-media">
                     <img src={p.img} alt={p.imgAlt ?? ""} loading="lazy" decoding="async" width="640" height="360" />
-                    {p.status === "concept" && <span class="pj-media-cap">Design concept</span>}
+                    {(p.status === "concept" || p.status === "designed") && <span class="pj-media-cap">Design concept</span>}
                   </div>
                 )}
                 <div class="pj-top">
