@@ -760,10 +760,13 @@
 
     @media (max-width: 900px) { .xn-flow { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 620px) { .xn-stats { grid-template-columns: repeat(2, 1fr); } }
-    /* /projects carries six counts (total + five statuses): one row on desktop, an even 3x2 on
-       phones so no cell is left empty. */
-    .xn-stats.pj-stats { grid-template-columns: repeat(6, 1fr); }
-    @media (max-width: 620px) { .xn-stats.pj-stats { grid-template-columns: repeat(3, 1fr); } }
+    /* /projects carries five counts (total + four statuses): one row on desktop; on phones the
+       total spans the top so the four statuses sit in an even 2x2 with no empty cell. */
+    .xn-stats.pj-stats { grid-template-columns: repeat(5, 1fr); }
+    @media (max-width: 620px) {
+      .xn-stats.pj-stats { grid-template-columns: repeat(2, 1fr); }
+      .xn-stats.pj-stats > .xn-stat:first-child { grid-column: 1 / -1; }
+    }
     @media (max-width: 560px) { .xn-flow { grid-template-columns: repeat(2, 1fr); } }
     .xn-info { display: flex; flex-direction: column; gap: 16px; min-width: 180px; max-width: 220px; padding-top: 8px; }
     @media (max-width: 760px) { .xn-info { max-width: 100%; flex-direction: row; flex-wrap: wrap; align-items: center; } }
@@ -891,7 +894,6 @@
     /* Status is encoded in form as well as word, so it reads at a glance. */
     .pj-status[data-s="shipped"] .pj-dot  { background: #2E6B3E; }
     .pj-status[data-s="beta"] .pj-dot     { background: #2E6B3E; box-shadow: 0 0 0 3px rgba(46, 107, 62, .22); }
-    .pj-status[data-s="designed"] .pj-dot { background: transparent; box-shadow: inset 0 0 0 1.5px var(--accent); }
     .pj-status[data-s="building"] .pj-dot { background: var(--accent); }
     .pj-status[data-s="concept"] .pj-dot  { background: var(--border-str); }
 
