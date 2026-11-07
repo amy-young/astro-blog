@@ -30,9 +30,15 @@ import Layout from "../layouts/home.astro";
 // the handoff (handoff/publications-intelligence-project-page/README.md) are left in place,
 // just unlinked — don't delete that work, don't silently re-add the card either.
 //
-// Ordered shipped -> building -> concept, so the page opens on what actually exists.
+// Amy's rulings 2026-11-06:
+//  - Card 05 renamed "Build Your Own AI Operating System" (was "AI Learning Platform") and set to
+//    the new "active" status: it's one-to-one training she is running now, not a build in progress.
+//  - Memory Care Center RE-ADDED as card 06, status "building", reversing the 08-07 removal at
+//    her explicit request.
+//
+// Ordered shipped -> active -> building -> concept, so the page opens on what actually exists.
 
-type Status = "shipped" | "building" | "concept";
+type Status = "shipped" | "active" | "building" | "concept";
 
 interface Project {
   no: string;
@@ -78,10 +84,14 @@ const PROJECTS: Project[] = [
     imgAlt: "A grid of video cells with one lit, beside the line 'Save it on the couch. Find it filed by morning.'",
   },
   {
-    no: "05", cat: "Education", status: "building", name: "Build Your Own AI Operating System", meta: "One-to-one training",
+    no: "05", cat: "Education", status: "active", name: "Build Your Own AI Operating System", meta: "One-to-one training",
     desc: "I train people one to one to build their own AI operating system: plain files that tell their AI who they are, which parts of their life it covers, and what it must never touch. We start from a questionnaire, build the core together in one session, and add to it as their work grows. Works with Claude, ChatGPT, or an open-source model running on their own computer.",
     img: "/assets/images/projects/ai-operating-system-hero-v1.webp",
     imgAlt: "Folders for work, writing and home connected to a file box holding 'About me' and 'My routines' cards, with a morning brief checklist, a calendar and a locked folder, beside the line 'Your AI. Built around you.'",
+  },
+  {
+    no: "06", cat: "Directory", status: "building", name: "Memory Care Center", meta: "Venture build",
+    desc: "I'm building a directory of Washington's memory care options from state and federal licensing and inspection data. Families contact only the facility they choose, their information is never sold or shared, and inspection citations stay visible. Astro and Postgres with PostGIS, on my own VPS.",
   },
   {
     no: "07", cat: "Discovery", status: "concept", name: "ADRD Research Funding Platform", meta: "Product Design",
@@ -103,6 +113,7 @@ const PROJECTS: Project[] = [
 
 const STATUS_LABEL: Record<Status, string> = {
   shipped: "Shipped",
+  active: "Active",
   building: "Building",
   concept: "Concept",
 };
@@ -110,6 +121,7 @@ const STATUS_LABEL: Record<Status, string> = {
 const counts = {
   all: PROJECTS.length,
   shipped: PROJECTS.filter((p) => p.status === "shipped").length,
+  active: PROJECTS.filter((p) => p.status === "active").length,
   building: PROJECTS.filter((p) => p.status === "building").length,
   concept: PROJECTS.filter((p) => p.status === "concept").length,
 };
@@ -117,6 +129,7 @@ const counts = {
 const FILTERS: [string, string][] = [
   ["all", "All"],
   ["shipped", "Shipped"],
+  ["active", "Active"],
   ["building", "Building"],
   ["concept", "Concept"],
 ];
@@ -134,9 +147,10 @@ const FILTERS: [string, string][] = [
         <h1 class="page-title rv">Things I've<br><strong>designed and built.</strong></h1>
         <p class="page-lead rv">I build tools that make complex information easier to work with. Some are shipped and in daily use, some are in progress, and some are designs waiting for their turn. Every one started with a problem worth solving.</p>
 
-        <dl class="xn-stats page-stats rv">
+        <dl class="xn-stats pj-stats page-stats rv">
           <div class="xn-stat"><dt class="xn-stat-n">{counts.all}</dt><dd class="xn-stat-l">projects</dd></div>
           <div class="xn-stat"><dt class="xn-stat-n">{counts.shipped}</dt><dd class="xn-stat-l">shipped</dd></div>
+          <div class="xn-stat"><dt class="xn-stat-n">{counts.active}</dt><dd class="xn-stat-l">active</dd></div>
           <div class="xn-stat"><dt class="xn-stat-n">{counts.building}</dt><dd class="xn-stat-l">building</dd></div>
           <div class="xn-stat"><dt class="xn-stat-n">{counts.concept}</dt><dd class="xn-stat-l">concept</dd></div>
         </dl>
