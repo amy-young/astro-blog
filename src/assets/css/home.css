@@ -179,7 +179,7 @@
       align-items: center;
       gap: 20px;
     }
-    .nav-logo { font-size: 1.475rem; font-weight: 800; letter-spacing: -.025em; color: var(--ink); }
+    .nav-logo { font-size: 1.475rem; font-weight: 800; letter-spacing: -.025em; color: var(--ink); justify-self: start; }
     .nav-links { display: flex; gap: 32px; justify-self: center; }
     .nav-links a { font-size: 1.137rem; font-weight: 500; color: var(--ink-3); transition: color .15s; }
     .nav-links a:hover, .nav-links a.active { color: var(--ink); }
