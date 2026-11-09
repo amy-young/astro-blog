@@ -252,7 +252,7 @@ The map above is the whole system on one page. These three go deeper, and unlike
 
 | Tool | Role |
 |------|------|
-| Claude Code | Primary orchestration layer |
+| Claude Code | Primary orchestration layer, running 80+ custom skills I built myself, plus outside skill libraries I vet with my own audit process before anything gets installed. |
 | Wispr Flow | Voice-first daily input, and meeting capture. Meeting notes sync into Obsidian, where the PKA picks them up and routes them. |
 | Kip (Telegram bot) | Voice-note capture on the go. A quick message to Kip gets transcribed and dropped into a daily scratch file, which the morning brief and end-of-day routine both pick up and route from. |
 | Obsidian | Meeting notes, daily notes, and a visual mirror of the PKA system. The graph view makes connections across your knowledge visible in a way nothing else does. |
