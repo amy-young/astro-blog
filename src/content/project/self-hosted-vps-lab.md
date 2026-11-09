@@ -22,6 +22,9 @@ I didn't build this to run a company. I built it because my personal AI operatin
 | Caddy | Reverse proxy for everything below, automatic HTTPS |
 | Docker Compose | Runs every service, no Kubernetes needed at this scale |
 | n8n | Automation: document and video transcript pipelines into my knowledge base |
+| yt-dlp API | Pulls transcripts and descriptions for the [YouTube Capture Pipeline](/project/youtube-capture-pipeline) |
+| Twenty CRM | Customized CRM at the center of my contacts across work, ventures, and life |
+| Contact API | Self-hosted backend for this site's contact form |
 | KaraKeep | Tags and summarizes everything I save |
 | Vikunja | Personal task management, migrated off a work-owned Asana workspace |
 | Syncthing | Relays my knowledge base between desktop and laptop while traveling |
