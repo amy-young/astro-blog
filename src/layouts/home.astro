@@ -4,6 +4,11 @@ import "../assets/css/home.css";
 const SITE_NAME = "Amy Young";
 const DEFAULT_DESC =
   "Amy Young works at the intersection of data, product, and communications. Field notes on building AI systems, plus the projects behind them.";
+// Share card for the plain pages (/, /projects, /about, /resume, /posts), which have no
+// hero of their own. Added 2026-11-09: until then they shared as image-less `summary`
+// cards. Posts and projects still pass their own heroImage. Source and mockup live in
+// PKA ventures/context/design/ (hero-sources/, mockups/), never in public/.
+const DEFAULT_IMAGE = "/assets/images/og-default.webp";
 
 const {
   title = "Amy Young — Researcher, Designer, Builder · Seattle",
@@ -18,7 +23,7 @@ const {
   // " — Amy Young" suffix reads as duplication inside a card.
   ogTitle,
   // Site-relative path, e.g. /assets/images/posts/foo-hero.webp
-  image,
+  image = DEFAULT_IMAGE,
   ogType = "website",
 } = Astro.props;
 

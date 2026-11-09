@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  # Manual trigger, copied from deploy-staging.yml. Added 2026-11-09 after a GitHub
+  # Actions outage left production deployable only by rerunning an old run:
+  #   gh workflow run "Build and Deploy" -R amy-young/astro-blog --ref main
+  workflow_dispatch:
 
 jobs:
   deploy:
