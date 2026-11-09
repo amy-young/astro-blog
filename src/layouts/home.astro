@@ -6,9 +6,11 @@ const DEFAULT_DESC =
   "Amy Young works at the intersection of data, product, and communications. Field notes on building AI systems, plus the projects behind them.";
 // Share card for the plain pages (/, /projects, /about, /resume, /posts), which have no
 // hero of their own. Added 2026-11-09: until then they shared as image-less `summary`
-// cards. Posts and projects still pass their own heroImage. Source and mockup live in
-// PKA ventures/context/design/ (hero-sources/, mockups/), never in public/.
-const DEFAULT_IMAGE = "/assets/images/og-default.webp";
+// cards. Posts and projects still pass their own heroImage. v2 is Amy's own design at
+// 1.91:1, LinkedIn's card ratio, not the 16:9 hero ratio: it is never shown on a page,
+// only in share previews. Source lives in PKA ventures/context/design/hero-sources/,
+// never in public/. Bump the -vN filename on any change; LinkedIn caches by URL.
+const DEFAULT_IMAGE = "/assets/images/og-default-v2.webp";
 
 const {
   title = "Amy Young — Researcher, Designer, Builder · Seattle",
