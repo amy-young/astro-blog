@@ -327,14 +327,20 @@ const nav = document.getElementById('nav');
       });
     });
 
-    // Skill rows — the purple/white state follows the pointer and stays on the last row entered
-    document.querySelectorAll('.skill-row').forEach(row => {
-      const setActive = () => {
-        document.querySelectorAll('.skill-row.active').forEach(r => r.classList.remove('active'));
-        row.classList.add('active');
-      };
-      row.addEventListener('mouseenter', setActive);
-      row.addEventListener('focusin', setActive);
+    // Focus-area rows — click opens one row's detail, one open at a time
+    document.querySelectorAll('.skill-head').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('.skill-row');
+        const isOpen = row.classList.contains('active');
+        document.querySelectorAll('.skill-row.active').forEach(r => {
+          r.classList.remove('active');
+          r.querySelector('.skill-head').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          row.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
     });
 
     const rvEls = document.querySelectorAll('.rv');

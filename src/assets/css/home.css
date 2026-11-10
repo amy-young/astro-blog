@@ -793,13 +793,27 @@
     .skills-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(40px, 6vw, 100px); align-items: start; }
     @media (max-width: 760px) { .skills-layout { grid-template-columns: 1fr; } }
     .skills-left { position: sticky; top: 100px; }
+    @media (max-width: 760px) { .skills-left { position: static; } }
     .skills-lbl { font-size: .805rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 18px; }
     .skills-heading { font-family: var(--f); font-size: clamp(2.4rem, 4.5vw, 4rem); line-height: 1.05; letter-spacing: -.035em; margin-bottom: clamp(32px, 4vw, 52px); color: var(--ink-3); font-weight: 300; }
     .skills-heading strong { font-weight: 800; color: var(--ink); }
     .skills-contact { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border: 1.5px solid var(--accent-bdr); border-radius: 8px; font-size: .88rem; font-weight: 600; color: var(--accent); background: var(--accent-wash); transition: all .2s; }
     .skills-contact:hover { border-color: var(--accent); color: #fff; background: var(--accent); }
     .skills-list { display: flex; flex-direction: column; }
-    .skill-row { display: grid; grid-template-columns: 40px 1fr 44px; align-items: center; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); cursor: default; transition: background .2s; }
+    /* Rows are an accordion (2026-11-09): click opens one row's detail, one open at a time.
+       Opening on hover was ruled out because the list would reflow under the pointer. */
+    .skill-row { border-bottom: 1px solid var(--border); }
+    .skill-head { width: 100%; display: grid; grid-template-columns: 40px 1fr 44px; align-items: center; gap: 20px; padding: 20px 0; background: none; border: 0; text-align: left; cursor: pointer; font: inherit; color: inherit; }
+    .skill-head:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+    .skill-detail { display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows .35s ease, opacity .25s ease, visibility .35s; padding-left: 60px; padding-right: 64px; }
+    .skill-detail > * { overflow: hidden; }
+    .skill-detail p { margin: 0; font-size: .95rem; line-height: 1.65; color: var(--ink-2); }
+    .skill-links { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 12px 0 24px; }
+    .skill-links a { font-size: .86rem; font-weight: 600; color: var(--accent); }
+    .skill-links a:hover { text-decoration: underline; }
+    .skill-row.active .skill-detail { grid-template-rows: 1fr; opacity: 1; visibility: visible; }
+    @media (max-width: 760px) { .skill-detail { padding-left: 0; padding-right: 0; } }
+    @media (prefers-reduced-motion: reduce) { .skill-detail { transition: none; } }
     .skill-row:first-child { border-top: 1px solid var(--border); }
     .skill-row:hover .skill-arrow { background: var(--accent); color: #fff; border-color: var(--accent); }
     .skill-row:hover .skill-name { color: var(--ink); }
